@@ -19,6 +19,15 @@ defmodule TilWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/auth", TilWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/:provider/callback", AuthController, :callback
+    delete "/logout", AuthController, :delete
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", TilWeb do
   #   pipe_through :api

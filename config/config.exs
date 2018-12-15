@@ -28,7 +28,7 @@ config :phoenix, :json_library, Jason
 # Add GitHub to Ueberauth Config
 config :ueberauth, Ueberauth,
   providers: [
-    github: {Ueberauth.Strategy.Github, []}
+    github: {Ueberauth.Strategy.Github, [default_scope: "user:email", allow_private_emails: true]}
   ]
 
 # Update provider configuration
