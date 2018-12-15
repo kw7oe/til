@@ -1,6 +1,8 @@
 defmodule TilWeb.Router do
   use TilWeb, :router
 
+  require Ueberauth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
