@@ -6,9 +6,9 @@ defmodule Til.AccountsTest do
   describe "credentials" do
     alias Til.Accounts.Credential
 
-    @valid_attrs %{email: "some email", password_hash: "some password_hash"}
-    @update_attrs %{email: "some updated email", password_hash: "some updated password_hash"}
-    @invalid_attrs %{email: nil, password_hash: nil}
+    @valid_attrs %{email: "some email", password: "some password_hash"}
+    @update_attrs %{email: "some updated email", password: "some updated password_hash"}
+    @invalid_attrs %{email: nil, password: nil}
 
     def credential_fixture(attrs \\ %{}) do
       {:ok, credential} =
@@ -41,7 +41,10 @@ defmodule Til.AccountsTest do
 
     test "update_credential/2 with valid data updates the credential" do
       credential = credential_fixture()
-      assert {:ok, %Credential{} = credential} = Accounts.update_credential(credential, @update_attrs)
+
+      assert {:ok, %Credential{} = credential} =
+               Accounts.update_credential(credential, @update_attrs)
+
       assert credential.email == "some updated email"
       assert credential.password_hash == "some updated password_hash"
     end

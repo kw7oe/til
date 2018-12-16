@@ -28,6 +28,7 @@ defmodule TilWeb.AuthController do
         |> put_flash(:info, "Successfully authenticated.")
         |> put_session(:current_user, user)
         |> redirect(to: "/")
+
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)

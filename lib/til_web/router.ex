@@ -19,6 +19,8 @@ defmodule TilWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/register", AccountController, :new
+    post "/register", AccountController, :create
   end
 
   scope "/auth", TilWeb do

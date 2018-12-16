@@ -12,15 +12,16 @@
       <section class="container">
         <nav role="navigation">
           <ul class="flex align-center">
-          <%= if @current_user do %>
-            <li>
-              Welcome, <%= @current_user.name %>!
-              <img src="<%= @current_user.avatar %>" class="img-circle"/>
-              <%= button "Logout", to: Routes.auth_path(@conn, :delete), method: :delete, class: "btn" %>
-            </li>
-          <% else %>
-            <li><%= link("Sign in", to: Routes.auth_path(@conn, :request, "github")) %></li>
-          <% end %>
+            <li>TIL</li>
+          <%# <%= if @current_user do %1> %>
+          <%#   <li> %>
+          <%#     Welcome, <%= @current_user.name %1>! %>
+          <%#     <img src="<%= @current_user.avatar %1>" class="img-circle"/> %>
+          <%#     <%= button "Logout", to: Routes.auth_path(@conn, :delete), method: :delete, class: "btn" %1> %>
+          <%#   </li> %>
+          <%# <% else %1> %>
+          <%#   <li><%= link("Sign in", to: Routes.auth_path(@conn, :request, "github")) %1></li> %>
+          <%# <% end %1> %>
           </ul>
         </nav>
       </section>
