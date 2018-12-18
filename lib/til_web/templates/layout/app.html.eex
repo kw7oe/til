@@ -9,10 +9,15 @@
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav role="navigation">
+      <div class="container">
+        <nav class="nav" role="navigation">
           <ul class="flex align-center">
-            <li>TIL</li>
+            <li>
+              <%= link "TIL", to: Routes.page_path(@conn, :index) %>
+            </li>
+            <li>
+              <%= link "Register", to: Routes.account_path(@conn, :new), class: "btn" %>
+            </li>
           <%# <%= if @current_user do %1> %>
           <%#   <li> %>
           <%#     Welcome, <%= @current_user.name %1>! %>
@@ -24,7 +29,7 @@
           <%# <% end %1> %>
           </ul>
         </nav>
-      </section>
+      </div>
     </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

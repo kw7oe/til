@@ -14,3 +14,11 @@
 .align-center {
   align-items: center;
 }
+
+.nav ul {
+  list-style: none;
+}
+
+.nav li {
+  padding: 0 6px;
+}
