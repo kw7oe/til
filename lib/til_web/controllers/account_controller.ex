@@ -4,6 +4,11 @@ defmodule TilWeb.AccountController do
   alias Til.Accounts
   alias Til.Accounts.Credential
 
+  def index(conn, _params) do
+    accounts = Accounts.list_credentials()
+    render(conn, "index.html", accounts: accounts)
+  end
+
   def new(conn, _params) do
     changeset = Accounts.change_credential(%Credential{})
     render(conn, "new.html", changeset: changeset)
