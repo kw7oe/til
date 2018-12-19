@@ -15,9 +15,21 @@
             <li>
               <%= link "TIL", to: Routes.page_path(@conn, :index) %>
             </li>
-            <li>
-              <%= link "Register", to: Routes.account_path(@conn, :new), class: "btn" %>
-            </li>
+            <%= if @current_user do %>
+              <li>
+                <%= link "Accounts", to: Routes.account_path(@conn, :index), class: "btn" %>
+              </li>
+              <li>
+                <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "btn" %>
+              </li>
+            <% else %>
+              <li>
+                <%= link "Register", to: Routes.account_path(@conn, :new), class: "btn" %>
+              </li>
+              <li>
+                <%= link "Login", to: Routes.session_path(@conn, :new), class: "btn" %>
+              </li>
+            <% end %>
           <%# <%= if @current_user do %1> %>
           <%#   <li> %>
           <%#     Welcome, <%= @current_user.name %1>! %>

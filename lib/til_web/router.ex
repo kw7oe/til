@@ -9,6 +9,7 @@ defmodule TilWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug TilWeb.Auth
   end
 
   pipeline :api do
@@ -19,9 +20,13 @@ defmodule TilWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/accounts", AccountController, :index
     get "/register", AccountController, :new
     post "/register", AccountController, :create
+
+    get "/accounts", AccountController, :index
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    delete "/logout", SessionController, :delete
   end
 
   scope "/auth", TilWeb do

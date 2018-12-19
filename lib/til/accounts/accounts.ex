@@ -8,6 +8,21 @@ defmodule Til.Accounts do
 
   alias Til.Accounts.Credential
 
+  def authenticate_by_email_and_pass(email, given_pass) do
+    query = from c in Credential, where: c.email == ^email
+    user = Repo.one(query)
+
+    cond do
+      user && Comeonin.Pbkdf2.checkpw(given_pass, user.password_hash) ->
+        {:ok, user}
+      user ->
+        {:error, :unauthorized}
+      true ->
+        Comeonin.Pbkdf2.dummy_checkpw()
+        {:error, :not_found}
+    end
+  end
+
   @doc """
   Returns the list of credentials.
 
