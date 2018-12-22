@@ -3,7 +3,7 @@ defmodule TilWeb.AccountController do
 
   alias Til.Accounts
   alias Til.Accounts.Credential
-  alias Til.Auth
+  alias TilWeb.Auth
 
   plug :authenticate_user when action in [:index]
 

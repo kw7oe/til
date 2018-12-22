@@ -20,6 +20,9 @@
                 <%= link "Accounts", to: Routes.account_path(@conn, :index), class: "btn" %>
               </li>
               <li>
+                <%= link "Posts", to: Routes.post_path(@conn, :index), class: "btn" %>
+              </li>
+              <li>
                 <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "btn" %>
               </li>
             <% else %>
