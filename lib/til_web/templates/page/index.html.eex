@@ -1,5 +1,13 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed and maintainability.</p>
+<section>
+  <%= for post <- @posts do %>
+    <div class="post">
+      <h3>
+        <%= post.title %>
+      </h3>
+      <article>
+        <%= post.content %>
+      </article>
+    </div>
+  <% end %>
 </section>
 

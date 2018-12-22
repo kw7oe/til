@@ -1,0 +1,42 @@
+/* This file is for your main application css. */
+
+@import "./phoenix.css";
+
+body, html {
+  background: #eaf1f8;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+.img-circle {
+  border-radius: 50%;
+  width: 50px;
+}
+
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.nav ul {
+  list-style: none;
+}
+
+.nav li {
+  padding: 0 6px;
+}
+
+.post {
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+}
+
+.post + .post {
+  margin-top: 2rem;
+}

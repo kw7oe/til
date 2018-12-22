@@ -9,42 +9,7 @@
   </head>
   <body>
     <header>
-      <div class="container">
-        <nav class="nav" role="navigation">
-          <ul class="flex align-center">
-            <li>
-              <%= link "TIL", to: Routes.page_path(@conn, :index) %>
-            </li>
-            <%= if @current_user do %>
-              <li>
-                <%= link "Accounts", to: Routes.account_path(@conn, :index), class: "btn" %>
-              </li>
-              <li>
-                <%= link "Posts", to: Routes.post_path(@conn, :index), class: "btn" %>
-              </li>
-              <li>
-                <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "btn" %>
-              </li>
-            <% else %>
-              <li>
-                <%= link "Register", to: Routes.account_path(@conn, :new), class: "btn" %>
-              </li>
-              <li>
-                <%= link "Login", to: Routes.session_path(@conn, :new), class: "btn" %>
-              </li>
-            <% end %>
-          <%# <%= if @current_user do %1> %>
-          <%#   <li> %>
-          <%#     Welcome, <%= @current_user.name %1>! %>
-          <%#     <img src="<%= @current_user.avatar %1>" class="img-circle"/> %>
-          <%#     <%= button "Logout", to: Routes.auth_path(@conn, :delete), method: :delete, class: "btn" %1> %>
-          <%#   </li> %>
-          <%# <% else %1> %>
-          <%#   <li><%= link("Sign in", to: Routes.auth_path(@conn, :request, "github")) %1></li> %>
-          <%# <% end %1> %>
-          </ul>
-        </nav>
-      </div>
+      <%= render TilWeb.SharedView, "navigation.html", assigns %>
     </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
