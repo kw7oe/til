@@ -27,6 +27,9 @@ defmodule TilWeb.Router do
     get "/login", SessionController, :new
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
+
+    pipe_through :authenticate_user
+    resources "/posts", PostController
   end
 
   scope "/auth", TilWeb do

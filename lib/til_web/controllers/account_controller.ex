@@ -5,7 +5,7 @@ defmodule TilWeb.AccountController do
   alias Til.Accounts.Credential
   alias Til.Auth
 
-  plug :authenticate when action in [:index]
+  plug :authenticate_user when action in [:index]
 
   def index(conn, _params) do
     accounts = Accounts.list_credentials()
@@ -27,17 +27,6 @@ defmodule TilWeb.AccountController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
-    end
-  end
-
-  defp authenticate(conn, _opts) do
-    if conn.assigns.current_user do
-      conn
-    else
-      conn
-      |> put_flash(:error, "You must be logged in to access that page")
-      |> redirect(to: Routes.page_path(conn, :index))
-      |> halt()
     end
   end
 end

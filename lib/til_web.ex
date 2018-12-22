@@ -23,6 +23,7 @@ defmodule TilWeb do
 
       import Plug.Conn
       import TilWeb.Gettext
+      import TilWeb.Auth, only: [authenticate_user: 2]
       alias TilWeb.Router.Helpers, as: Routes
     end
   end
@@ -50,6 +51,7 @@ defmodule TilWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import TilWeb.Auth, only: [authenticate_user: 2]
     end
   end
 
