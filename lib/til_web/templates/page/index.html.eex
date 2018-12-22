@@ -1,13 +1,21 @@
 <section>
-  <%= for post <- @posts do %>
-    <div class="post">
-      <h3>
-        <%= post.title %>
-      </h3>
-      <article>
-        <%= post.content %>
-      </article>
+  <%= if Enum.empty?(@posts) do %>
+    <div class="empty-state flex align-center flex-column">
+      <img src="<%= Routes.static_path(@conn, "/images/post.svg") %>">
+      <h4>No Today I learned post yet.</h4>
+      <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "button" %>
     </div>
+  <% else %>
+    <%= for post <- @posts do %>
+      <div class="post">
+        <h3>
+          <%= post.title %>
+        </h3>
+        <article>
+          <%= post.content %>
+        </article>
+      </div>
+    <% end %>
   <% end %>
 </section>
 
