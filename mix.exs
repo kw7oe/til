@@ -48,6 +48,9 @@ defmodule Til.MixProject do
       {:comeonin, "~> 4.1"},
       {:pbkdf2_elixir, "~> 0.12"},
 
+      # Markdonw
+      {:earmark, "~> 1.3.1"},
+
       # OAuth Github
       {:ueberauth_github, "~> 0.7"},
       # Deps of oauth2 in ueberauth_github

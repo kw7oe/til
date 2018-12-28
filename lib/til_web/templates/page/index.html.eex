@@ -12,10 +12,11 @@
           <%= post.title %>
         </h3>
         <article>
-          <%= post.content %>
+          <%= raw(Earmark.as_html! post.content) %>
         </article>
       </div>
     <% end %>
   <% end %>
 </section>
+<script>hljs.initHighlightingOnLoad();</script>
 
