@@ -7,14 +7,7 @@
     </div>
   <% else %>
     <%= for post <- @posts do %>
-      <div class="post">
-        <h3>
-          <%= post.title %>
-        </h3>
-        <article>
-          <%= raw(Earmark.as_html! post.content) %>
-        </article>
-      </div>
+      <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
     <% end %>
   <% end %>
 </section>

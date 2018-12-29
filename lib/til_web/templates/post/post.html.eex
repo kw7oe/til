@@ -1,0 +1,13 @@
+<div class="post">
+  <div class="flex align-center space-between mb-1">
+    <h3><%= @post.title %></h3>
+    <span>
+      <%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
+      <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
+    </span>
+  </div>
+  <article>
+    <%= raw(Earmark.as_html! @post.content) %>
+  </article>
+
+</div>

@@ -1,8 +1,11 @@
 <h1>Accounts</h1>
-<table>
-  <%= for acc <- @accounts do %>
-    <tr>
-      <td><%= acc.email %></td>
-    </tr>
-  <% end %>
-</table>
+
+<div class="box">
+  <table>
+    <%= for acc <- @accounts do %>
+      <tr>
+        <td><%= acc.email %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
