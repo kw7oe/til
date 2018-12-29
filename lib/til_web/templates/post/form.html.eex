@@ -9,9 +9,21 @@
   <%= text_input f, :title %>
   <%= error_tag f, :title %>
 
-  <%= label f, :content %>
-  <%= textarea f, :content %>
-  <%= error_tag f, :content %>
+
+  <div class="tabs">
+    <input name="tabs" type="radio" id="tab-1" checked="checked" class="input"/>
+    <label for="tab-1" class="label">Write</label>
+    <div class="panel">
+      <%= textarea f, :content, id: "textarea" %>
+      <%= error_tag f, :content %>
+    </div>
+
+    <input name="tabs" type="radio" id="tab-2" class="input" />
+    <label for="tab-2" id="preview-tab" class="label">Preview</label>
+    <div class="panel" id="preview">
+      <p id="empty"><em>No preview yet</em></p>
+    </div>
+  </div>
 
   <div>
     <%= submit "Save" %>
