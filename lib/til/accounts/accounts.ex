@@ -15,8 +15,10 @@ defmodule Til.Accounts do
     cond do
       user && Comeonin.Pbkdf2.checkpw(given_pass, user.password_hash) ->
         {:ok, user}
+
       user ->
         {:error, :unauthorized}
+
       true ->
         Comeonin.Pbkdf2.dummy_checkpw()
         {:error, :not_found}

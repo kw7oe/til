@@ -44,4 +44,3 @@ defmodule TilWeb.Auth do
     end
   end
 end
-

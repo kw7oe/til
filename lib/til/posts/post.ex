@@ -2,7 +2,6 @@ defmodule Til.Posts.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "posts" do
     field :content, :string
     field :title, :string

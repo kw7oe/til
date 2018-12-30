@@ -7,8 +7,9 @@ defmodule TilWeb.PostChannel do
 
   def handle_in("update", params, socket) do
     broadcast!(socket, "preview", %{
-      preview: Earmark.as_html! params
+      preview: Earmark.as_html!(params)
     })
+
     {:reply, :ok, socket}
   end
 end
