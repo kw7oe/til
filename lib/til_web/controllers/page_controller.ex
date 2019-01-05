@@ -7,4 +7,9 @@ defmodule TilWeb.PageController do
     posts = Posts.list_posts()
     render(conn, "index.html", posts: posts)
   end
+
+  def test(conn, _params) do
+    Til.Email.welcome_email() |> Til.Mailer.deliver_later()
+    text(conn, "OKAY")
+  end
 end

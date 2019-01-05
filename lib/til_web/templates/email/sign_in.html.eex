@@ -1,0 +1,1 @@
+<p><%= link "Sign In", to: Routes.session_path(TilWeb.Endpoint, :new) %></p>

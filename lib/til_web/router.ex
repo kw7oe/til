@@ -16,10 +16,15 @@ defmodule TilWeb.Router do
     plug :accepts, ["json"]
   end
 
+   if Mix.env == :dev do
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+   end
+
   scope "/", TilWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/test", PageController, :test
     get "/register", AccountController, :new
     post "/register", AccountController, :create
 

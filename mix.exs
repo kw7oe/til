@@ -48,8 +48,11 @@ defmodule Til.MixProject do
       {:comeonin, "~> 4.1"},
       {:pbkdf2_elixir, "~> 0.12"},
 
-      # Markdonw
+      # Markdown
       {:earmark, "~> 1.3.1"},
+
+      # Email
+      {:bamboo, "~> 1.1"},
 
       # OAuth Github
       {:ueberauth_github, "~> 0.7"},
