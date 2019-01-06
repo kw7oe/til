@@ -21,8 +21,10 @@ config :til, TilWeb.Endpoint,
     ]
   ]
 
-# config :til, Til.Mailer,
-#   adapter: Bamboo.LocalAdapter
+# Mailer
+config :til, Til.Mailer,
+  adapter: Bamboo.LocalAdapter
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
