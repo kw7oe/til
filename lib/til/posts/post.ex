@@ -5,7 +5,7 @@ defmodule Til.Posts.Post do
   schema "posts" do
     field :content, :string
     field :title, :string
-    belongs_to :credential, Til.Accounts.Credential
+    belongs_to :user, Til.Accounts.User
 
     timestamps()
   end

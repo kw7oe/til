@@ -11,7 +11,7 @@ defmodule TilWeb.PostController do
   end
 
   def index(conn, _params, current_user) do
-    posts = Posts.list_credential_posts(current_user)
+    posts = Posts.list_user_posts(current_user)
     render(conn, "index.html", posts: posts)
   end
 
@@ -33,18 +33,18 @@ defmodule TilWeb.PostController do
   end
 
   def show(conn, %{"id" => id}, current_user) do
-    post = Posts.get_credential_post!(current_user, id)
+    post = Posts.get_user_post!(current_user, id)
     render(conn, "show.html", post: post)
   end
 
   def edit(conn, %{"id" => id}, current_user) do
-    post = Posts.get_credential_post!(current_user, id)
+    post = Posts.get_user_post!(current_user, id)
     changeset = Posts.change_post(conn.assigns.current_user, post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}, current_user) do
-    post = Posts.get_credential_post!(current_user, id)
+    post = Posts.get_user_post!(current_user, id)
 
     case Posts.update_post(post, post_params) do
       {:ok, post} ->
@@ -58,7 +58,7 @@ defmodule TilWeb.PostController do
   end
 
   def delete(conn, %{"id" => id}, current_user) do
-    post = Posts.get_credential_post!(current_user, id)
+    post = Posts.get_user_post!(current_user, id)
     {:ok, _post} = Posts.delete_post(post)
 
     conn

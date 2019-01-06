@@ -9,18 +9,18 @@ defmodule Til.Posts do
   alias Til.Accounts
   alias Til.Posts.Post
 
-  def list_credential_posts(%Accounts.Credential{} = credential) do
+  def list_user_posts(%Accounts.User{} = user) do
     Post
-    |> credential_posts_query(credential)
+    |> user_posts_query(user)
     |> Repo.all()
-    |> preload_credential()
+    |> preload_user()
   end
 
-  def get_credential_post!(%Accounts.Credential{} = credential, id) do
+  def get_user_post!(%Accounts.User{} = user, id) do
     from(p in Post, where: p.id == ^id)
-    |> credential_posts_query(credential)
+    |> user_posts_query(user)
     |> Repo.one!()
-    |> preload_credential()
+    |> preload_user()
   end
 
   def list_posts do
@@ -29,13 +29,13 @@ defmodule Til.Posts do
 
   def get_post!(id) do
     Repo.get!(Post, id)
-    |> preload_credential()
+    |> preload_user()
   end
 
-  def create_post(%Accounts.Credential{} = credential, attrs \\ %{}) do
+  def create_post(%Accounts.User{} = user, attrs \\ %{}) do
     %Post{}
     |> Post.changeset(attrs)
-    |> put_credential(credential)
+    |> put_user(user)
     |> Repo.insert()
   end
 
@@ -49,21 +49,21 @@ defmodule Til.Posts do
     Repo.delete(post)
   end
 
-  def change_post(%Accounts.Credential{} = credential, %Post{} = post) do
+  def change_post(%Accounts.User{} = user, %Post{} = post) do
     post
     |> Post.changeset(%{})
-    |> put_credential(credential)
+    |> put_user(user)
   end
 
-  defp put_credential(changeset, credential) do
-    Ecto.Changeset.put_assoc(changeset, :credential, credential)
+  defp put_user(changeset, user) do
+    Ecto.Changeset.put_assoc(changeset, :user, user)
   end
 
-  defp credential_posts_query(query, %Accounts.Credential{id: credential_id}) do
-    from(p in query, where: p.credential_id == ^credential_id)
+  defp user_posts_query(query, %Accounts.User{id: user_id}) do
+    from(p in query, where: p.user_id == ^user_id)
   end
 
-  defp preload_credential(post_or_posts) do
-    Repo.preload(post_or_posts, :credential)
+  defp preload_user(post_or_posts) do
+    Repo.preload(post_or_posts, :user)
   end
 end

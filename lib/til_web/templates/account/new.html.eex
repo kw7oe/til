@@ -9,6 +9,11 @@
     <% end %>
 
     <div>
+      <%= text_input f, :username, placeholder: "Username" %>
+      <%= error_tag f, :username %>
+    </div>
+
+    <div>
       <%= text_input f, :email, placeholder: "Email" %>
       <%= error_tag f, :email %>
     </div>
