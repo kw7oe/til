@@ -7,11 +7,11 @@
 
       <div>
         <%= if @current_user do %>
-          <%= link "Accounts", to: Routes.account_path(@conn, :index), class: "btn" %>
+          <%= link "Users", to: Routes.user_path(@conn, :index), class: "btn" %>
           <%= link "Posts", to: Routes.post_path(@conn, :index), class: "btn" %>
           <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "btn" %>
         <% else %>
-          <%= link "Register", to: Routes.account_path(@conn, :new), class: "btn" %>
+          <%= link "Register", to: Routes.user_path(@conn, :new), class: "btn" %>
           <%= link "Login", to: Routes.session_path(@conn, :new), class: "btn" %>
         <% end %>
       </div>

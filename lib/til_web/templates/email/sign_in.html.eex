@@ -1,1 +1,8 @@
-<p><%= link "Sign In", to: Routes.session_path(TilWeb.Endpoint, :new) %></p>
+<p>Dear <%= @user.username %>, </p>
+
+<p>
+  Welcome to TIL. Thank you for signing up. Here is the confirmation link
+  of your account:
+</p>
+
+<p><%= link "Confirm your email", to: Routes.confirmation_path(TilWeb.Endpoint, :new, @user.confirmation_token) %></p>

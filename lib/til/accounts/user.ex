@@ -21,9 +21,21 @@ defmodule Til.Accounts.User do
     user
     |> cast(attrs, [:email, :username, :password])
     |> validate_required([:email, :username, :password])
+    |> validate_length(:username, min: 4, max: 100)
+    |> validate_length(:password, min: 6)
     |> unique_constraint(:email)
     |> unique_constraint(:username)
     |> put_pass_hash()
+    |> put_confirmation_token()
+  end
+
+  defp put_confirmation_token(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: _} ->
+        put_change(changeset, :confirmation_token, Til.RandomToken.generate())
+      _ ->
+        changeset
+    end
   end
 
   defp put_pass_hash(changeset) do

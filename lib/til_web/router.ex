@@ -25,10 +25,11 @@ defmodule TilWeb.Router do
 
     get "/", PageController, :index
     get "/test", PageController, :test
-    get "/register", AccountController, :new
-    post "/register", AccountController, :create
+    get "/register",  UserController, :new
+    get "/confirmation/:token", ConfirmationController, :new
+    post "/register", UserController, :create
 
-    get "/accounts", AccountController, :index
+    get "/users", UserController, :index
     get "/login", SessionController, :new
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
