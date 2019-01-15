@@ -4,7 +4,6 @@ defmodule TilWeb.UserController do
   alias Til.Mailer
   alias Til.Accounts
   alias Til.Accounts.User
-  alias TilWeb.Auth
   alias TilWeb.Email
 
   plug :authenticate_user when action in [:index]
@@ -22,7 +21,7 @@ defmodule TilWeb.UserController do
   def create(conn, %{"user" => user_params}) do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
-        Email.welcome_email(user) |> Mailer.deliver_later
+        Email.welcome_email(user) |> Mailer.deliver_later()
 
         conn
         |> put_flash(:info, "Only one step left! Check your inbox for a confirmation email.")

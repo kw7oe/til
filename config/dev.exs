@@ -22,8 +22,7 @@ config :til, TilWeb.Endpoint,
   ]
 
 # Mailer
-config :til, Til.Mailer,
-  adapter: Bamboo.LocalAdapter
+config :til, Til.Mailer, adapter: Bamboo.LocalAdapter
 
 # ## SSL Support
 #

@@ -8,6 +8,28 @@ defmodule Til.Accounts do
   alias Til.Repo
   alias Til.Accounts.User
 
+  @doc """
+  Update `confirmed` column of user to true
+  """
+  def confirm_user(user) do
+    user
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_change(:confirmed, true)
+    |> Repo.update()
+  end
+
+  @doc """
+  Get user by confirmation_token.
+
+  Return `nil` if confirmation token is invalid.
+  """
+  def check_confirmation_token(token) do
+    Repo.get_by(User, confirmation_token: token)
+  end
+
+  @doc """
+  Authenticate user by email and password
+  """
   def authenticate_by_email_and_pass(email, given_pass) do
     query = from c in User, where: c.email == ^email
     user = Repo.one(query)
@@ -25,15 +47,8 @@ defmodule Til.Accounts do
     end
   end
 
-
   @doc """
   Returns the list of users.
-
-  ## Examples
-
-      iex> list_users()
-      [%User{}, ...]
-
   """
   def list_users do
     Repo.all(User)
@@ -76,14 +91,6 @@ defmodule Til.Accounts do
   @doc """
   Updates a user.
 
-  ## Examples
-
-      iex> update_user(user, %{field: new_value})
-      {:ok, %User{}}
-
-      iex> update_user(user, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
   def update_user(%User{} = user, attrs) do
     user
@@ -119,5 +126,4 @@ defmodule Til.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
-
 end

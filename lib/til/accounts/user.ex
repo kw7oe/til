@@ -2,7 +2,6 @@ defmodule Til.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "users" do
     field :email, :string
     field :username, :string
@@ -33,6 +32,7 @@ defmodule Til.Accounts.User do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: _} ->
         put_change(changeset, :confirmation_token, Til.RandomToken.generate())
+
       _ ->
         changeset
     end
@@ -48,4 +48,3 @@ defmodule Til.Accounts.User do
     end
   end
 end
-

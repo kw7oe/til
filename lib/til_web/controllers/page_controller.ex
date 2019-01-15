@@ -7,5 +7,4 @@ defmodule TilWeb.PageController do
     posts = Posts.list_posts()
     render(conn, "index.html", posts: posts)
   end
-
 end
