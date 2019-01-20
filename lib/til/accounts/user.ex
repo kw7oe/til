@@ -1,5 +1,6 @@
 defmodule Til.Accounts.User do
   use Ecto.Schema
+  use Timex
   import Ecto.Changeset
 
   schema "users" do
@@ -11,6 +12,9 @@ defmodule Til.Accounts.User do
 
     field :confirmation_token, :string
     field :confirmed, :boolean, default: false
+
+    field :reset_password_token, :string
+    field :reset_password_at, :naive_datetime
 
     timestamps()
   end
@@ -26,6 +30,17 @@ defmodule Til.Accounts.User do
     |> unique_constraint(:username)
     |> put_pass_hash()
     |> put_confirmation_token()
+  end
+
+  def generate_reset_password(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: _} ->
+        changeset
+        |> put_change(:reset_password_token, Til.RandomToken.generate())
+        |> put_change(:reset_password_at, NaiveDateTime.utc_now |> NaiveDateTime.truncate(:second))
+      _ ->
+        changeset
+    end
   end
 
   defp put_confirmation_token(changeset) do

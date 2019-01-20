@@ -44,6 +44,9 @@ defmodule Til.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
 
+      # Date/Time Library
+      {:timex, "~> 3.1"},
+
       # Authentication Dependencies
       {:comeonin, "~> 4.1"},
       {:pbkdf2_elixir, "~> 0.12"},

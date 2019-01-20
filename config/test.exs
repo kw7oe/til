@@ -16,3 +16,6 @@ config :til, Til.Repo,
   database: "til_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Pbkdf2
+config :pbkdf2_elixir, :rounds, 1

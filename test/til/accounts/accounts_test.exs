@@ -1,5 +1,5 @@
 defmodule Til.AccountsTest do
-  use Til.DataCase
+  use Til.DataCase, async: true
   alias Til.Accounts
 
   @valid_attrs %{email: "test@example.com", username: "test", password: "password"}
@@ -21,6 +21,14 @@ defmodule Til.AccountsTest do
       {:ok, user} = Accounts.create_user(@valid_attrs)
       {:ok, result} = Accounts.confirm_user(user)
       assert result.confirmed
+    end
+
+    test "check_reset_password_token/1 with valid token return user" do
+      {:ok, user} = Accounts.create_user(@valid_attrs)
+      {:ok, user} = Accounts.reset_password(user)
+
+      token = user.reset_password_token
+      {:ok, %Accounts.User{}} = Accounts.check_reset_password_token(token)
     end
   end
 end

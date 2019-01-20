@@ -8,6 +8,9 @@ defmodule Til.Accounts do
   alias Til.Repo
   alias Til.Accounts.User
 
+  # 15 minutes * 60 seconds = 900 seconds
+  @valid_reset_password_token_second 900
+
   @doc """
   Update `confirmed` column of user to true
   """
@@ -19,12 +22,47 @@ defmodule Til.Accounts do
   end
 
   @doc """
+  Generate 'reset_password_token` and `reset_password_at`
+  value for user.
+  """
+  def reset_password(user) do
+    user
+    |> Ecto.Changeset.change()
+    |> User.generate_reset_password()
+    |> Repo.update()
+  end
+
+  @doc """
   Get user by confirmation_token.
 
   Return `nil` if confirmation token is invalid.
   """
   def check_confirmation_token(token) do
     Repo.get_by(User, confirmation_token: token)
+  end
+
+  @doc """
+  Check if reset password token is valid or invalid.
+
+  If the current time is 15 minutes more than the reset_password_at
+  time, it is considered as expired.
+
+  A expired token is considered as invalid token.
+  """
+  def check_reset_password_token(token) do
+    user = Repo.get_by(User, reset_password_token: token)
+
+    cond do
+      nil ->
+        {:error, :invalid}
+
+      user && NaiveDateTime.diff(NaiveDateTime.utc_now, user.reset_password_at) < @valid_reset_password_token_second ->
+        {:ok, user}
+
+      user ->
+        {:error, :expired}
+
+    end
   end
 
   @doc """
