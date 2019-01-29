@@ -32,6 +32,25 @@ defmodule Til.Accounts.User do
     |> put_confirmation_token()
   end
 
+  def reset_password_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:password])
+    |> validate_required([:password])
+    |> validate_length(:password, min: 6)
+    |> put_pass_hash()
+    |> clear_reset_token()
+  end
+
+  def clear_reset_token(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: _} ->
+        changeset
+        |> put_change(:reset_password_token, nil)
+      _ ->
+        changeset
+    end
+  end
+
   def generate_reset_password(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: _} ->

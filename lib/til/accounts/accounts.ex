@@ -33,6 +33,15 @@ defmodule Til.Accounts do
   end
 
   @doc """
+  Update password for user
+  """
+  def update_password(%User{} = user, attrs) do
+    user
+    |> User.reset_password_changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
   Get user by confirmation_token.
 
   Return `nil` if confirmation token is invalid.
@@ -53,15 +62,14 @@ defmodule Til.Accounts do
     user = Repo.get_by(User, reset_password_token: token)
 
     cond do
-      nil ->
-        {:error, :invalid}
-
       user && NaiveDateTime.diff(NaiveDateTime.utc_now, user.reset_password_at) < @valid_reset_password_token_second ->
         {:ok, user}
 
       user ->
         {:error, :expired}
 
+      true ->
+        {:error, :invalid}
     end
   end
 
