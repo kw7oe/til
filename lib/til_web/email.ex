@@ -9,6 +9,14 @@ defmodule TilWeb.Email do
     |> render("sign_in.html")
   end
 
+  def reset_password_email(user) do
+    base_email()
+    |> to(user)
+    |> subject("Reset Password in TIL")
+    |> assign(:user, user)
+    |> render("reset_password.html")
+  end
+
   defp base_email do
     new_email()
     |> from("choongkwern@hotmail.com")

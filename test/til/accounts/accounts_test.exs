@@ -33,7 +33,7 @@ defmodule Til.AccountsTest do
 
     test "check_reset_password_token/1 with invalid token return error" do
       {:ok, user} = Accounts.create_user(@valid_attrs)
-      {:ok, user} = Accounts.reset_password(user)
+      {:ok, _user} = Accounts.reset_password(user)
 
       token = "invalid token"
       {:error, :invalid} = Accounts.check_reset_password_token(token)

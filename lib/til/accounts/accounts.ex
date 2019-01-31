@@ -12,6 +12,15 @@ defmodule Til.Accounts do
   @valid_reset_password_token_second 900
 
   @doc """
+  Get User by email
+
+  Return 'nil' if does not exist.
+  """
+  def get_user_by_email(email) do
+    Repo.get_by(User, email: email)
+  end
+
+  @doc """
   Update `confirmed` column of user to true
   """
   def confirm_user(user) do
@@ -171,5 +180,13 @@ defmodule Til.Accounts do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset()` for reset password only
+  """
+
+  def change_password(%User{} = user) do
+    User.reset_password_changeset(user, %{})
   end
 end

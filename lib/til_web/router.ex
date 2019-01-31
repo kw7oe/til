@@ -25,9 +25,16 @@ defmodule TilWeb.Router do
 
     get "/", PageController, :index
     get "/test", PageController, :test
+
     get "/register", UserController, :new
+
     get "/confirmation/:token", ConfirmationController, :new
-    get "/reset_password/:token", ResetPasswordController, :new
+
+    get "/reset_password/new", ResetPasswordController, :new
+    post "/reset_password", ResetPasswordController, :create
+    get "/reset_password/token/:token", ResetPasswordController, :edit
+    put "/reset_password/token/:token", ResetPasswordController, :update
+
     post "/register", UserController, :create
 
     get "/users", UserController, :index
