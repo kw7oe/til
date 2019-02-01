@@ -17,7 +17,7 @@ defmodule TilWeb.ResetPasswordController do
       nil ->
         conn
         |> put_flash(:error, "Email not found.")
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.reset_password_path(conn, :new))
 
       user ->
         {:ok, user} = Accounts.reset_password(user)
@@ -54,7 +54,7 @@ defmodule TilWeb.ResetPasswordController do
       |> redirect(to: Routes.page_path(conn, :index))
     else
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", changeset: changeset)
+        render(conn, "edit.html", changeset: changeset, token: token)
     end
   end
 end
