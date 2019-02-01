@@ -47,16 +47,14 @@ defmodule TilWeb.ResetPasswordController do
 
   # Update user password
   def update(conn, %{"token" => token, "user" => user_params}) do
-    {:ok ,user} = Accounts.check_reset_password_token(token)
-    case Accounts.update_password(user, user_params) do
-      {:ok, _user} ->
-        conn
-        |> put_flash(:info, "Password updated successfully.")
-        |> redirect(to: Routes.page_path(conn, :index))
-
+    with {:ok, user} <- Accounts.check_reset_password_token(token),
+         {:ok, _user} <- Accounts.update_password(user, user_params) do
+      conn
+      |> put_flash(:info, "Password updated successfully.")
+      |> redirect(to: Routes.page_path(conn, :index))
+    else
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", changeset: changeset)
-
     end
   end
 end

@@ -46,6 +46,7 @@ defmodule Til.Accounts.User do
       %Ecto.Changeset{valid?: true, changes: _} ->
         changeset
         |> put_change(:reset_password_token, nil)
+
       _ ->
         changeset
     end
@@ -56,7 +57,11 @@ defmodule Til.Accounts.User do
       %Ecto.Changeset{valid?: true, changes: _} ->
         changeset
         |> put_change(:reset_password_token, Til.RandomToken.generate())
-        |> put_change(:reset_password_at, NaiveDateTime.utc_now |> NaiveDateTime.truncate(:second))
+        |> put_change(
+          :reset_password_at,
+          NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+        )
+
       _ ->
         changeset
     end

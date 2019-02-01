@@ -71,7 +71,9 @@ defmodule Til.Accounts do
     user = Repo.get_by(User, reset_password_token: token)
 
     cond do
-      user && NaiveDateTime.diff(NaiveDateTime.utc_now, user.reset_password_at) < @valid_reset_password_token_second ->
+      user &&
+          NaiveDateTime.diff(NaiveDateTime.utc_now(), user.reset_password_at) <
+            @valid_reset_password_token_second ->
         {:ok, user}
 
       user ->
