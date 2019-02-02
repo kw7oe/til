@@ -7,7 +7,7 @@
 
       <div>
         <%= if @current_user do %>
-          <%= link "Users", to: Routes.user_path(@conn, :index), class: "btn" %>
+          <%# <%= link "Users", to: Routes.user_path(@conn, :index), class: "btn" %1> %>
           <%= link "Posts", to: Routes.post_path(@conn, :index), class: "btn" %>
           <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "btn" %>
         <% else %>

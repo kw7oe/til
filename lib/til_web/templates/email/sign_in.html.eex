@@ -5,4 +5,4 @@
   of your account:
 </p>
 
-<p><%= link "Confirm your email", to: Routes.confirmation_path(TilWeb.Endpoint, :new, @user.confirmation_token) %></p>
+<p><%= link "Confirm your email", to: Routes.confirmation_url(TilWeb.Endpoint, :new, @user.confirmation_token) %></p>
