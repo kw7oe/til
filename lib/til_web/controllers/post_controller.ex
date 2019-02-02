@@ -3,7 +3,6 @@ defmodule TilWeb.PostController do
 
   alias Til.Posts
   alias Til.Posts.Post
-  alias Til.Accounts
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]

@@ -1,6 +1,5 @@
 defmodule Til.Accounts.User do
   use Ecto.Schema
-  use Timex
   import Ecto.Changeset
 
   schema "users" do

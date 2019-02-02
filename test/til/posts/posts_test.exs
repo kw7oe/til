@@ -2,13 +2,12 @@ defmodule Til.PostsTest do
   use Til.DataCase
 
   alias Til.Posts
+  alias Til.Posts.Tag
 
   describe "posts" do
   end
 
   describe "tags" do
-    alias Til.Posts.Tag
-
     @valid_attrs %{name: "some name"}
     @update_attrs %{name: "some updated name"}
     @invalid_attrs %{name: nil}

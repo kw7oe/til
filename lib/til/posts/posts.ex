@@ -7,13 +7,14 @@ defmodule Til.Posts do
 
   alias Til.Repo
   alias Til.Accounts
-  alias Til.Posts.Post
+  alias Til.Posts.{Post, Tag}
 
   def list_user_posts(%Accounts.User{} = user) do
     Post
     |> user_posts_query(user)
     |> Repo.all()
     |> preload_user()
+    |> preload_tags()
   end
 
   def get_user_post!(%Accounts.User{} = user, id) do
@@ -21,6 +22,7 @@ defmodule Til.Posts do
     |> user_posts_query(user)
     |> Repo.one!()
     |> preload_user()
+    |> preload_tags()
   end
 
   def list_posts do
@@ -30,6 +32,7 @@ defmodule Til.Posts do
   def get_post!(id) do
     Repo.get!(Post, id)
     |> preload_user()
+    |> preload_tags()
   end
 
   def create_post(%Accounts.User{} = user, attrs \\ %{}) do
@@ -65,6 +68,10 @@ defmodule Til.Posts do
 
   defp preload_user(post_or_posts) do
     Repo.preload(post_or_posts, :user)
+  end
+
+  defp preload_tags(post_or_posts) do
+    Repo.preload(post_or_posts, :tags)
   end
 
   alias Til.Posts.Tag

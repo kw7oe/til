@@ -25,6 +25,10 @@
     </div>
   </div>
 
+  <%= label f, :tags %>
+  <%= text_input f, :virtual_tags %>
+  <%= error_tag f, :virtual_tags %>
+
   <div>
     <%= submit "Save" %>
   </div>
