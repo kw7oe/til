@@ -8,8 +8,16 @@
       </span>
     <% end %>
   </div>
-  <article>
+  <article class="mb-1">
     <%= raw(Earmark.as_html! @post.content) %>
   </article>
+
+  <div>
+    <p>
+      <strong>Tags: </strong>
+      <%= for tag <- @post.tags do %>
+        <span><%= tag.name %> </span>
+      <% end %>
+  </div>
 
 </div>

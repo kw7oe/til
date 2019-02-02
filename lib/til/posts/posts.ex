@@ -27,6 +27,7 @@ defmodule Til.Posts do
 
   def list_posts do
     Repo.all(Post)
+    |> preload_tags()
   end
 
   def get_post!(id) do
