@@ -1,29 +1,29 @@
-<nav class="nav" role="navigation">
-  <div class="container">
-    <div class="flex align-center space-between">
-      <div>
-        <%= link "Today I learned", to: Routes.page_path(@conn, :index), class: 'brand' %>
-      </div>
-
-      <div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container w-md-75">
+    <%= link "Today I learned", to: Routes.page_path(@conn, :index), class: 'navbar-brand mb-0 h1' %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
         <%= if @current_user do %>
           <%# <%= link "Users", to: Routes.user_path(@conn, :index), class: "btn" %1> %>
-          <%= link "Posts", to: Routes.post_path(@conn, :index), class: "btn" %>
-          <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "btn" %>
+          <div class="nav-item">
+            <%= link "Posts", to: Routes.post_path(@conn, :index), class: "btn" %>
+          </div>
+          <div class="nav-item">
+            <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "btn" %>
+          </div>
         <% else %>
-          <%= link "Register", to: Routes.user_path(@conn, :new), class: "btn" %>
-          <%= link "Login", to: Routes.session_path(@conn, :new), class: "btn" %>
+          <div class="nav-item">
+            <%= link "Register", to: Routes.user_path(@conn, :new), class: "btn" %>
+          </div>
+          <div class="nav-item">
+            <%= link "Login", to: Routes.session_path(@conn, :new), class: "btn" %>
+          </div>
         <% end %>
-      </div>
-    <%# <%= if @current_user do %1> %>
-    <%#   <li> %>
-    <%#     Welcome, <%= @current_user.name %1>! %>
-    <%#     <img src="<%= @current_user.avatar %1>" class="img-circle"/> %>
-    <%#     <%= button "Logout", to: Routes.auth_path(@conn, :delete), method: :delete, class: "btn" %1> %>
-    <%#   </li> %>
-    <%# <% else %1> %>
-    <%#   <li><%= link("Sign in", to: Routes.auth_path(@conn, :request, "github")) %1></li> %>
-    <%# <% end %1> %>
-    </ul>
+      </ul>
+  </div>
   </div>
 </nav>
+
