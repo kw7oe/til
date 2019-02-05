@@ -5,31 +5,40 @@
     </div>
   <% end %>
 
-  <%= label f, :title %>
-  <%= text_input f, :title %>
-  <%= error_tag f, :title %>
+  <div class="form-group">
+    <%= label f, :title %>
+    <%= text_input f, :title, class: "form-control" %>
+    <%= error_tag f, :title %>
+  </div>
 
+  <div class="form-group">
+    <%= label f, :tags %>
+    <%= text_input f, :virtual_tags, class: "form-control" %>
+    <%= error_tag f, :virtual_tags %>
+  </div>
 
-  <div class="tabs">
-    <input name="tabs" type="radio" id="tab-1" checked="checked" class="input"/>
-    <label for="tab-1" class="label">Write</label>
-    <div class="panel">
-      <%= textarea f, :content, id: "textarea" %>
-      <%= error_tag f, :content %>
-    </div>
-
-    <input name="tabs" type="radio" id="tab-2" class="input" />
-    <label for="tab-2" id="preview-tab" class="label">Preview</label>
-    <div class="panel" id="preview">
-      <p id="empty"><em>No preview yet</em></p>
+  <div class="form-group">
+    <%= label f, :content %>
+    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="write-tab" data-toggle="tab" href="#write" role="tab" aria-controls="write" aria-selected="true">Write</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab" aria-controls="preview" aria-selected="false">Preview</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane active" id="write" role="tabpanel" aria-labelledby="write-tab">
+        <%= textarea f, :content, id: "textarea", class: "form-control" %>
+        <%= error_tag f, :content %>
+      </div>
+      <div class="tab-pane" id="preview" role="tabpanel" aria-labelledby="preview-tab">
+        <p id="empty"><em>No preview yet</em></p>
+      </div>
     </div>
   </div>
 
-  <%= label f, :tags %>
-  <%= text_input f, :virtual_tags %>
-  <%= error_tag f, :virtual_tags %>
-
-  <div>
-    <%= submit "Save" %>
+  <div class="form-group">
+    <%= submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>
