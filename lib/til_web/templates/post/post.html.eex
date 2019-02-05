@@ -1,23 +1,27 @@
-<div class="post">
-  <div class="flex align-center space-between mb-1">
-    <h3><%= @post.title %></h3>
-    <%= if is_owner(@current_user, @post) do %>
-      <span>
-        <%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
-        <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
-      </span>
-    <% end %>
-  </div>
-  <article class="mb-1">
-    <%= raw(Earmark.as_html! @post.content) %>
-  </article>
+<div class="card mb-4">
+  <div class="card-header"><%= @post.title %></div>
 
-  <div>
-    <p>
+  <div class="card-body">
+    <div class="flex align-center space-between mb-1">
+      <%= if is_owner(@current_user, @post) do %>
+        <span>
+          <%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
+          <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
+        </span>
+      <% end %>
+    </div>
+
+    <article class="mb-1">
+      <%= raw(Earmark.as_html! @post.content) %>
+    </article>
+
+    <div>
+      <p>
       <strong>Tags: </strong>
       <%= for tag <- @post.tags do %>
-        <span><%= tag.name %> </span>
+        <span class="badge badge-info"><%= tag.name %> </span>
       <% end %>
-  </div>
+    </div>
 
+  </div>
 </div>

@@ -1,12 +1,12 @@
 <section>
   <%= if Enum.empty?(@posts) do %>
-    <div class="empty-state flex align-center flex-column">
+    <div class="empty-state d-flex align-items-center flex-column">
       <img src="<%= Routes.static_path(@conn, "/images/post.svg") %>">
       <h4>No Today I learned post yet.</h4>
-      <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "button" %>
+      <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "btn btn-primary" %>
     </div>
   <% else %>
-    <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "button" %>
+    <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "btn btn-primary" %>
     <%= for post <- @posts do %>
       <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
     <% end %>
