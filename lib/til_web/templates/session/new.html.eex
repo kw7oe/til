@@ -1,18 +1,26 @@
-<div class="box">
-  <h2>Login</h2>
-  <%= form_for @conn, Routes.session_path(@conn, :create), [as: :session], fn f -> %>
-    <div>
-      <%= text_input f, :email, placeholder: "Email" %>
-    </div>
-    <div>
-      <%= password_input f, :password, placeholder: "Password" %>
-    </div>
+<div class="row justify-content-center">
+  <div class="col-6 card">
+    <div class="card-body">
+      <h2 class="text-center">Login</h2>
+      <%= form_for @conn, Routes.session_path(@conn, :create), [as: :session], fn f -> %>
 
-    <%= submit "Log in" %>
-  <% end %>
+        <div class="form-group">
+          <%= label f, :email %>
+          <%= text_input f, :email, placeholder: "Email", class: "form-control" %>
+        </div>
 
-  <p>
-    Forget your password?
-    <%= link "Reset here", to: Routes.reset_password_path(@conn, :new) %>
-  </p>
+        <div class="form-group">
+          <%= label f, :password %>
+          <%= password_input f, :password, placeholder: "Password", class: "form-control" %>
+        </div>
+
+        <%= submit "Log in", class: "btn btn-primary" %>
+      <% end %>
+
+      <p class="mt-4">
+        Forget your password?
+        <%= link "Reset here", to: Routes.reset_password_path(@conn, :new) %>
+      </p>
+    </div>
+  </div>
 </div>
