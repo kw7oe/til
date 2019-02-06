@@ -1,4 +1,4 @@
-<section>
+<div class="row justify-content-center">
   <%= if Enum.empty?(@posts) do %>
     <div class="empty-state d-flex align-items-center flex-column">
       <img src="<%= Routes.static_path(@conn, "/images/post.svg") %>">
@@ -6,10 +6,12 @@
       <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "btn btn-primary" %>
     </div>
   <% else %>
-    <%= for post <- @posts do %>
-      <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
-    <% end %>
+    <div class="col-8">
+      <%= for post <- @posts do %>
+        <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
+      <% end %>
+    </div>
   <% end %>
-</section>
+</div>
 <script>hljs.initHighlightingOnLoad();</script>
 
