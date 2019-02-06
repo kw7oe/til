@@ -9,17 +9,20 @@
         <%= if @current_user do %>
           <%# <%= link "Users", to: Routes.user_path(@conn, :index), class: "btn" %1> %>
           <div class="nav-item">
-            <%= link "Posts", to: Routes.post_path(@conn, :index), class: "btn" %>
+            <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "nav-link" %>
           </div>
           <div class="nav-item">
-            <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "btn" %>
+            <%= link "Posts", to: Routes.post_path(@conn, :index), class: "nav-link" %>
+          </div>
+          <div class="nav-item">
+            <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "nav-link" %>
           </div>
         <% else %>
           <div class="nav-item">
-            <%= link "Register", to: Routes.user_path(@conn, :new), class: "btn" %>
+            <%= link "Register", to: Routes.user_path(@conn, :new), class: "nav-link" %>
           </div>
           <div class="nav-item">
-            <%= link "Login", to: Routes.session_path(@conn, :new), class: "btn" %>
+            <%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %>
           </div>
         <% end %>
       </ul>

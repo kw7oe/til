@@ -7,6 +7,7 @@ defmodule TilWeb.PostView do
     current_user.id == post.user_id
   end
 
+  def tag_list(%Ecto.Association.NotLoaded{}), do: ""
   def tag_list(tags) do
     tags |> Enum.map(fn t -> t.name() end) |> Enum.join(", ")
   end

@@ -1,7 +1,4 @@
-<div class="flex align-center mb-1">
-  <h1 class="mr-1">Listing Posts</h1>
-  <span><%= link "New Post", to: Routes.post_path(@conn, :new) %></span>
-</div>
+<h2 class="mb-4">My Posts</h2>
 
 <%= for post <- @posts do %>
   <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
