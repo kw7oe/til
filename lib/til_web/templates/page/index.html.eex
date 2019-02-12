@@ -6,7 +6,7 @@
       <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "btn btn-primary" %>
     </div>
   <% else %>
-    <div class="col-8">
+    <div class="col-md-10">
       <%= for post <- @posts do %>
         <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
       <% end %>
