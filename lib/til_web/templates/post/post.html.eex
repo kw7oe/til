@@ -1,17 +1,18 @@
-<div class="card mb-4">
-  <div class="card-header d-flex justify-content-between ">
-    <%= @post.title %>
-    <div>
-      <%= if is_owner(@current_user, @post) do %>
-        <span>
-          <%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
-          <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
-        </span>
-      <% end %>
-    </div>
-  </div>
+<div class="card mb-4 shadow-sm">
 
   <div class="card-body">
+    <div class="d-flex justify-content-between mb-2">
+      <h2><%= @post.title %></h2>
+      <div>
+        <%= if is_owner(@current_user, @post) do %>
+          <span>
+            <%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
+            <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+
     <article class="mb-1">
       <%= raw(Earmark.as_html! @post.content) %>
     </article>
