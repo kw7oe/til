@@ -2,7 +2,7 @@
 
   <div class="card-body">
     <div class="d-flex justify-content-between mb-2">
-      <h2><%= @post.title %></h2>
+      <h1 class="h4"><%= @post.title %></h1>
       <div>
         <%= if is_owner(@current_user, @post) do %>
           <span>
