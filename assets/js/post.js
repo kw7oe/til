@@ -14,6 +14,9 @@ let Post = {
     let postChannel = socket.channel("post")
     postChannel.on("preview", (resp) => {
       preview.innerHTML = resp["preview"]
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
     })
     postChannel.join()
       .receive("ok", resp => console.log("joined the post channel", resp))
