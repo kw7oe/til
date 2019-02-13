@@ -1,23 +1,5 @@
-<h1>Show Post</h1>
-
-<ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @post.title %>
-  </li>
-
-  <li>
-    <strong>Content:</strong>
-    <%= @post.content %>
-  </li>
-
-  <li>
-    <strong>Tags: </strong>
-    <%= tag_list(@post.tags) %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
-<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, @post) %>
+  </div>
+</div>
