@@ -1,5 +1,5 @@
-<div class="row justify-content-center">
-  <div class="col-6 card">
+<div class="row justify-content-center px-2">
+  <div class="col-md-6 card">
     <div class="card-body">
       <h2 class="text-center">Register</h2>
       <%= form_for @changeset, Routes.user_path(@conn, :create), fn f -> %>

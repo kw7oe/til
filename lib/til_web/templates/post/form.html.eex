@@ -43,3 +43,5 @@
     <%= submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script>hljs.initHighlightingOnLoad()</script>
