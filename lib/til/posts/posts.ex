@@ -10,8 +10,7 @@ defmodule Til.Posts do
   alias Til.Posts.{Post, Tag}
 
   def list_user_posts(%Accounts.User{} = user) do
-    Post
-    |> user_posts_query(user)
+    Post.submitted_by(user.id)
     |> Repo.all()
     |> preload_user()
     |> preload_tags()
@@ -19,14 +18,15 @@ defmodule Til.Posts do
 
   def get_user_post!(%Accounts.User{} = user, id) do
     from(p in Post, where: p.id == ^id)
-    |> user_posts_query(user)
+    |> Post.submitted_by(user.id)
     |> Repo.one!()
     |> preload_user()
     |> preload_tags()
   end
 
   def list_posts do
-    Repo.all(Post)
+    Post.ordered
+    |> Repo.all
     |> preload_tags()
   end
 
@@ -61,10 +61,6 @@ defmodule Til.Posts do
 
   defp put_user(changeset, user) do
     Ecto.Changeset.put_assoc(changeset, :user, user)
-  end
-
-  defp user_posts_query(query, %Accounts.User{id: user_id}) do
-    from(p in query, where: p.user_id == ^user_id)
   end
 
   defp preload_user(post_or_posts) do
