@@ -8,13 +8,15 @@ defmodule Til.Posts.Post do
     field :content, :string
     field :title, :string
     belongs_to :user, Til.Accounts.User
-    many_to_many :tags, Til.Posts.Tag, join_through: "posts_tags", on_replace: :delete
+    many_to_many :tags, Til.Posts.Tag, join_through: Til.Posts.PostTag, on_replace: :delete
 
     timestamps()
   end
 
   def ordered(query \\ __MODULE__), do: from(q in query, order_by: [desc: :inserted_at])
-  def submitted_by(query \\ __MODULE__, user_id), do: from(q in query, where: q.user_id == ^user_id)
+
+  def submitted_by(query \\ __MODULE__, user_id),
+    do: from(q in query, where: q.user_id == ^user_id)
 
   @doc false
   def changeset(post, attrs) do

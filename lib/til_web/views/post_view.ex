@@ -8,6 +8,7 @@ defmodule TilWeb.PostView do
   end
 
   def tag_list(%Ecto.Association.NotLoaded{}), do: ""
+
   def tag_list(tags) do
     tags |> Enum.map(fn t -> t.name() end) |> Enum.join(", ")
   end

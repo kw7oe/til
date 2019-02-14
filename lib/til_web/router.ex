@@ -42,6 +42,8 @@ defmodule TilWeb.Router do
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
 
+    resources "/tags", TagController, only: [:index, :show]
+
     pipe_through :authenticate_user
     resources "/posts", PostController
   end

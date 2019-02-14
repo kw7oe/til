@@ -6,6 +6,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
+        <div class="nav-item">
+          <%= link "Tags", to: Routes.tag_path(@conn, :index), class: "nav-link" %>
+        </div>
         <%= if @current_user do %>
           <%# <%= link "Users", to: Routes.user_path(@conn, :index), class: "btn" %1> %>
           <div class="nav-item">

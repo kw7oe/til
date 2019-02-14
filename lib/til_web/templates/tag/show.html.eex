@@ -1,0 +1,16 @@
+<div class="row justify-content-center">
+  <%= if Enum.empty?(@tag.posts) do %>
+    <div class="empty-state d-flex align-items-center flex-column">
+      <img src="<%= Routes.static_path(@conn, "/images/post.svg") %>">
+      <h4>No Today I learned post for this tag.</h4>
+    </div>
+  <% else %>
+    <div class="col-md-10">
+      <h1 class="mb-4"><%= @tag.name %></h1>
+      <%= for post <- @tag.posts do %>
+        <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+

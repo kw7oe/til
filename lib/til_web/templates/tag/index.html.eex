@@ -1,0 +1,6 @@
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <h2 class="mb-4">All Tags</h2>
+    <%= render TilWeb.TagView, "tags.html", Map.put(assigns, :tags, @tags) %>
+  </div>
+</div>

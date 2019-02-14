@@ -20,9 +20,7 @@
     <div>
       <p>
       <strong>Tags: </strong>
-      <%= for tag <- @post.tags do %>
-        <span class="badge badge-info"><%= tag.name %> </span>
-      <% end %>
+      <%= render TilWeb.TagView, "tags.html", Map.put(assigns, :tags, @post.tags) %>
     </div>
 
   </div>
