@@ -1,8 +1,8 @@
 defmodule Til.PostsTest do
   use Til.DataCase
 
-  alias Til.Posts
-  alias Til.Posts.Tag
+  # alias Til.Posts
+  # alias Til.Posts.Tag
 
   describe "posts" do
   end

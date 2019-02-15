@@ -14,6 +14,11 @@ defmodule TilWeb.SessionController do
         |> put_flash(:info, "Welcome back!")
         |> redirect(to: Routes.page_path(conn, :index))
 
+      {:error, :unconfirm, conn} ->
+        conn
+        |> put_flash(:info, "Hey, you can't login before you confirm your email address.")
+        |> render("new.html")
+
       {:error, _reason, conn} ->
         conn
         |> put_flash(:error, "Invalid email/password")

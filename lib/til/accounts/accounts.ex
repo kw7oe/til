@@ -31,6 +31,16 @@ defmodule Til.Accounts do
   end
 
   @doc """
+  Update `confirmed` column of user to false
+  """
+  def unconfirm_user(user) do
+    user
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_change(:confirmed, false)
+    |> Repo.update()
+  end
+
+  @doc """
   Generate 'reset_password_token` and `reset_password_at`
   value for user.
   """
@@ -92,6 +102,9 @@ defmodule Til.Accounts do
     user = Repo.one(query)
 
     cond do
+      user && !user.confirmed ->
+        {:error, :unconfirm}
+
       user && Comeonin.Pbkdf2.checkpw(given_pass, user.password_hash) ->
         {:ok, user}
 

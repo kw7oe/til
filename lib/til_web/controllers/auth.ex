@@ -24,8 +24,7 @@ defmodule TilWeb.Auth do
   def login_by_email_and_pass(conn, email, given_pass) do
     case Accounts.authenticate_by_email_and_pass(email, given_pass) do
       {:ok, user} -> {:ok, login(conn, user)}
-      {:error, :unauthorized} -> {:error, :unauthorized, conn}
-      {:error, :not_found} -> {:error, :not_found, conn}
+      {:error, reason} -> {:error, reason, conn}
     end
   end
 
