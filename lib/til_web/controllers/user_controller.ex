@@ -3,6 +3,7 @@ defmodule TilWeb.UserController do
 
   alias Til.Mailer
   alias Til.Accounts
+  alias Til.Posts
   alias Til.Accounts.User
   alias TilWeb.Email
 
@@ -11,6 +12,12 @@ defmodule TilWeb.UserController do
   def index(conn, _params) do
     users = Accounts.list_users()
     render(conn, "index.html", users: users)
+  end
+
+  def show(conn, %{"id" => id}) do
+    user = Accounts.get_user!(id)
+    posts = Posts.list_user_posts(user)
+    render(conn, "show.html", posts: posts, user: user)
   end
 
   def new(conn, _params) do
