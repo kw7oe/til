@@ -43,4 +43,7 @@ npm-debug.log
 
 .env
 
+# Ignore todo tasks
+.todo
+
 
