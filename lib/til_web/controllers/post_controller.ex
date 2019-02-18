@@ -4,6 +4,8 @@ defmodule TilWeb.PostController do
   alias Til.Posts
   alias Til.Posts.Post
 
+  @twitter_intent "https://twitter.com/intent/tweet"
+
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]
     apply(__MODULE__, action_name(conn), args)
@@ -22,9 +24,19 @@ defmodule TilWeb.PostController do
   def create(conn, %{"post" => post_params}, current_user) do
     case Posts.create_post(current_user, post_params) do
       {:ok, post} ->
-        conn
-        |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: Routes.post_path(conn, :show, post))
+        conn = conn |> put_flash(:info, "Post created successfully.")
+
+        if post_params["share_to_twitter"] == "true" do
+          # REFACTOR: Extract out the composition logic of Twitter URL intent
+          #           to a seperate module
+          #
+          # Eexmaple:
+          #           url = Routes.post_url(conn, :show, post)
+          #           twitter_intent = TwitterIntent.url(post.title, url)
+          redirect(conn, external: "#{@twitter_intent}?text=TIL: #{post.title}&url=#{Routes.post_url(conn, :show, post)}")
+        else
+          redirect(conn, to: Routes.post_path(conn, :show, post))
+        end
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
