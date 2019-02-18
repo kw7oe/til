@@ -6,6 +6,8 @@ defmodule TilWeb.PostController do
 
   @twitter_intent "https://twitter.com/intent/tweet"
 
+  plug :authenticate_user when action in [:index, :new, :create, :edit, :update, :delete]
+
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]
     apply(__MODULE__, action_name(conn), args)
@@ -43,8 +45,8 @@ defmodule TilWeb.PostController do
     end
   end
 
-  def show(conn, %{"id" => id}, current_user) do
-    post = Posts.get_user_post!(current_user, id)
+  def show(conn, %{"id" => id}, _current_user) do
+    post = Posts.get_post!(id)
     render(conn, "show.html", post: post)
   end
 

@@ -45,7 +45,6 @@ defmodule TilWeb.Router do
     resources "/users", UserController, only: [:show]
     resources "/tags", TagController, only: [:index, :show]
 
-    pipe_through :authenticate_user
     resources "/posts", PostController
   end
 
