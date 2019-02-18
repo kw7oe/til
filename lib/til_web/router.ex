@@ -28,6 +28,7 @@ defmodule TilWeb.Router do
 
 
     get "/confirmation/:token", ConfirmationController, :new
+    resources "/resend_confirmation", ResendConfirmationController, only: [:new, :create]
 
     get "/reset_password/new", ResetPasswordController, :new
     post "/reset_password", ResetPasswordController, :create

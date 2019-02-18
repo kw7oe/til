@@ -21,6 +21,10 @@
         Forget your password?
         <%= link "Reset here", to: Routes.reset_password_path(@conn, :new) %>
       </p>
+      <p>
+        Did not receive your confirmation link?
+        <%= link "Resend here", to: Routes.resend_confirmation_path(@conn, :new) %>
+      </p>
     </div>
   </div>
 </div>
