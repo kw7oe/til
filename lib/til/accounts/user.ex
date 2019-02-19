@@ -66,7 +66,7 @@ defmodule Til.Accounts.User do
     end
   end
 
-  defp put_confirmation_token(changeset) do
+  def put_confirmation_token(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: _} ->
         put_change(changeset, :confirmation_token, Til.RandomToken.generate())

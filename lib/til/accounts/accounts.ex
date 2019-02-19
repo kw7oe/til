@@ -52,6 +52,16 @@ defmodule Til.Accounts do
   end
 
   @doc """
+  Generate confirmation token for user.
+  """
+  def add_confirmation_token(user) do
+    user
+    |> Ecto.Changeset.change()
+    |> User.put_confirmation_token()
+    |> Repo.update()
+  end
+
+  @doc """
   Update password for user
   """
   def update_password(%User{} = user, attrs) do

@@ -11,8 +11,15 @@ defmodule TilWeb.ResendConfirmationController do
 
   def create(conn, %{"email" => email}) do
     case Accounts.get_user_by_email(email) do
-      nil -> :ok
-      user -> Email.welcome_email(user) |> Mailer.deliver_later()
+      nil ->
+        :ok
+
+      user ->
+        if user.confirmation_token == nil do
+          Accounts.add_confirmation_token(user)
+        end
+
+        Email.welcome_email(user) |> Mailer.deliver_later()
     end
 
     conn
