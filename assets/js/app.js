@@ -10,6 +10,9 @@ import css from "../css/app.sass"
 // Import dependencies
 //
 import "phoenix_html"
+import "jquery"
+import "popper.js"
+import "bootstrap"
 
 // Import local files
 //
