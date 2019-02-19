@@ -4,8 +4,6 @@ defmodule TilWeb.PostController do
   alias Til.Posts
   alias Til.Posts.Post
 
-  @twitter_intent "https://twitter.com/intent/tweet"
-
   plug :authenticate_user when action in [:index, :new, :create, :edit, :update, :delete]
 
   def action(conn, _) do
@@ -29,13 +27,9 @@ defmodule TilWeb.PostController do
         conn = conn |> put_flash(:info, "Post created successfully.")
 
         if post_params["share_to_twitter"] == "true" do
-          # REFACTOR: Extract out the composition logic of Twitter URL intent
-          #           to a seperate module
-          #
-          # Eexmaple:
-          #           url = Routes.post_url(conn, :show, post)
-          #           twitter_intent = TwitterIntent.url(post.title, url)
-          redirect(conn, external: "#{@twitter_intent}?text=TIL: #{post.title}&url=#{Routes.post_url(conn, :show, post)}")
+          url = Routes.post_url(conn, :show, post)
+          twitter_intent_url = Til.TwitterIntent.url(post.title, url)
+          redirect(conn, external: twitter_intent_url)
         else
           redirect(conn, to: Routes.post_path(conn, :show, post))
         end

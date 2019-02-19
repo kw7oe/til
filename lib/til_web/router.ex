@@ -26,7 +26,6 @@ defmodule TilWeb.Router do
     get "/", PageController, :index
     get "/test", PageController, :test
 
-
     get "/confirmation/:token", ConfirmationController, :new
     resources "/resend_confirmation", ResendConfirmationController, only: [:new, :create]
 

@@ -18,9 +18,13 @@ defmodule Til.AccountsTest do
 
     test "it return ok with user if valid input", context do
       user = context[:user]
-      result = Accounts.authenticate_by_email_and_pass(
-        "test@example.com", "password"
-      )
+
+      result =
+        Accounts.authenticate_by_email_and_pass(
+          "test@example.com",
+          "password"
+        )
+
       assert {:ok, user_from_result} = result
       assert user.email == user_from_result.email
     end
@@ -28,23 +32,33 @@ defmodule Til.AccountsTest do
     test "it return error if email is unconfirmed", context do
       user = context[:user]
       Accounts.unconfirm_user(user)
-      result = Accounts.authenticate_by_email_and_pass(
-        "test@example.com", "password"
-      )
+
+      result =
+        Accounts.authenticate_by_email_and_pass(
+          "test@example.com",
+          "password"
+        )
+
       assert {:error, :unconfirm} = result
     end
 
     test "it return error if email not found" do
-      result = Accounts.authenticate_by_email_and_pass(
-        "invalid@email.com", "password"
-      )
+      result =
+        Accounts.authenticate_by_email_and_pass(
+          "invalid@email.com",
+          "password"
+        )
+
       assert {:error, :not_found} = result
     end
 
     test "it return error if password incorrect" do
-      result = Accounts.authenticate_by_email_and_pass(
-        "test@example.com", "incorrect"
-      )
+      result =
+        Accounts.authenticate_by_email_and_pass(
+          "test@example.com",
+          "incorrect"
+        )
+
       assert {:error, :unauthorized} = result
     end
   end
@@ -62,7 +76,6 @@ defmodule Til.AccountsTest do
       assert user.username == "test"
       assert user.confirmation_token != nil
     end
-
 
     test "confirm_user/1 return result.confirmed as true", context do
       user = context[:user]

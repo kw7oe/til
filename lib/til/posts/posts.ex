@@ -11,6 +11,7 @@ defmodule Til.Posts do
 
   def list_user_posts(%Accounts.User{} = user) do
     Post.submitted_by(user.id)
+    |> Post.ordered()
     |> Repo.all()
     |> preload_user()
     |> preload_tags()
