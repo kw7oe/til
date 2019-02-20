@@ -22,6 +22,9 @@ defmodule Til.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Til.DataCase
+
+      # To use Factory Method
+      import Til.Factory
     end
   end
 

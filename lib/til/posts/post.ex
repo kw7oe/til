@@ -15,8 +15,21 @@ defmodule Til.Posts.Post do
 
   def ordered(query \\ __MODULE__), do: from(q in query, order_by: [desc: :inserted_at])
 
-  def submitted_by(query \\ __MODULE__, user_id),
-    do: from(q in query, where: q.user_id == ^user_id)
+  def submitted_by(query \\ __MODULE__, user_id) do
+    from(q in query, where: q.user_id == ^user_id)
+  end
+
+  def filter_by_tags(query \\ __MODULE__, tags) do
+    from(
+      q in query,
+      distinct: true,
+      join: pt in Til.Posts.PostTag,
+      on: pt.post_id == q.id,
+      join: t in Til.Posts.Tag,
+      on: pt.tag_id == t.id,
+      where: t.name in ^tags
+    )
+  end
 
   @doc false
   def changeset(post, attrs) do

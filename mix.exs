@@ -60,7 +60,10 @@ defmodule Til.MixProject do
       # OAuth Github
       {:ueberauth_github, "~> 0.7"},
       # Deps of oauth2 in ueberauth_github
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+
+      # Testing
+      {:ex_machina, "~> 2.2"}
     ]
   end
 
