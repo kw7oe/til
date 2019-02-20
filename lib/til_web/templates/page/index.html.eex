@@ -1,16 +1,17 @@
 <div class="row justify-content-center">
-  <%= if Enum.empty?(@posts) do %>
-    <div class="empty-state d-flex align-items-center flex-column">
-      <img src="<%= Routes.static_path(@conn, "/images/post.svg") %>">
-      <h4>No Today I learned post yet.</h4>
-      <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "btn btn-primary" %>
-    </div>
-  <% else %>
-    <div class="col-md-10">
+  <div class="col-md-10">
+    <%= render TilWeb.SharedView, "filter.html", Map.put(assigns, :tags, @tags) %>
+    <%= if Enum.empty?(@posts) do %>
+      <div class="empty-state d-flex align-items-center flex-column mt-5">
+        <img src="<%= Routes.static_path(@conn, "/images/post.svg") %>">
+        <h4>No Today I learned post yet.</h4>
+        <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "btn btn-primary" %>
+      </div>
+    <% else %>
       <%= for post <- @posts do %>
         <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
