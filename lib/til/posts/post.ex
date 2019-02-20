@@ -45,6 +45,7 @@ defmodule Til.Posts.Post do
   def parse_tags(attrs) do
     (attrs["virtual_tags"] || "")
     |> String.split(",", trim: true)
+    |> Enum.map(&String.trim/1)
     |> insert_and_get_all_tags()
   end
 
