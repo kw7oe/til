@@ -19,7 +19,10 @@ defmodule Til.Posts.Post do
     from(q in query, where: q.user_id == ^user_id)
   end
 
-  def filter_by_tags(query \\ __MODULE__, tags) do
+  # Method header
+  def filter_by_tags(query \\ __MODULE__, tags)
+  def filter_by_tags(query, []), do: query
+  def filter_by_tags(query, tags) do
     from(
       q in query,
       distinct: true,

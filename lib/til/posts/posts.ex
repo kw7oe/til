@@ -25,8 +25,9 @@ defmodule Til.Posts do
     |> preload_tags()
   end
 
-  def list_posts do
+  def list_posts(tags) do
     Post.ordered()
+    |> Post.filter_by_tags(tags)
     |> Repo.all()
     |> preload_user()
     |> preload_tags()

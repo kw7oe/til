@@ -3,8 +3,11 @@ defmodule TilWeb.PageController do
 
   alias Til.Posts
 
-  def index(conn, _params) do
-    posts = Posts.list_posts()
+  def index(conn, params) do
+    tags = Map.get(params, "tags", "")
+           |> String.split(",", trim: true)
+
+    posts = Posts.list_posts(tags)
     render(conn, "index.html", posts: posts)
   end
 end
