@@ -12,6 +12,17 @@ defmodule Til.Accounts do
   @valid_reset_password_token_second 900
 
   @doc """
+  Generate remember token for user
+  """
+  def remember_me(user) do
+    attrs = %{remember_token: Til.RandomToken.generate()}
+
+    user
+    |> Ecto.Changeset.change(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
   Get User by email
 
   Return 'nil' if does not exist.
