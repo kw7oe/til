@@ -1,9 +1,7 @@
 defmodule Til.RandomToken do
-  @length 64
-
-  def generate() do
-    :crypto.strong_rand_bytes(@length)
+  def generate(len \\ 64) do
+    :crypto.strong_rand_bytes(len)
     |> Base.url_encode64()
-    |> binary_part(0, @length)
+    |> binary_part(0, len)
   end
 end

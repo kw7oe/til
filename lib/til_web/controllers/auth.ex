@@ -8,7 +8,22 @@ defmodule TilWeb.Auth do
   def init(opts), do: opts
 
   def call(conn, _opts) do
-    user_id = get_session(conn, :user_id)
+    {conn, user_id} =
+      case Map.get(conn.cookies, "remember_token") do
+        nil ->
+          {conn, get_session(conn, :user_id)}
+
+        token ->
+          result = verify_remember_token(token)
+
+          conn =
+            conn
+            |> put_session(:user_id, result)
+            |> configure_session(renew: true)
+
+          {conn, result}
+      end
+
     user = user_id && Accounts.get_user!(user_id)
     assign(conn, :current_user, user)
   end
@@ -23,7 +38,7 @@ defmodule TilWeb.Auth do
 
   def login_by_email_and_pass(conn, email, given_pass) do
     case Accounts.authenticate_by_email_and_pass(email, given_pass) do
-      {:ok, user} -> {:ok, login(conn, user)}
+      {:ok, user} -> {:ok, login(conn, user), user.id}
       {:error, reason} -> {:error, reason, conn}
     end
   end
@@ -40,6 +55,28 @@ defmodule TilWeb.Auth do
       |> put_flash(:error, "You must be logged in to access that page")
       |> redirect(to: Routes.session_path(conn, :new))
       |> halt()
+    end
+  end
+
+  @doc """
+  To generate Phoniex.Token for remember token and add it to request cookies
+  encoded with the User id.
+  """
+  def remember_me(conn, user_id) do
+    token = Phoenix.Token.sign(TilWeb.Endpoint, "remember salt", user_id)
+    conn |> put_resp_cookie("remember_token", token, max_age: 86400)
+  end
+
+  @doc """
+  To verify remember token from cookies.
+
+  If valid, it will return user_id
+  If invalid, it will return nil
+  """
+  def verify_remember_token(token) do
+    case Phoenix.Token.verify(TilWeb.Endpoint, "remember salt", token, max_age: 86400) do
+      {:ok, user_id} -> user_id
+      {:error, _} -> nil
     end
   end
 end

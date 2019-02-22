@@ -12,7 +12,7 @@ defmodule Til.Factory do
   def confirmed_user_factory do
     struct!(
       user_factory(),
-      %{ confirmed: true }
+      %{confirmed: true}
     )
   end
 
@@ -25,7 +25,7 @@ defmodule Til.Factory do
 
   def tag_factory do
     %Til.Posts.Tag{
-      name: sequence(:name, &"tag-#{&1}"),
+      name: sequence(:name, &"tag-#{&1}")
     }
   end
 end

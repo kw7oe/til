@@ -9,9 +9,10 @@ defmodule TilWeb.SessionController do
 
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
     case Auth.login_by_email_and_pass(conn, email, password) do
-      {:ok, conn} ->
+      {:ok, conn, user_id} ->
         conn
         |> put_flash(:info, "Welcome back!")
+        |> Auth.remember_me(user_id)
         |> redirect(to: Routes.page_path(conn, :index))
 
       {:error, :unconfirm, conn} ->
