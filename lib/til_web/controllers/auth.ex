@@ -44,7 +44,9 @@ defmodule TilWeb.Auth do
   end
 
   def logout(conn) do
-    configure_session(conn, drop: true)
+    conn
+    |> delete_resp_cookie("remember_token")
+    |> configure_session(drop: true)
   end
 
   def authenticate_user(conn, _opts) do
