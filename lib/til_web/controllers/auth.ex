@@ -79,7 +79,9 @@ defmodule TilWeb.Auth do
   If invalid, it will return nil
   """
   def verify_remember_token(token) do
-    case Phoenix.Token.verify(TilWeb.Endpoint, "remember salt", token, max_age: @remember_token_age) do
+    case Phoenix.Token.verify(TilWeb.Endpoint, "remember salt", token,
+           max_age: @remember_token_age
+         ) do
       {:ok, user_id} -> user_id
       {:error, _} -> nil
     end
