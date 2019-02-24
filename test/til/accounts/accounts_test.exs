@@ -9,13 +9,6 @@ defmodule Til.AccountsTest do
     assert {:error, %Ecto.Changeset{}} = Accounts.create_user(@invalid_attrs)
   end
 
-  test "remember_me/1 will generate remember_token for user" do
-    user = insert(:user)
-
-    assert {:ok, updated_user} = Accounts.remember_me(user)
-    assert updated_user.remember_token != nil
-  end
-
   describe "authenticate_by_email_and_pass/2" do
     setup do
       {:ok, user} = Accounts.create_user(@valid_attrs)
