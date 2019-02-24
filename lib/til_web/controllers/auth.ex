@@ -5,6 +5,9 @@ defmodule TilWeb.Auth do
   alias Til.Accounts
   alias TilWeb.Router.Helpers, as: Routes
 
+  # In seconds, 15 days. One day has 86400 seconds.
+  @remember_token_age 86400 * 15
+
   def init(opts), do: opts
 
   def call(conn, _opts) do
@@ -66,7 +69,7 @@ defmodule TilWeb.Auth do
   """
   def remember_me(conn, user_id) do
     token = Phoenix.Token.sign(TilWeb.Endpoint, "remember salt", user_id)
-    conn |> put_resp_cookie("remember_token", token, max_age: 86400)
+    conn |> put_resp_cookie("remember_token", token, max_age: @remember_token_age)
   end
 
   @doc """
@@ -76,7 +79,7 @@ defmodule TilWeb.Auth do
   If invalid, it will return nil
   """
   def verify_remember_token(token) do
-    case Phoenix.Token.verify(TilWeb.Endpoint, "remember salt", token, max_age: 86400) do
+    case Phoenix.Token.verify(TilWeb.Endpoint, "remember salt", token, max_age: @remember_token_age) do
       {:ok, user_id} -> user_id
       {:error, _} -> nil
     end
