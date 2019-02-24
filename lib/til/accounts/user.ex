@@ -15,8 +15,6 @@ defmodule Til.Accounts.User do
     field :reset_password_token, :string
     field :reset_password_at, :naive_datetime
 
-    field :remember_token, :string
-
     timestamps()
   end
 
