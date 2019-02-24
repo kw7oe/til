@@ -2,7 +2,6 @@ defmodule TilWeb.TagController do
   use TilWeb, :controller
 
   alias Til.Posts
-  alias Til.Posts.Tags
 
   def index(conn, _) do
     tags = Posts.list_tags()

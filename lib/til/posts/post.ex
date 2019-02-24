@@ -22,6 +22,7 @@ defmodule Til.Posts.Post do
   # Method header
   def filter_by_tags(query \\ __MODULE__, tags)
   def filter_by_tags(query, []), do: query
+
   def filter_by_tags(query, tags) do
     from(
       q in query,

@@ -23,6 +23,9 @@ defmodule TilWeb.ConnCase do
 
       # The default endpoint for testing
       @endpoint TilWeb.Endpoint
+
+      # To use FactoryMethod
+      import Til.Factory
     end
   end
 
