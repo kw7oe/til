@@ -54,6 +54,9 @@ defmodule Til.MixProject do
       # Date/Time Library
       {:timex, "~> 3.1"},
 
+      # Pagination
+      {:scrivener_ecto, "~> 2.0"},
+
       # Authentication Dependencies
       {:comeonin, "~> 4.1"},
       {:pbkdf2_elixir, "~> 0.12"},
