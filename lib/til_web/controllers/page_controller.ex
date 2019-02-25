@@ -13,4 +13,8 @@ defmodule TilWeb.PageController do
     posts = Posts.list_posts(tags)
     render(conn, "index.html", posts: posts, tags: all_tags)
   end
+
+  def about(conn, _) do
+    render(conn, "about.html")
+  end
 end

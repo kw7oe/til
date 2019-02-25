@@ -24,7 +24,7 @@ defmodule TilWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/test", PageController, :test
+    get "/about", PageController, :about
 
     get "/confirmation/:token", ConfirmationController, :new
     resources "/resend_confirmation", ResendConfirmationController, only: [:new, :create]

@@ -1,0 +1,28 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-header">
+        <h1 class="text-center">About</h1>
+      </div>
+      <div class="card-body">
+        <p>
+        TIL is an application aims to make knowledge more accessible by
+        allowing people to share their knowledge to each other. Users
+        are able to create a "Today I learned" post with Markdown. To
+        categorize the posts, users can add multiple tags to the post
+        by adding it to the input field, seperated by commas.
+        </p>
+
+        <p>
+        This application is built with Elixir, Phoenix and Bootstrap.
+        It is deployed to Gigalixir free tier instance.
+        </p>
+
+        <p>
+        It is strongly inspired by
+        <a href="https://til.hashrocket.com">Hashrocket TIL</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
