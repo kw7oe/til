@@ -56,6 +56,7 @@ defmodule Til.MixProject do
 
       # Pagination
       {:scrivener_ecto, "~> 2.0"},
+      {:scrivener_html, "~> 1.8"},
 
       # Authentication Dependencies
       {:comeonin, "~> 4.1"},
