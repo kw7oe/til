@@ -10,8 +10,13 @@ defmodule TilWeb.PageController do
 
     all_tags = Posts.list_tags() |> Enum.map(& &1.name)
 
-    posts = Posts.list_posts(tags)
-    render(conn, "index.html", posts: posts, tags: all_tags)
+    page = Posts.list_posts(tags, params)
+
+    render(conn, "index.html",
+      posts: page.entries,
+      page: Map.delete(page, :entries),
+      tags: all_tags
+    )
   end
 
   def about(conn, _) do

@@ -11,6 +11,9 @@
       <%= for post <- @posts do %>
         <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
       <% end %>
+
+      <%= pagination_links @page, previous: "Previous", next: "Next" %>
+
     <% end %>
   </div>
 </div>
