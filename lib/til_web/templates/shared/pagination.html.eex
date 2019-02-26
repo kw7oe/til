@@ -1,0 +1,1 @@
+<%= pagination_links @page, previous: "Previous", next: "Next" %>

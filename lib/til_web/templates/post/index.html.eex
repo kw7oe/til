@@ -1,9 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-md-10">
     <h2 class="mb-4">My Posts</h2>
+    <%= render "posts.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>
 
-    <%= for post <- @posts do %>
-      <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
-    <% end %>
   </div>
 </div>

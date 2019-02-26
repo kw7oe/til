@@ -8,12 +8,7 @@
         <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "btn btn-primary" %>
       </div>
     <% else %>
-      <%= for post <- @posts do %>
-        <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
-      <% end %>
-
-      <%= pagination_links @page, previous: "Previous", next: "Next" %>
-
+      <%= render TilWeb.PostView, "posts.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>
     <% end %>
   </div>
 </div>

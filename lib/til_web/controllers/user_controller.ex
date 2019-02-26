@@ -14,10 +14,10 @@ defmodule TilWeb.UserController do
     render(conn, "index.html", users: users)
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id} = params) do
     user = Accounts.get_user!(id)
-    posts = Posts.list_user_posts(user)
-    render(conn, "show.html", posts: posts, user: user)
+    page = Posts.list_user_posts_with_paginate(user, params)
+    render(conn, "show.html", page: page, posts: page.entries, user: user)
   end
 
   def new(conn, _params) do

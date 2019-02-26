@@ -9,12 +9,20 @@ defmodule Til.Posts do
   alias Til.Accounts
   alias Til.Posts.{Post, Tag}
 
-  def list_user_posts(%Accounts.User{} = user) do
+  def list_user_posts_with_paginate(%Accounts.User{} = user, params) do
     Post.submitted_by(user.id)
     |> Post.ordered()
-    |> Repo.all()
-    |> preload_user()
-    |> preload_tags()
+    |> preload(:user)
+    |> preload(:tags)
+    |> Repo.paginate(params)
+  end
+
+  def list_posts_with_paginate(tags, params) do
+    Post.ordered()
+    |> Post.filter_by_tags(tags)
+    |> preload(:user)
+    |> preload(:tags)
+    |> Repo.paginate(params)
   end
 
   def get_user_post!(%Accounts.User{} = user, id) do
@@ -23,14 +31,6 @@ defmodule Til.Posts do
     |> Repo.one!()
     |> preload_user()
     |> preload_tags()
-  end
-
-  def list_posts(tags, params) do
-    Post.ordered()
-    |> Post.filter_by_tags(tags)
-    |> preload(:user)
-    |> preload(:tags)
-    |> Repo.paginate(params)
   end
 
   def get_post!(id) do

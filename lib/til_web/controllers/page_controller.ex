@@ -10,7 +10,7 @@ defmodule TilWeb.PageController do
 
     all_tags = Posts.list_tags() |> Enum.map(& &1.name)
 
-    page = Posts.list_posts(tags, params)
+    page = Posts.list_posts_with_paginate(tags, params)
 
     render(conn, "index.html",
       posts: page.entries,
