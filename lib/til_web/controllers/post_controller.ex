@@ -13,9 +13,11 @@ defmodule TilWeb.PostController do
 
   def index(conn, params, current_user) do
     page = Posts.list_user_posts_with_paginate(current_user, params)
+
     render(conn, "index.html",
-           page: Map.delete(page, :entries),
-           posts: page.entries)
+      page: Map.delete(page, :entries),
+      posts: page.entries
+    )
   end
 
   def new(conn, _params, current_user) do
