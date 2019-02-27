@@ -41,6 +41,9 @@ defmodule TilWeb.Router do
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
 
+    get "/profile/edit", UserController, :edit
+    put "/profile/edit", UserController, :update
+
     resources "/users", UserController, only: [:show]
     resources "/tags", TagController, only: [:index, :show]
 

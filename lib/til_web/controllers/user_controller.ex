@@ -7,7 +7,7 @@ defmodule TilWeb.UserController do
   alias Til.Accounts.User
   alias TilWeb.Email
 
-  plug :authenticate_user when action in [:index]
+  plug :authenticate_user when action in [:index, :edit, :update]
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -37,6 +37,23 @@ defmodule TilWeb.UserController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
+    end
+  end
+
+  def edit(conn, _params) do
+    changeset = Accounts.change_user(conn.assigns.current_user)
+    render(conn, "edit.html", changeset: changeset)
+  end
+
+  def update(conn, %{"user" => user_params}) do
+    case Accounts.update_user(conn.assigns.current_user, user_params) do
+      {:ok, _user} ->
+        conn
+        |> put_flash(:info, "Profile updated successfully.")
+        |> redirect(to: Routes.user_path(conn, :edit))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", changeset: changeset)
     end
   end
 end

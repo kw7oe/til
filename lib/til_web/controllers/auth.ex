@@ -11,24 +11,28 @@ defmodule TilWeb.Auth do
   def init(opts), do: opts
 
   def call(conn, _opts) do
-    {conn, user_id} =
-      case Map.get(conn.cookies, "remember_token") do
-        nil ->
-          {conn, get_session(conn, :user_id)}
+    cond do
+      conn.assigns[:current_user] -> conn
+      true ->
+        {conn, user_id} =
+          case Map.get(conn.cookies, "remember_token") do
+            nil ->
+              {conn, get_session(conn, :user_id)}
 
-        token ->
-          result = verify_remember_token(token)
+            token ->
+              result = verify_remember_token(token)
 
-          conn =
-            conn
-            |> put_session(:user_id, result)
-            |> configure_session(renew: true)
+              conn =
+                conn
+                |> put_session(:user_id, result)
+                |> configure_session(renew: true)
 
-          {conn, result}
-      end
+              {conn, result}
+          end
 
-    user = user_id && Accounts.get_user!(user_id)
-    assign(conn, :current_user, user)
+        user = user_id && Accounts.get_user!(user_id)
+        assign(conn, :current_user, user)
+    end
   end
 
   def login(conn, user) do
