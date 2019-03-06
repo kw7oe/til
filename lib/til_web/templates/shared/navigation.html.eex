@@ -21,6 +21,9 @@
             <%= link "Posts", to: Routes.post_path(@conn, :index), class: "nav-link" %>
           </div>
           <div class="nav-item">
+            <%= link "Edit Profile", to: Routes.user_path(@conn, :edit), class: "nav-link" %>
+          </div>
+          <div class="nav-item">
             <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "nav-link" %>
           </div>
         <% else %>
