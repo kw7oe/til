@@ -19,23 +19,18 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :content %>
-    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="write-tab" data-toggle="tab" href="#write" role="tab" aria-controls="write" aria-selected="true">Write</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab" aria-controls="preview" aria-selected="false">Preview</a>
-      </li>
-    </ul>
-
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane active" id="write" role="tabpanel" aria-labelledby="write-tab">
+    <div class="row">
+      <div class="col-md-6">
+        <%= label f, :content, class: "font-weight-bold" %>
         <%= textarea f, :content, id: "textarea", class: "form-control" %>
         <%= error_tag f, :content %>
       </div>
-      <div class="tab-pane" id="preview" role="tabpanel" aria-labelledby="preview-tab">
-        <p id="empty"><em>No preview yet</em></p>
+
+      <div class="col-md-6 mt-4 mt-sm-0">
+        <label class="font-weight-bold">Preview</label>
+        <div id="preview">
+          <p id="empty"><em>No preview yet</em></p>
+        </div>
       </div>
     </div>
   </div>

@@ -9,9 +9,8 @@ let Post = {
     console.log("on Ready")
     let input = document.querySelector("#textarea")
     let preview = document.querySelector("#preview")
-    let previewTab = document.querySelector("#preview-tab")
-
     let postChannel = socket.channel("post")
+
     postChannel.on("preview", (resp) => {
       preview.innerHTML = resp["preview"]
       document.querySelectorAll('pre code').forEach((block) => {
@@ -23,7 +22,8 @@ let Post = {
       .receive("error", reason => console.log("join failed", reason))
 
 
-    previewTab.addEventListener("click", e => {
+    postChannel.push("update", input.value)
+    input.addEventListener("keyup", e => {
       postChannel.push("update", input.value)
     })
 
