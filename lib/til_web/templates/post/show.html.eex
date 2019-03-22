@@ -3,3 +3,10 @@
     <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, @post) %>
   </div>
 </div>
+
+<script>
+  // To open Twitter Intent
+  const urlParams = new URLSearchParams(window.location.search)
+  const twitterUrl = urlParams.get("twitter_url")
+  window.open(twitterUrl, "_blank")
+</script>

@@ -33,7 +33,7 @@ defmodule TilWeb.PostController do
         if post_params["share_to_twitter"] == "true" do
           url = Routes.post_url(conn, :show, post)
           twitter_intent_url = Til.TwitterIntent.url(post.title, url)
-          redirect(conn, external: twitter_intent_url)
+          redirect(conn, to: Routes.post_path(conn, :show, post, twitter_url: twitter_intent_url))
         else
           redirect(conn, to: Routes.post_path(conn, :show, post))
         end
