@@ -22,11 +22,6 @@ import Post from "./post"
 
 Post.init(socket, document.getElementById("preview"))
 
-var tx = document.getElementsByTagName('textarea');
-for (var i = 0; i < tx.length; i++) {
-  tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
-  tx[i].addEventListener("input", OnInput, false);
-}
 
 function OnInput() {
   if (this.scrollHeight >= 400) {
@@ -35,4 +30,13 @@ function OnInput() {
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px';
   }
+}
+
+var tx = document.getElementById('textarea');
+if (tx) {
+  tx.setAttribute('style', 'height:' + (tx.scrollHeight) + 'px;overflow-y:hidden;');
+  if (tx.scrollHeight >= 400) {
+    tx.style.overflowY = "scroll"
+  }
+  tx.addEventListener("input", OnInput, false);
 }
