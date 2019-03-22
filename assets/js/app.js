@@ -29,6 +29,10 @@ for (var i = 0; i < tx.length; i++) {
 }
 
 function OnInput() {
-  this.style.height = 'auto';
-  this.style.height = (this.scrollHeight) + 'px';
+  if (this.scrollHeight >= 400) {
+    this.style.overflowY = "scroll"
+  } else {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+  }
 }

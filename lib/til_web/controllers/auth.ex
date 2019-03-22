@@ -12,7 +12,9 @@ defmodule TilWeb.Auth do
 
   def call(conn, _opts) do
     cond do
-      conn.assigns[:current_user] -> conn
+      conn.assigns[:current_user] ->
+        conn
+
       true ->
         {conn, user_id} =
           case Map.get(conn.cookies, "remember_token") do

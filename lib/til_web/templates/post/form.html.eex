@@ -28,6 +28,7 @@
         <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab" aria-controls="preview" aria-selected="false">Preview</a>
       </li>
     </ul>
+
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane active" id="write" role="tabpanel" aria-labelledby="write-tab">
         <%= textarea f, :content, id: "textarea", class: "form-control" %>

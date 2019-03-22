@@ -8,9 +8,8 @@ defmodule Til.TwitterIntentTest do
       url = "https://til.com"
       result = TwitterIntent.url("N%", url)
 
-      expected_result = "#{TwitterIntent.base_url}?text=TIL:%20N%25&url=#{url}"
+      expected_result = "#{TwitterIntent.base_url()}?text=TIL:%20N%25&url=#{url}"
       assert result == expected_result
     end
-
   end
 end

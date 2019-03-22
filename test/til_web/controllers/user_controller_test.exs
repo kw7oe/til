@@ -3,13 +3,16 @@ defmodule TilWeb.UserControllerTest do
   use Plug.Test
 
   test "requires user authentication on edit", %{conn: conn} do
-    Enum.each([
-      get(conn, Routes.user_path(conn, :edit)),
-      put(conn, Routes.user_path(conn, :update), user: %{}),
-    ], fn conn ->
-      assert html_response(conn, 302)
-      assert conn.halted
-    end)
+    Enum.each(
+      [
+        get(conn, Routes.user_path(conn, :edit)),
+        put(conn, Routes.user_path(conn, :update), user: %{})
+      ],
+      fn conn ->
+        assert html_response(conn, 302)
+        assert conn.halted
+      end
+    )
   end
 
   describe "login" do
@@ -36,7 +39,6 @@ defmodule TilWeb.UserControllerTest do
 
       conn = get(conn, Routes.user_path(conn, :edit))
       assert html_response(conn, 200)
-
     end
   end
 end
