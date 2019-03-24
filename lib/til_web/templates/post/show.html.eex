@@ -8,5 +8,5 @@
   // To open Twitter Intent
   const urlParams = new URLSearchParams(window.location.search)
   const twitterUrl = urlParams.get("twitter_url")
-  if (twiiterUrl) { window.open(twitterUrl, "_blank") }
+  if (twitterUrl) { window.open(twitterUrl, "_blank") }
 </script>
