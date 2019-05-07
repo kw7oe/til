@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :til, TilWeb.Endpoint,
-  http: [:inet6, port: System.get_env("PORT") || 4000],
+  http: [:inet6, port: System.get_env("PORT")],
   url: [scheme: "https", host: "til.kaiwern.com", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
