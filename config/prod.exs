@@ -17,16 +17,6 @@ config :til, TilWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
-config :til, TilWeb.Endpoint,
-  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
-  server: true
-
-config :til, Til.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("DATABASE_URL"),
-  ssl: true,
-  pool_size: 2
-
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
