@@ -46,4 +46,7 @@ npm-debug.log
 # Ignore todo tasks
 .todo
 
+# Ignore deployment folder
+/deployment
+
 

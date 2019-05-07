@@ -75,7 +75,10 @@ defmodule Til.MixProject do
 
       # Testing
       {:ex_machina, "~> 2.2"},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+
+      # Deployment
+      {:distillery, "~> 2.0"}
     ]
   end
 
