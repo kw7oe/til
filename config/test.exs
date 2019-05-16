@@ -3,8 +3,9 @@ use Mix.Config
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :til, TilWeb.Endpoint,
-  http: [port: 4002],
-  server: false
+  # Set to 4001 and true for Integration Test
+  http: [port: 4001],
+  server: true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
@@ -19,3 +20,9 @@ config :til, Til.Repo,
 
 # Pbkdf2
 config :pbkdf2_elixir, :rounds, 1
+
+# Mailer
+config :til, Til.Mailer, adapter: Bamboo.LocalAdapter
+
+# Hound
+config :hound, driver: "chrome_driver", browser: "chrome_headless"

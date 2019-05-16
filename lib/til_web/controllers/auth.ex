@@ -55,7 +55,9 @@ defmodule TilWeb.Auth do
   def logout(conn) do
     conn
     |> delete_resp_cookie("remember_token")
-    |> configure_session(drop: true)
+    # Use clear_session instead of configure_session(:drop)
+    # to allow flash messsage to be sent to client
+    |> clear_session()
   end
 
   def authenticate_user(conn, _opts) do
@@ -75,7 +77,9 @@ defmodule TilWeb.Auth do
   """
   def remember_me(conn, user_id) do
     token = Phoenix.Token.sign(TilWeb.Endpoint, "remember salt", user_id)
-    conn |> put_resp_cookie("remember_token", token, max_age: @remember_token_age)
+
+    conn
+    |> put_resp_cookie("remember_token", token, max_age: @remember_token_age)
   end
 
   @doc """

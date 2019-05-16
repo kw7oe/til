@@ -37,6 +37,7 @@ defmodule TilWeb.SessionController do
   def delete(conn, _) do
     conn
     |> Auth.logout()
+    |> put_flash(:info, "Logout successfully.")
     |> redirect(to: Routes.page_path(conn, :index))
   end
 end
