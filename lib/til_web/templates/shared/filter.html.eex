@@ -1,5 +1,5 @@
 <%= form_for @conn, Routes.page_path(@conn, :index), [method: :get], fn f -> %>
-  <div class="form-group row">
+  <div class="row">
     <%= label f, :filter_by_tag, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-8">
       <%= select f, :tags, @tags, class: "form-control" %>

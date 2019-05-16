@@ -9,24 +9,26 @@
         <div class="nav-item">
           <%= link "Tags", to: Routes.tag_path(@conn, :index), class: "nav-link" %>
         </div>
-        <div class="nav-item">
-          <%= link "Abouts", to: Routes.page_path(@conn, :about), class: "nav-link" %>
-        </div>
         <%= if @current_user do %>
           <%# <%= link "Users", to: Routes.user_path(@conn, :index), class: "btn" %1> %>
           <div class="nav-item">
             <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "nav-link" %>
           </div>
-          <div class="nav-item">
-            <%= link "Posts", to: Routes.post_path(@conn, :index), class: "nav-link" %>
-          </div>
-          <div class="nav-item">
-            <%= link "Edit Profile", to: Routes.user_path(@conn, :edit), class: "nav-link" %>
-          </div>
-          <div class="nav-item">
-            <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "nav-link" %>
-          </div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              More
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link "Posts", to: Routes.post_path(@conn, :index), class: "dropdown-item" %>
+              <%= link "Edit Profile", to: Routes.user_path(@conn, :edit), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "dropdown-item" %>
+            </div>
+          </li>
         <% else %>
+          <div class="nav-item">
+            <%= link "Abouts", to: Routes.page_path(@conn, :about), class: "nav-link" %>
+          </div>
           <div class="nav-item">
             <%= link "Register", to: Routes.user_path(@conn, :new), class: "nav-link" %>
           </div>

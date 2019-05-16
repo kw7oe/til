@@ -1,6 +1,10 @@
 <div class="row justify-content-center">
   <div class="col-md-10">
-    <%= render TilWeb.SharedView, "filter.html", Map.put(assigns, :tags, @tags) %>
+    <div class="card mb-5">
+      <div class="card-body">
+        <%= render TilWeb.SharedView, "filter.html", Map.put(assigns, :tags, @tags) %>
+      </div>
+    </div>
     <%= if Enum.empty?(@posts) do %>
       <div class="empty-state d-flex align-items-center flex-column mt-5">
         <img src="<%= Routes.static_path(@conn, "/images/post.svg") %>">
