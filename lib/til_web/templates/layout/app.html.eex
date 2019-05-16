@@ -19,7 +19,7 @@
       <%= render TilWeb.SharedView, "navigation.html", assigns %>
     </header>
 
-    <main role="main" class="container w-md-75 mt-5">
+    <main role="main" class="container mt-5">
       <%= render TilWeb.SharedView, "flash_message.html", assigns %>
       <%= render @view_module, @view_template, assigns %>
     </main>
