@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>TIL · What have you learned today?</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+  </head>
+
+  <body class="bg-light">
+    <header>
+      <%= render TilWeb.SharedView, "navigation.html", assigns %>
+    </header>
+
+    <main role="main" class="container mt-5">
+      <%= render TilWeb.SharedView, "flash_message.html", assigns %>
+      <div class="row px-2 align-items-start">
+        <%= render TilWeb.SharedView, "side_menu.html", assigns %>
+        <%= render @view_module, @view_template, assigns %>
+      </div>
+    </main>
+
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

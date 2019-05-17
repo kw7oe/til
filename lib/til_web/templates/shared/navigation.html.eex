@@ -19,7 +19,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="more_dropdown">
               <%= link "Posts", to: Routes.post_path(@conn, :index), class: "dropdown-item" %>
-              <%= link "Edit Profile", to: Routes.user_path(@conn, :edit), class: "dropdown-item" %>
+              <%= link "Profile", to: Routes.user_path(@conn, :edit), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "dropdown-item", id: "logout_link" %>
             </div>

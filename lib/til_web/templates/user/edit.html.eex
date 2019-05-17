@@ -1,30 +1,4 @@
-<div class="row px-2 align-items-start">
-  <div class="side-menu">
-    <ul class="side-menu-items">
-      <li class="side-nav-item side-nav-title">Personal</li>
-      <li class="side-nav-item">
-        <%= link "Profile", to: Routes.user_path(@conn, :edit), class: "side-nav-link active" %>
-      </li>
-      <li class="side-nav-item">
-        <%= link "Posts", to: Routes.post_path(@conn, :index), class: "side-nav-link" %>
-      </li>
-    </ul>
-
-    <ul class="side-menu-items">
-      <li class="side-nav-item">
-        <%= link "Profile", to: Routes.user_path(@conn, :edit), class: "side-nav-link active" %>
-      </li>
-      <li class="side-nav-item">
-        <%= link "Posts", to: Routes.post_path(@conn, :index), class: "side-nav-link" %>
-      </li>
-    </ul>
-  </div>
-
-  <div class="col card">
-    <div class="card-body">
-      <h2>Profile</h2>
-      <%= render "form.html", Map.merge(assigns, %{action: Routes.user_path(@conn, :update), button_title: "Update"}) %>
-    </div>
-  </div>
+<div class="col">
+  <h2 class="mb-4">Profile</h2>
+  <%= render "form.html", Map.merge(assigns, %{action: Routes.user_path(@conn, :update), button_title: "Update"}) %>
 </div>
-

@@ -16,7 +16,8 @@ defmodule TilWeb.PostController do
 
     render(conn, "index.html",
       page: Map.delete(page, :entries),
-      posts: page.entries
+      posts: page.entries,
+      layout: {TilWeb.LayoutView, "dashboard.html"}
     )
   end
 
