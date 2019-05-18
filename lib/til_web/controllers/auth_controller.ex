@@ -1,7 +1,6 @@
 defmodule TilWeb.AuthController do
   use TilWeb, :controller
 
-  plug Ueberauth
   alias Ueberauth.Strategy.Helpers
 
   def request(conn, _params) do
@@ -16,6 +15,8 @@ defmodule TilWeb.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
+    IO.inspect(conn.assigns)
+
     conn
     |> put_flash(:error, "Failed to authenticate.")
     |> redirect(to: "/")
