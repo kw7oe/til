@@ -6,13 +6,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <div class="nav-item">
-          <%= link "Tags", to: Routes.tag_path(@conn, :index), class: "nav-link" %>
-        </div>
         <%= if @current_user do %>
-          <div class="nav-item">
-            <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "nav-link" %>
-          </div>
+
+          <li class="nav-item">
+            <%= link "Tags", to: Routes.tag_path(@conn, :index), class: "nav-link" %>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="more_dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               More
@@ -24,16 +22,20 @@
               <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "dropdown-item", id: "logout_link" %>
             </div>
           </li>
+
+          <form class="form-inline">
+            <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "btn btn-primary btn-sm" %>
+          </form>
         <% else %>
-          <div class="nav-item">
+          <li class="nav-item">
             <%= link "Abouts", to: Routes.page_path(@conn, :about), class: "nav-link" %>
-          </div>
-          <div class="nav-item">
+          </li>
+          <li class="nav-item">
             <%= link "Register", to: Routes.user_path(@conn, :new), class: "nav-link" %>
-          </div>
-          <div class="nav-item">
+          </li>
+          <li class="nav-item">
             <%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %>
-          </div>
+          </li>
         <% end %>
       </ul>
   </div>
