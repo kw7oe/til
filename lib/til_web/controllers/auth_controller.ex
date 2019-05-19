@@ -15,11 +15,27 @@ defmodule TilWeb.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
-    IO.inspect(conn.assigns)
-
     conn
     |> put_flash(:error, "Failed to authenticate.")
     |> redirect(to: "/")
+  end
+
+  def callback(
+        %{assigns: %{current_user: %Til.Accounts.User{} = current_user, ueberauth_auth: auth}} =
+          conn,
+        _params
+      ) do
+    IO.inspect("Hello")
+
+    case UserFromAuth.connect(auth, current_user) do
+      {:ok, _user} ->
+        conn
+        |> put_flash(:info, "Connected to GitHub successfully")
+        |> redirect(to: Routes.user_path(conn, :edit))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", changeset: changeset)
+    end
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do

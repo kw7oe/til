@@ -21,6 +21,11 @@ defmodule UserFromAuth do
     {:ok, basic_info(auth)}
   end
 
+  def connect(%Auth{} = auth, user) do
+    avatar_url = avatar_from_auth(auth)
+    Til.Accounts.update_user(user, %{avatar_url: avatar_url})
+  end
+
   # github does it this way
   defp avatar_from_auth(%{info: %{urls: %{avatar_url: image}}}), do: image
 

@@ -34,9 +34,10 @@ defmodule Til.Accounts.User do
 
   def edit_changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :username, :password])
+    |> cast(attrs, [:email, :username, :password, :avatar_url])
     |> validate_required([:email, :username])
     |> validate_length(:username, min: 4, max: 100)
+    |> validate_length(:password, min: 6)
     |> unique_constraint(:email)
     |> unique_constraint(:username)
   end

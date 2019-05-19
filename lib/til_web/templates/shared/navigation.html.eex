@@ -9,7 +9,7 @@
         <%= if @current_user do %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle dropdown-toggle-no-icon" href="#" id="more_dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="<%= Routes.static_path(@conn, "/images/default-user.png") %>" alt="Profile Picture" class="avatar rounded-circle">
+              <img src="<%= avatar(@current_user) %>" alt="Profile Picture" class="avatar rounded-circle">
             </a>
             <div class="dropdown-menu" aria-labelledby="more_dropdown">
               <%= link "Posts", to: Routes.post_path(@conn, :index), class: "dropdown-item" %>
