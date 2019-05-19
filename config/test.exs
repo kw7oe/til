@@ -25,4 +25,4 @@ config :pbkdf2_elixir, :rounds, 1
 config :til, Til.Mailer, adapter: Bamboo.LocalAdapter
 
 # Hound
-config :hound, driver: "chrome_driver", browser: "chrome_headless"
+config :hound, driver: "chrome_driver", browser: "chrome"

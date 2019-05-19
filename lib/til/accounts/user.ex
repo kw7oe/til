@@ -5,6 +5,7 @@ defmodule Til.Accounts.User do
   schema "users" do
     field :email, :string
     field :username, :string
+    field :avatar_url, :string
 
     field :password, :string, virtual: true
     field :password_hash, :string
@@ -21,7 +22,7 @@ defmodule Til.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :username, :password])
+    |> cast(attrs, [:email, :username, :password, :avatar_url])
     |> validate_required([:email, :username])
     |> validate_length(:username, min: 4, max: 100)
     |> validate_length(:password, min: 6)
