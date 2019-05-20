@@ -28,18 +28,13 @@ defmodule Til.Accounts.User do
     |> validate_length(:password, min: 6)
     |> unique_constraint(:email)
     |> unique_constraint(:username)
-    |> put_pass_hash()
-    |> put_confirmation_token()
   end
 
-  def edit_changeset(user, attrs) do
+  def new_changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :username, :password, :avatar_url])
-    |> validate_required([:email, :username])
-    |> validate_length(:username, min: 4, max: 100)
-    |> validate_length(:password, min: 6)
-    |> unique_constraint(:email)
-    |> unique_constraint(:username)
+    |> changeset(attrs)
+    |> put_pass_hash()
+    |> put_confirmation_token()
   end
 
   def reset_password_changeset(user, attrs) do

@@ -25,8 +25,6 @@ defmodule TilWeb.AuthController do
           conn,
         _params
       ) do
-    IO.inspect("Hello")
-
     case UserFromAuth.connect(auth, current_user) do
       {:ok, _user} ->
         conn
