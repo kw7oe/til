@@ -2,7 +2,7 @@
   <ul class="side-menu-items">
     <li class="side-nav-item side-nav-title">Personal</li>
     <li class="side-nav-item">
-      <%= active_link_to @conn, "Profile", to: Routes.user_path(@conn, :edit), class: "side-nav-link", active_class: "active" %>
+      <%= active_link_to @conn, "Account", to: Routes.user_path(@conn, :edit), class: "side-nav-link", active_class: "active" %>
     </li>
     <li class="side-nav-item">
       <%= active_link_to @conn, "Posts", to: Routes.post_path(@conn, :index), class: "side-nav-link", active_class: "active" %>
