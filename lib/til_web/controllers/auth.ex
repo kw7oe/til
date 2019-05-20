@@ -10,31 +10,29 @@ defmodule TilWeb.Auth do
 
   def init(opts), do: opts
 
-  def call(conn, _opts) do
-    cond do
-      conn.assigns[:current_user] ->
+  def call(%{assigns: %{current_user: %Til.Accounts.User{}}} = conn, _opts) do
+    conn
+  end
+
+  def call(%{cookies: %{"remember_token" => token}} = conn, _opts) do
+    user_id = verify_remember_token(token)
+
+    case user_id && Accounts.get_user!(user_id) do
+      # Invalid Remember Token
+      nil ->
         conn
+        |> delete_resp_cookie("remember_token")
+        |> call(%{})
 
-      true ->
-        {conn, user_id} =
-          case Map.get(conn.cookies, "remember_token") do
-            nil ->
-              {conn, get_session(conn, :user_id)}
-
-            token ->
-              result = verify_remember_token(token)
-
-              conn =
-                conn
-                |> put_session(:user_id, result)
-                |> configure_session(renew: true)
-
-              {conn, result}
-          end
-
-        user = user_id && Accounts.get_user!(user_id)
-        assign(conn, :current_user, user)
+      user ->
+        login(conn, user)
     end
+  end
+
+  def call(conn, _opts) do
+    user_id = get_session(conn, :user_id)
+    user = user_id && Accounts.get_user!(user_id)
+    assign(conn, :current_user, user)
   end
 
   def login(conn, user) do

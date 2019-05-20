@@ -34,8 +34,22 @@ defmodule TilWeb.AuthTest do
       assert conn.assigns[:current_user].email == user.email
     end
 
+    test "assign nil to current_user if remember_token does not contain existing user id" do
+      conn =
+        build_conn()
+        |> init_test_session(%{})
+        |> fetch_session()
+        |> put_resp_cookie("remember_token", "lalala", max_age: 86400)
+        |> fetch_cookies()
+        |> Auth.call(%{})
+
+      assert Map.has_key?(conn.assigns, :current_user)
+      assert conn.assigns[:current_user] == nil
+    end
+
     test "assign nil to current_user if user_id does not exist" do
       conn = build_conn() |> init_test_session(%{}) |> fetch_session() |> Auth.call(%{})
+      assert Map.has_key?(conn.assigns, :current_user)
       assert conn.assigns[:current_user] == nil
     end
   end
