@@ -6,6 +6,10 @@ defmodule Til.Accounts.User do
     field :email, :string
     field :username, :string
     field :avatar_url, :string
+    field :github_handle, :string
+    field :twitter_handle, :string
+    field :bio, :string
+    field :website, :string
 
     field :password, :string, virtual: true
     field :password_hash, :string
@@ -22,7 +26,16 @@ defmodule Til.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :username, :password, :avatar_url])
+    |> cast(attrs, [
+      :email,
+      :username,
+      :password,
+      :avatar_url,
+      :twitter_handle,
+      :github_handle,
+      :bio,
+      :website
+    ])
     |> validate_required([:email, :username])
     |> validate_length(:username, min: 4, max: 100)
     |> validate_length(:password, min: 6)
