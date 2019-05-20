@@ -14,12 +14,12 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/elixir.min.js"></script>
   </head>
-  <body>
+  <body class="container">
     <header>
       <%= render TilWeb.SharedView, "navigation.html", assigns %>
     </header>
 
-    <main role="main" class="container mt-5">
+    <main role="main" class="mt-5">
       <%= render TilWeb.SharedView, "flash_message.html", assigns %>
       <%= render @view_module, @view_template, assigns %>
     </main>

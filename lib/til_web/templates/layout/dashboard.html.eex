@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
 
-  <body class="bg-light">
+  <body class="container bg-light">
     <header>
       <%= render TilWeb.SharedView, "navigation.html", assigns %>
     </header>
 
-    <main role="main" class="container mt-5">
+    <main role="main" class="mt-5">
       <%= render TilWeb.SharedView, "flash_message.html", assigns %>
       <div class="row px-2 align-items-start">
         <%= render TilWeb.SharedView, "side_menu.html", assigns %>

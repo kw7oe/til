@@ -1,11 +1,18 @@
 <div class="col">
-  <h3 class="mb-4">Profile</h3>
+  <h4 class="mb-4">General</h4>
   <div class="card">
     <div class="card-body">
-      <%= render "form.html", Map.merge(assigns, %{action: Routes.user_path(@conn, :update), button_title: "Update"}) %>
+      <%= render "form.html", Map.merge(assigns, %{action: Routes.user_path(@conn, :update), button_title: "Save"}) %>
     </div>
   </div>
 
-  <h3 class="my-4">Connected Account</h3>
+  <h4 class="my-4">Profile</h4>
+  <div class="card">
+    <div class="card-body">
+      <%= render "profile_form.html", Map.merge(assigns, %{action: Routes.user_path(@conn, :update), button_title: "Save"}) %>
+    </div>
+  </div>
+
+  <h4 class="my-4">Connected Account</h4>
   <%= render "connected_accounts.html", assigns %>
 </div>

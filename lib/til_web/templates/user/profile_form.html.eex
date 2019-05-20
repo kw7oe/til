@@ -1,0 +1,22 @@
+<%= form_for @changeset, @action, fn f -> %>
+
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :website %>
+    <%= text_input f, :website, required: true, class: "form-control" %>
+    <%= error_tag f, :website %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :biography %>
+    <%= textarea f, :bio, required: true, class: "form-control" %>
+    <%= error_tag f, :bio %>
+  </div>
+
+  <%= submit @button_title, class: "btn btn-primary", id: "profile_submit" %>
+<% end %>
