@@ -27,12 +27,7 @@ defmodule UserFromAuth do
 
   # GitHub
   defp avatar_from_auth(%{info: %{urls: %{avatar_url: image}}}), do: image
-
-  defp avatar_from_auth(auth) do
-    Logger.warn(auth.provider <> " needs to find an avatar URL!")
-    Logger.debug(Jason.encode!(auth))
-    nil
-  end
+  defp avatar_from_auth(auth), do: nil
 
   # GitHub
   defp handle_from_auth(%{info: %{nickname: handle}}), do: handle

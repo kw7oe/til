@@ -56,9 +56,9 @@ defmodule Til.UserIntegrationTest do
     fill_in_sign_in_info(user)
     assert visible_page_text() =~ "Welcome"
 
-    # Edit and Update Profile
+    # Edit and Update Account
     click_more()
-    find_element(:link_text, "Profile") |> click()
+    find_element(:link_text, "Account") |> click()
     find_element(:id, "user_username") |> fill_field("new_name")
     find_element(:id, "user_submit") |> click()
     assert visible_page_text() =~ "successfully"
