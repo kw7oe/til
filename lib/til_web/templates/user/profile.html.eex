@@ -1,0 +1,17 @@
+<div class="profile d-flex mb-5 align-items-start justify-content-between">
+  <div class="d-flex align-items-center">
+    <img
+      class="profile-picture mr-4"
+      src="<%= TilWeb.SharedView.avatar(@user) %>"
+      alt="<%= @user.username %> profile picture">
+      <div>
+        <h2><%= @user.username %></h2>
+        <p class="mb-4"><%= @user.bio %></p>
+        <a href="<%= @user.website %>" target="_blank" rel=”noopener noreferrer”>Visit Website</a>
+      </div>
+  </div>
+
+  <%= if @user == @current_user do %>
+    <%= link "Edit Profile", to: Routes.user_path(@conn, :edit), class: "btn btn-secondary btn-sm" %>
+  <% end %>
+</div>
