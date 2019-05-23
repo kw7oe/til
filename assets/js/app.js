@@ -32,7 +32,7 @@ function OnInput() {
   }
 }
 
-var tx = document.getElementById('textarea');
+var tx = document.getElementById('post_content');
 if (tx) {
   tx.setAttribute('style', 'height:' + (tx.scrollHeight) + 'px;overflow-y:hidden;');
   if (tx.scrollHeight >= 400) {

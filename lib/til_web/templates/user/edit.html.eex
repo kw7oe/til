@@ -1,9 +1,18 @@
-<div class="row justify-content-center px-2">
-  <div class="col-md-6 card">
+<div class="col">
+  <h4 class="mb-4">General</h4>
+  <div class="card">
     <div class="card-body">
-      <h2 class="text-center">Edit Profile</h2>
       <%= render "form.html", Map.merge(assigns, %{action: Routes.user_path(@conn, :update), button_title: "Save"}) %>
     </div>
   </div>
-</div>
 
+  <h4 class="my-4">Profile</h4>
+  <div class="card">
+    <div class="card-body">
+      <%= render "profile_form.html", Map.merge(assigns, %{action: Routes.user_path(@conn, :update), button_title: "Save"}) %>
+    </div>
+  </div>
+
+  <h4 class="my-4">Connected Account</h4>
+  <%= render "connected_accounts.html", assigns %>
+</div>

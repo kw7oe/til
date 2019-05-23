@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-body">
+    <table class="table table-borderless mb-0">
+      <tr>
+        <td class="d-flex">
+          <img src="<%= Routes.static_path(@conn, "/images/github-mark.png")%>" alt="GitHub Logo" class="social-icon">
+          <p>GitHub:</p>
+        </td>
+        <%= if @current_user.github_handle do %>
+          <td>
+            <img src="<%= TilWeb.SharedView.avatar(@current_user) %>" alt="Profile Picture" class="avatar rounded-circle">
+            <%= @current_user.github_handle %>
+          </td>
+        </td>
+        <% else %>
+          <td>
+            <%= link "Connect", to: Routes.auth_path(@conn, :request, "github"), class: "btn btn-sm btn-light" %>
+          </td>
+        <% end %>
+      </tr>
+    </table>
+
+  </div>
+</div>

@@ -1,6 +1,2 @@
-<div class="row justify-content-center">
-  <div class="col-md-10">
-    <h2 class="mb-4"><%= @user.username %>'s Posts</h2>
-      <%= render TilWeb.PostView, "posts.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>
-  </div>
-</div>
+<%= render "profile.html", assigns %>
+<%= render TilWeb.PostView, "posts.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>

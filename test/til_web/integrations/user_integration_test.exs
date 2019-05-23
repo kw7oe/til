@@ -19,17 +19,6 @@ defmodule Til.UserIntegrationTest do
     find_element(:class, "btn") |> click()
   end
 
-  setup do
-    # When using Chrome Headless, it has the window size of a mobile devices.
-    #
-    # We resize the window to carry out UI testing in a desktop
-    # breakpoint so some elements will be present without the need of toggling
-    # additional element.
-    set_window_size(current_window_handle(), 1280, 720)
-
-    :ok
-  end
-
   test "User Flow" do
     user = %{username: "kw7oe", password: "password", email: "kw7oe@email.com"}
 
@@ -56,11 +45,11 @@ defmodule Til.UserIntegrationTest do
     fill_in_sign_in_info(user)
     assert visible_page_text() =~ "Welcome"
 
-    # Edit and Update Profile
+    # Edit and Update Account
     click_more()
-    find_element(:link_text, "Edit Profile") |> click()
+    find_element(:link_text, "Account") |> click()
     find_element(:id, "user_username") |> fill_field("new_name")
-    find_element(:class, "btn") |> click()
+    find_element(:id, "user_submit") |> click()
     assert visible_page_text() =~ "successfully"
   end
 end

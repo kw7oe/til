@@ -1,42 +1,39 @@
 <nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container w-md-75">
-    <%= link "Today I learned", to: Routes.page_path(@conn, :index), class: 'navbar-brand mb-0 h1' %>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <div class="nav-item">
-          <%= link "Tags", to: Routes.tag_path(@conn, :index), class: "nav-link" %>
-        </div>
-        <%= if @current_user do %>
-          <div class="nav-item">
-            <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "nav-link" %>
+  <%= link "Today I learned", to: Routes.page_path(@conn, :index), class: 'navbar-brand mb-0 h1' %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <%= if @current_user do %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle dropdown-toggle-no-icon" href="#" id="more_dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="<%= avatar(@current_user) %>" alt="Profile Picture" class="avatar rounded-circle">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="more_dropdown">
+            <%= link "Profile", to: Routes.user_path(@conn, :show, @current_user), class: "dropdown-item" %>
+            <%= link "Account", to: Routes.user_path(@conn, :edit), class: "dropdown-item" %>
+            <%= link "Posts", to: Routes.post_path(@conn, :index), class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "dropdown-item", id: "logout_link" %>
           </div>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="more_dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              More
-            </a>
-            <div class="dropdown-menu" aria-labelledby="more_dropdown">
-              <%= link "Posts", to: Routes.post_path(@conn, :index), class: "dropdown-item" %>
-              <%= link "Edit Profile", to: Routes.user_path(@conn, :edit), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete",  class: "dropdown-item", id: "logout_link" %>
-            </div>
-          </li>
-        <% else %>
-          <div class="nav-item">
-            <%= link "Abouts", to: Routes.page_path(@conn, :about), class: "nav-link" %>
-          </div>
-          <div class="nav-item">
-            <%= link "Register", to: Routes.user_path(@conn, :new), class: "nav-link" %>
-          </div>
-          <div class="nav-item">
-            <%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %>
-          </div>
-        <% end %>
-      </ul>
-  </div>
+        </li>
+
+        <form class="form-inline px-2">
+          <%= link "Add TIL", to: Routes.post_path(@conn, :new), class: "btn btn-primary btn-sm" %>
+        </form>
+      <% else %>
+        <li class="nav-item">
+          <%= link "Abouts", to: Routes.page_path(@conn, :about), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link "Register", to: Routes.user_path(@conn, :new), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </nav>
 

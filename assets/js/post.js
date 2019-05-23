@@ -7,7 +7,7 @@ let Post = {
 
   onReady(socket) {
     console.log("on Ready")
-    let input = document.querySelector("#textarea")
+    let input = document.querySelector("#post_content")
     let preview = document.querySelector("#preview")
     let postChannel = socket.channel("post")
 
