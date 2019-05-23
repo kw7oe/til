@@ -53,6 +53,7 @@ defmodule Til.ReleaseTasks do
     app = Keyword.get(repo.config, :otp_app)
     IO.puts("Running migrations for #{app}")
     migrations_path = priv_path_for(repo, "migrations")
+    IO.puts("Migration path: #{migrations_path}")
     Ecto.Migrator.run(repo, migrations_path, :up, all: true)
   end
 
