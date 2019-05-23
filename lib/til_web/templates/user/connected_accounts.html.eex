@@ -11,7 +11,9 @@
             <img src="<%= TilWeb.SharedView.avatar(@current_user) %>" alt="Profile Picture" class="avatar rounded-circle">
             <%= @current_user.github_handle %>
           </td>
-        </td>
+          <td>
+            <%= link "Sync", to: Routes.auth_path(@conn, :request, "github"), class: "btn btn-sm btn-light" %>
+          </td>
         <% else %>
           <td>
             <%= link "Connect", to: Routes.auth_path(@conn, :request, "github"), class: "btn btn-sm btn-light" %>

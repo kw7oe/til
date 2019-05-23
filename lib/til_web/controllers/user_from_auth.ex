@@ -39,7 +39,7 @@ defmodule UserFromAuth do
   end
 
   defp social_info(auth) do
-    %{github_handle: handle_from_auth(auth), avatar: avatar_from_auth(auth)}
+    %{github_handle: handle_from_auth(auth), avatar_url: avatar_from_auth(auth)}
   end
 
   defp validate_pass(%{other: %{password: ""}}) do
