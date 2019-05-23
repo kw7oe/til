@@ -53,7 +53,10 @@ defmodule TilWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :edit))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", changeset: changeset)
+        render(conn, "edit.html",
+          changeset: changeset,
+          layout: {TilWeb.LayoutView, "dashboard.html"}
+        )
     end
   end
 end

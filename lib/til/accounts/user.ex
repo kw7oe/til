@@ -2,6 +2,8 @@ defmodule Til.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Til.Regexp
+
   schema "users" do
     field :email, :string
     field :username, :string
@@ -39,6 +41,7 @@ defmodule Til.Accounts.User do
     |> validate_required([:email, :username])
     |> validate_length(:username, min: 4, max: 100)
     |> validate_length(:password, min: 6)
+    |> validate_format(:website, Regexp.http(), message: Regexp.http_message())
     |> unique_constraint(:email)
     |> unique_constraint(:username)
   end

@@ -1,10 +1,27 @@
 defmodule Til.UserTest do
   use Til.DataCase
   alias Til.Accounts.User
+  alias Til.Regexp
 
   import Ecto.Changeset
 
   @valid_attrs %{email: "test@example.com", username: "test", password: "password"}
+
+  describe "validate website" do
+    test "success with valid url" do
+      attrs = Map.merge(@valid_attrs, %{website: "https://www.kaiwern.com"})
+      changeset = User.changeset(%User{}, attrs)
+      assert changeset.valid?
+    end
+
+    test "fail with invalid url" do
+      attrs = Map.merge(@valid_attrs, %{website: "www.kaiwern.com"})
+      changeset = User.changeset(%User{}, attrs)
+
+      message = Regexp.http_message()
+      assert %{website: [message]} = errors_on(changeset)
+    end
+  end
 
   test "reset_password_changeset should only change password and reset_password_token" do
     user =
