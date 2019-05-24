@@ -52,7 +52,7 @@ defmodule TilWeb.PostController do
   def edit(conn, %{"id" => id}, current_user) do
     post = Posts.get_user_post!(current_user, id)
     changeset = Posts.change_post(conn.assigns.current_user, post)
-    render(conn, "edit.html", post: post, changeset: changeset)
+    render(conn, "new_edit.html", post: post, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}, current_user) do

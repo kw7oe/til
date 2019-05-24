@@ -14,18 +14,14 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/elixir.min.js"></script>
   </head>
-  <body class="container">
+  <body>
     <header>
       <%= render TilWeb.SharedView, "navigation.html", assigns %>
     </header>
 
     <main role="main" class="mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-10">
-          <%= render TilWeb.SharedView, "flash_message.html", assigns %>
-          <%= render @view_module, @view_template, assigns %>
-        </div>
-      </div>
+      <%= render TilWeb.SharedView, "flash_message.html", assigns %>
+      <%= render @view_module, @view_template, assigns %>
     </main>
 
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
