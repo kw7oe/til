@@ -2,7 +2,7 @@
   <div class="card-body">
     <table class="table table-borderless mb-0">
       <tr>
-        <td class="d-flex">
+        <td class="d-flex align-items-center">
           <img src="<%= Routes.static_path(@conn, "/images/github-mark.png")%>" alt="GitHub Logo" class="social-icon">
           <p>GitHub:</p>
         </td>
@@ -21,6 +21,5 @@
         <% end %>
       </tr>
     </table>
-
   </div>
 </div>
