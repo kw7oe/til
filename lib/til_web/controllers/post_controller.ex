@@ -23,7 +23,11 @@ defmodule TilWeb.PostController do
 
   def new(conn, _params, current_user) do
     changeset = Posts.change_post(current_user, %Post{})
-    render(conn, "new.html", changeset: changeset)
+
+    render(conn, "new.html",
+      changeset: changeset,
+      layout: {TilWeb.LayoutView, "editor_layout.html"}
+    )
   end
 
   def create(conn, %{"post" => post_params}, current_user) do
