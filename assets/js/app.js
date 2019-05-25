@@ -23,13 +23,9 @@ import Post from "./post"
 Post.init(socket, document.getElementById("preview"))
 
 
-function OnInput() {
-  if (this.scrollHeight >= 400) {
-    this.style.overflowY = "scroll"
-  } else {
-    this.style.height = 'auto';
-    this.style.height = (this.scrollHeight) + 'px';
-  }
+function onInput() {
+  this.style.height = 'auto';
+  this.style.height = (this.scrollHeight) + 'px';
 }
 
 var tx = document.getElementById('post_content');
@@ -38,5 +34,5 @@ if (tx) {
   if (tx.scrollHeight >= 400) {
     tx.style.overflowY = "scroll"
   }
-  tx.addEventListener("input", OnInput, false);
+  tx.addEventListener("input", onInput, false);
 }
