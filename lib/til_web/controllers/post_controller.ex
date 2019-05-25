@@ -56,7 +56,12 @@ defmodule TilWeb.PostController do
   def edit(conn, %{"id" => id}, current_user) do
     post = Posts.get_user_post!(current_user, id)
     changeset = Posts.change_post(conn.assigns.current_user, post)
-    render(conn, "new_edit.html", post: post, changeset: changeset)
+
+    render(conn, "edit.html",
+      post: post,
+      changeset: changeset,
+      layout: {TilWeb.LayoutView, "editor_layout.html"}
+    )
   end
 
   def update(conn, %{"id" => id, "post" => post_params}, current_user) do
@@ -69,7 +74,11 @@ defmodule TilWeb.PostController do
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", post: post, changeset: changeset)
+        render(conn, "edit.html",
+          post: post,
+          changeset: changeset,
+          layout: {TilWeb.LayoutView, "editor_layout.html"}
+        )
     end
   end
 

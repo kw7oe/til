@@ -1,0 +1,50 @@
+<%= form_for @changeset, @action, [class: "h-100"], fn f -> %>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <%= link "← Back", to: Routes.page_path(@conn, :index), class: "nav-link" %>
+    <div class="editor-nav-form">
+      <div class="flex-grow-1">
+        <%= text_input f, :title, class: "h4 transparent-form-control", placeholder: "Title", autofocus: true %>
+        <%= error_tag f, :title %>
+
+        <% tags = tag_list(@changeset.data.tags) %>
+        <%= text_input f, :virtual_tags, class: "transparent-form-control", value: tags, placeholder: "Tags, separated by comma" %>
+        <%= error_tag f, :virtual_tags %>
+      </div>
+
+      <div class="d-flex align-items-center">
+        <div class="form-check">
+          <%= checkbox f, :share_to_twitter, class: "form-check-input" %>
+          <%= label f, :share_to_twitter, class: "form-check-label" %>
+        </div>
+        <%= submit "Submit", class: "btn btn-primary ml-4", id: "post_submit" %>
+      </div>
+
+    </div>
+  </nav>
+
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="editor-content">
+    <div class="row h-100">
+      <div class="col-md-6 d-flex flex-column justify-content-between">
+
+        <div class="form-group">
+          <%= textarea f, :content, id: "post_content", class: "transparent-form-control", placeholder: "One TIL at a time", rows: 15 %>
+          <%= error_tag f, :content %>
+        </div>
+      </div>
+
+      <div class="col-md-6 mt-4 mt-sm-0">
+        <label class="font-weight-bold">Preview</label>
+        <div id="preview">
+          <p id="empty"><em>No preview yet</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
