@@ -9,7 +9,7 @@ let Post = {
     console.log("on Ready")
     let input = document.querySelector("#post_content")
     let preview = document.querySelector("#preview")
-    let postChannel = socket.channel("post")
+    let postChannel = socket.channel("post:" + window.userId)
 
     postChannel.on("preview", (resp) => {
       preview.innerHTML = resp["preview"]

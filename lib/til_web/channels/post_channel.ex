@@ -1,7 +1,7 @@
 defmodule TilWeb.PostChannel do
   use TilWeb, :channel
 
-  def join("post", _params, socket) do
+  def join("post" <> _userId, _params, socket) do
     {:ok, socket}
   end
 
