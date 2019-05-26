@@ -1,4 +1,6 @@
 defmodule TilWeb.ViewHelpers do
+  alias TilWeb.Router.Helpers, as: Routes
+
   def avatar(%{avatar_url: nil}) do
     Routes.static_path(TilWeb.Endpoint, "/images/default-user.png")
   end
