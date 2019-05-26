@@ -1,29 +1,37 @@
-<div class="card mb-4">
-  <div class="card-body">
-      <div class="d-flex justify-content-between mb-4">
-        <div class="post-meta">
-          <h1 class="h4 mb-0"><%= @post.title %></h1>
-          <small>by <%= link @post.user.username, to: Routes.user_path(@conn, :show, @post.user) %></small>
-        </div>
-        <div>
-          <%= if is_owner(@current_user, @post) do %>
-            <span>
-              <%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
-              <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
-            </span>
-          <% end %>
-        </div>
-      </div>
+<div class="post-card">
+  <img
+     class="author-profile-picture"
+     src="<%= avatar(@post.user) %>"
+     alt="<%= @post.user.username %> profile picture">
 
-    <article class="mb-1">
+  <%= if is_owner(@current_user, @post) do %>
+    <div class="post-action">
+      <span>
+        <%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
+        <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
+      </span>
+    </div>
+  <% end %>
+
+  <div class="post-card-body">
+    <div class="post-header">
+      <h1><%= @post.title %></h1>
+      <p>
+        by <%= link @post.user.username, to: Routes.user_path(@conn, :show, @post.user) %>
+        on <%= post_formatted_date(@post.updated_at) %>
+      </p>
+    </div>
+
+    <article class="post-article">
       <%= raw(Earmark.as_html! @post.content) %>
+
+      <div class="mt-5">
+        <p>
+        <strong>Tags: </strong>
+        <%= render TilWeb.TagView, "tags.html", Map.put(assigns, :tags, @post.tags) %>
+      </div>
     </article>
 
-    <div>
-      <p>
-      <strong>Tags: </strong>
-      <%= render TilWeb.TagView, "tags.html", Map.put(assigns, :tags, @post.tags) %>
-    </div>
 
   </div>
 </div>

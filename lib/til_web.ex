@@ -42,6 +42,7 @@ defmodule TilWeb do
 
       import TilWeb.ErrorHelpers
       import TilWeb.Gettext
+      import TilWeb.ViewHelpers
       alias TilWeb.Router.Helpers, as: Routes
     end
   end

@@ -12,4 +12,8 @@ defmodule TilWeb.PostView do
   def tag_list(tags) do
     tags |> Enum.map(fn t -> t.name() end) |> Enum.join(", ")
   end
+
+  def post_formatted_date(date) do
+    Timex.format!(date, "%B %d, %Y", :strftime)
+  end
 end
