@@ -1,15 +1,10 @@
 .post-card
   @extend .card
-  margin-bottom: calc(1rem + 60px)
+  @extend .mb-5
 
 .author-profile-picture
-  position: absolute
-  top: -30px
-  left: 50%
-  margin-left: -30px
-
-  width: 60px
-  height: 60px
+  width: 20px
+  height: 20px
   border-radius: 50%
 
 .post-action
@@ -19,7 +14,7 @@
 
 .post-card-body
   @extend .card-body
-  padding-top: 60px
+  padding: 40px 4rem
 
 .post-header
   display: flex
@@ -28,14 +23,18 @@
   margin-bottom: 1rem
   text-align: center
 
+  margin-bottom: 3rem
+
   h1
     @extend .h3
 
-.post-article
-  padding-left: 4rem
-  padding-right: 4rem
+.post-author
+  display: inline-flex
+  align-items: center
+  justify-content: center
 
+  img + a
+    margin-left: 4px
 
-
-
-
+  a + span
+    margin-left: 4px
