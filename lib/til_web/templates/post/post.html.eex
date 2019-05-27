@@ -12,14 +12,16 @@
   <div class="post-card-body">
     <div class="post-header">
       <h1><%= @post.title %></h1>
-      <div class="post-author">
-        <img
-          class="author-profile-picture"
-          src="<%= avatar(@post.user) %>"
-          alt="<%= @post.user.username %> profile picture">
-        <%= link @post.user.username, to: Routes.user_path(@conn, :show, @post.user) %>
-        <span>on <%= post_formatted_date(@post.updated_at) %></span>
-      </div>
+        <%= if @post.user do %>
+          <div class="post-author">
+            <img
+              class="author-profile-picture"
+              src="<%= avatar(@post.user) %>"
+              alt="<%= @post.user.username %> profile picture">
+            <%= link @post.user.username, to: Routes.user_path(@conn, :show, @post.user) %>
+            <span>on <%= post_formatted_date(@post.updated_at) %></span>
+          </div>
+        <% end %>
     </div>
 
     <article class="post-article">
