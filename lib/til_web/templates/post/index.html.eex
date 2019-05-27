@@ -1,4 +1,4 @@
 <div class="col">
   <h2 class="mb-4">My Posts</h2>
-  <%= render "posts.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>
+  <%= render "posts_table.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>
 </div>

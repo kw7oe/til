@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center">
     <img
       class="profile-picture mr-4"
-      src="<%= TilWeb.SharedView.avatar(@user) %>"
+      src="<%= avatar(@user) %>"
       alt="<%= @user.username %> profile picture">
       <div>
         <h2><%= @user.username %></h2>

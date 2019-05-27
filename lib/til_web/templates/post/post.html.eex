@@ -8,7 +8,7 @@
     <div class="post-action">
       <span>
         <%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
-        <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), class: "text-danger", method: :delete, data: [confirm: "Are you sure?"] %>
       </span>
     </div>
   <% end %>
