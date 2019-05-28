@@ -48,4 +48,5 @@
   "ueberauth": {:hex, :ueberauth, "0.5.0", "4570ec94d7f784dc4c4aa94c83391dbd9b9bd7b66baa30e95a666c5ec1b168b1", [:mix], [{:plug, "~> 1.2", [hex: :plug, repo: "hexpm", optional: false]}], "hexpm"},
   "ueberauth_github": {:hex, :ueberauth_github, "0.7.0", "637067c5500f7b13c18caca3db66d09eba661524e0d0e9518b54151e99484bad", [:mix], [{:oauth2, "~> 0.9", [hex: :oauth2, repo: "hexpm", optional: false]}, {:ueberauth, "~> 0.4", [hex: :ueberauth, repo: "hexpm", optional: false]}], "hexpm"},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.4.1", "d869e4c68901dd9531385bb0c8c40444ebf624e60b6962d95952775cac5e90cd", [:rebar3], [], "hexpm"},
+  "zarex": {:hex, :zarex, "1.0.0", "c85bfb645ecd63458b7164c484a5a648c3d2c817d95e94d8706f0705f9db4c89", [:mix], [], "hexpm"},
 }

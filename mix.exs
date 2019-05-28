@@ -73,6 +73,9 @@ defmodule Til.MixProject do
       # Deps of oauth2 in ueberauth_github
       {:poison, "~> 3.1"},
 
+      # File Sanitization
+      {:zarex, "~> 1.0"},
+
       # Testing
       {:ex_machina, "~> 2.2"},
       {:excoveralls, "~> 0.10", only: :test},

@@ -1,4 +1,4 @@
-defmodule TilWeb.AuthControllerTest do
+defmodule TilWeb.ExportControllerTest do
   use TilWeb.ConnCase
   use TilWeb.TestHelper
   use Plug.Test
@@ -18,7 +18,7 @@ defmodule TilWeb.AuthControllerTest do
       assert conn.resp_body =~ post.content
 
       [content_disposition_value | _] = get_resp_header(conn, "content-disposition")
-      assert content_disposition_value =~ "#{post.title}.md"
+      assert content_disposition_value =~ "title-0.md"
     end
   end
 end
