@@ -18,7 +18,7 @@ defmodule TilWeb.ExportControllerTest do
       assert conn.resp_body =~ post.content
 
       [content_disposition_value | _] = get_resp_header(conn, "content-disposition")
-      assert content_disposition_value =~ "title-0.md"
+      assert content_disposition_value =~ "#{post.title}.md"
     end
   end
 end
