@@ -47,6 +47,8 @@ defmodule TilWeb.Router do
     resources "/tags", TagController, only: [:index, :show]
 
     resources "/posts", PostController
+
+    get "/posts/:id/export", ExportController, :export
   end
 
   scope "/auth", TilWeb do
