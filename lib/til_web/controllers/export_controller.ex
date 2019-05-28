@@ -15,12 +15,8 @@ defmodule TilWeb.ExportController do
 
     File.write(filepath, post.content)
 
-    conn =
-      conn
-      |> put_resp_header("content-disposition", ~s(attachment; filename="#{filepath}"))
-      |> send_file(200, filepath)
-
-    File.rm(filepath)
     conn
+    |> put_resp_header("content-disposition", ~s(attachment; filename="#{filepath}"))
+    |> send_file(200, filepath)
   end
 end

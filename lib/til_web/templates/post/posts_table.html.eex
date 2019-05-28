@@ -15,6 +15,7 @@
         </td>
         <td>
           <%= link "Edit", to: Routes.post_path(@conn, :edit, post), class: "btn btn-sm btn-light" %>
+          <%= link "Export", to: Routes.export_path(@conn, :export, post), class: "btn btn-sm btn-light" %>
           <%= link "Delete", to: Routes.post_path(@conn, :delete, post), class: "btn btn-sm btn-danger", method: :delete, data: [confirm: "Are you sure?"] %>
         </td>
       </tr>
