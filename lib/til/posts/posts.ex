@@ -9,6 +9,12 @@ defmodule Til.Posts do
   alias Til.Accounts
   alias Til.Posts.{Post, Tag}
 
+  def list_user_posts(%Accounts.User{} = user) do
+    Post.submitted_by(user.id)
+    |> preload(:tags)
+    |> Repo.all()
+  end
+
   def list_user_posts_with_paginate(%Accounts.User{} = user, params) do
     Post.submitted_by(user.id)
     |> Post.ordered()

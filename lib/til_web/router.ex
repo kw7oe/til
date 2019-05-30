@@ -49,6 +49,7 @@ defmodule TilWeb.Router do
     resources "/posts", PostController
 
     get "/posts/:id/export", ExportController, :export
+    get "/export_posts", ExportController, :export_all
   end
 
   scope "/auth", TilWeb do
