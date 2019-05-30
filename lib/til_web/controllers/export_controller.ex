@@ -3,6 +3,27 @@ defmodule TilWeb.ExportController do
 
   alias Til.Posts
 
+  def download(conn, %{"tarfile" => tarname}) do
+    current_user_id = conn.assigns.current_user.id
+
+    [tar_id, _, _] = String.split(tarname, ".")
+
+    IO.inspect(current_user_id)
+    IO.inspect(tar_id)
+
+    case String.to_integer(tar_id) do
+      ^current_user_id ->
+        conn
+        |> put_resp_header("content-disposition", ~s(attachment; filename="#{tarname}"))
+        |> send_file(200, tarname)
+
+      _ ->
+        conn
+        |> put_flash(:error, "Access denied.")
+        |> redirect(to: Routes.page_path(conn, :index))
+    end
+  end
+
   def export_all(conn, _params) do
     current_user = conn.assigns.current_user
     tar_filename = get_filename(current_user.username, "tar.gz")

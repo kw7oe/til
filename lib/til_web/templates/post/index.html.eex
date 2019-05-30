@@ -1,8 +1,7 @@
-<%= live_render(@conn, TilWeb.ClockLive) %>
 <div class="col">
   <div class="mb-4 d-flex justify-content-between align-items-center">
     <h2>My Posts</h2>
-    <%= link "Export all", to: Routes.export_path(@conn, :export_all), class: "btn btn-sm btn-white" %>
+    <%= live_render(@conn, TilWeb.ExportAllLive, session: %{user_id: @current_user.id}) %>
   </div>
   <%= render "posts_table.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>
 </div>
