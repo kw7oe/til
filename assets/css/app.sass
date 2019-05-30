@@ -13,12 +13,12 @@ $headings-font-weight: 700
 @import "side-menu"
 @import "post"
 
-.w-md-75
-  width: 100%
-  padding: 0 15px !important
+body, html
+  background-color: #f5f7f9
+  margin: 0
+  padding: 0
 
-#textarea
-  max-height: 400px
+  height: 100%
 
 article
   h1
@@ -30,19 +30,25 @@ article
   h4, h5, h6
     font-size: 1.15rem
 
+.w-md-75
+  width: 100%
+  padding: 0 15px !important
+
+.btn-white
+  background: white
+  border-color: #bfbdbd
+
+  &:hover
+    background: #f8f9fa
+
+  &:focus
+    box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5)
 
 @media (min-width: 768px)
   .w-md-75
     width: 75%
 
-
-body, html
-  background-color: #f5f7f9
-  margin: 0
-  padding: 0
-
-  height: 100%
-
+// Others
 .social-icon
   width: 1.5rem
   height: 1.5rem
@@ -74,6 +80,10 @@ body, html
     margin-bottom: 1.5rem
   h4
     color: #6a8095
+
+// Editor
+#textarea
+  max-height: 400px
 
 .editor-content
   background-color: white

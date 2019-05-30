@@ -1,4 +1,7 @@
 <div class="col">
-  <h2 class="mb-4">My Posts</h2>
+  <div class="mb-4 d-flex justify-content-between align-items-center">
+    <h2>My Posts</h2>
+    <%= link "Export all", to: Routes.export_path(@conn, :export_all), class: "btn btn-sm btn-white" %>
+  </div>
   <%= render "posts_table.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>
 </div>
