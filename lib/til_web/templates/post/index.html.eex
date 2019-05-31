@@ -1,7 +1,27 @@
 <div class="col">
-  <div class="mb-4 d-flex justify-content-between align-items-center">
-    <h2>My Posts</h2>
-    <%= live_render(@conn, TilWeb.ExportAllLive, session: %{user_id: @current_user.id}) %>
+  <div class="card">
+    <div class="card-header bg-white">
+      <h4>My Posts</h4>
+    </div>
+    <div class="card-table">
+      <%= render "posts_table.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>
+    </div>
+    <div class="card-footer bg-white">
+      <%= render TilWeb.SharedView, "pagination.html", page: @page %>
+    </div>
   </div>
-  <%= render "posts_table.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>
+
+
+  <div class="card my-4">
+    <div class="card-body">
+      <header>
+        <h4>Download your TIL posts</h4>
+        <p>
+        You can export all of your TIL posts in Markdown format.
+        The exported files compressed into a tar archive.
+        </p>
+      </header>
+      <%= live_render(@conn, TilWeb.ExportAllLive, session: %{user_id: @current_user.id}) %>
+    </div>
+  </div>
 </div>

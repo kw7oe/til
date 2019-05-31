@@ -1,5 +1,5 @@
-<table class="table table-bordered table-responsive-sm bg-white">
-  <thead>
+<table class="table">
+  <thead class="thead-primary-bg">
     <tr>
       <th>Title</th>
       <th>Tags</th>
@@ -23,4 +23,3 @@
   </tbody>
 </table>
 
-<%= render TilWeb.SharedView, "pagination.html", page: @page %>
