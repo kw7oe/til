@@ -1,7 +1,7 @@
 <%= if @percentage > 0 do %>
   <div class="progress mb-3">
     <div class="progress-bar" role="progressbar" style="width: <%= @percentage %>%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-      <%= @percentage %>%
+      <%= round(@percentage) %>%
     </div>
   </div>
 <% end %>

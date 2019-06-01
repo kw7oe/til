@@ -38,7 +38,7 @@ defmodule TilWeb.ExportAllLive do
     posts = Posts.list_user_posts(user_id)
     percentage = 20
     posts_length = length(posts)
-    increment = div(90 - percentage, posts_length)
+    increment = (98 - percentage) / posts_length
 
     send(self(), {:tick, percentage})
     send(self(), {:converting, posts, [], percentage, increment})
