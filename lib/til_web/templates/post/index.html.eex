@@ -1,4 +1,4 @@
-<div class="col">
+<div class="d-flex flex-column">
   <div class="card">
     <div class="card-header bg-white">
       <h4>My Posts</h4>
