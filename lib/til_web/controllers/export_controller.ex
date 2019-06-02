@@ -3,16 +3,15 @@ defmodule TilWeb.ExportController do
 
   alias Til.Posts
 
+  plug :authenticate_user
+
   def download(conn, %{"tarfile" => tarname}) do
     current_user_id = conn.assigns.current_user.id
 
     [tar_id, _, _] = String.split(tarname, ".")
 
-    IO.inspect(current_user_id)
-    IO.inspect(tar_id)
-
-    case String.to_integer(tar_id) do
-      ^current_user_id ->
+    case Integer.parse(tar_id) do
+      {^current_user_id, _} ->
         conn
         |> put_resp_header("content-disposition", ~s(attachment; filename="#{tarname}"))
         |> send_file(200, tarname)
