@@ -2,6 +2,7 @@ defmodule TilWeb.ExportAllLive do
   use Phoenix.LiveView
 
   alias Til.Posts
+  alias Til.PostExporter
   alias TilWeb.PostView
 
   def mount(session, socket) do
@@ -41,26 +42,39 @@ defmodule TilWeb.ExportAllLive do
     increment = (98 - percentage) / posts_length
 
     send(self(), {:tick, percentage})
-    send(self(), {:converting, posts, [], percentage, increment})
+    send(self(), {:converting, posts, [], percentage, percentage, increment})
 
     {:noreply, socket}
   end
 
-  def handle_info({:converting, [h | tail], result, percentage, increment}, socket) do
+  def handle_info(
+        {:converting, [h | tail], result, percentage, old_percentage, increment},
+        socket
+      ) do
+    post = PostExporter.convert_to_binary(h)
+
     new_percentage = percentage + increment
-    post = convert_to_binary(h)
+    difference = new_percentage - old_percentage
 
-    send(self(), {:tick, new_percentage})
-    send(self(), {:converting, tail, [post | result], new_percentage, increment})
+    old_percentage =
+      case difference > 1 do
+        true ->
+          send(self(), {:tick, new_percentage})
+          new_percentage
+
+        false ->
+          old_percentage
+      end
+
+    send(self(), {:converting, tail, [post | result], new_percentage, old_percentage, increment})
 
     {:noreply, socket}
   end
 
-  def handle_info({:converting, [], result, _, _}, socket) do
+  def handle_info({:converting, [], result, _, _, _}, socket) do
     user_id = socket.assigns.user_id
-    filename = get_filename(user_id, "tar.gz")
-
-    :erl_tar.create("#{filename}", result, [:gz])
+    filename = PostExporter.get_filename(user_id, "tar.gz")
+    :ok = PostExporter.create_tar(filename, result)
 
     send(self(), {:tick, 100})
     Process.send_after(self(), :show_download, 500)
@@ -70,16 +84,5 @@ defmodule TilWeb.ExportAllLive do
 
   def handle_info(:show_download, socket) do
     {:noreply, assign(socket, show_download: true)}
-  end
-
-  defp convert_to_binary(post) do
-    {to_charlist(get_filename(post.title, "md")), post.content}
-  end
-
-  defp get_filename(title, extension) do
-    "#{title}.#{extension}"
-    |> String.downcase()
-    |> String.replace(" ", "-")
-    |> Zarex.sanitize()
   end
 end

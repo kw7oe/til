@@ -28,11 +28,19 @@ user =
 content = String.duplicate("Hello ", 10000)
 
 post_attrs = fn index ->
-  %{title: "title-#{index}", content: content}
+  datetime = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+
+  [
+    title: "title-#{index}",
+    content: content,
+    user_id: user.id,
+    inserted_at: datetime,
+    updated_at: datetime
+  ]
 end
 
 posts =
-  1..5000
-  |> Enum.each(fn index ->
-    Posts.create_post(user, post_attrs.(index))
-  end)
+  1..10000
+  |> Enum.map(post_attrs)
+
+Til.Repo.insert_all(Posts.Post, posts)
