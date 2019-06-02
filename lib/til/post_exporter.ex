@@ -26,9 +26,10 @@ defmodule Til.PostExporter do
       Posts.list_user_posts(user)
       |> Enum.map(&convert_to_binary/1)
 
-    create_tar(filename, posts)
-
-    filename
+    case create_tar(filename, posts) do
+      :ok -> {:ok, filename}
+      :error -> :error
+    end
   end
 
   @doc """
@@ -38,7 +39,8 @@ defmodule Til.PostExporter do
     try do
       :erl_tar.create("#{filename}", posts, [:gz])
     rescue
-      _ -> raise "fail to create tar"
+      _ ->
+        :error
     end
   end
 

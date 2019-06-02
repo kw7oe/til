@@ -18,9 +18,8 @@ defmodule Til.PostExporterTest do
     end
 
     test "should raise error if creation failed" do
-      assert_raise RuntimeError, "fail to create tar", fn ->
-        PostExporter.create_tar("test.tar.gz", nil)
-      end
+      result = PostExporter.create_tar("test.tar.gz", nil)
+      assert :error = result
     end
   end
 

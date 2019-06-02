@@ -25,11 +25,17 @@ defmodule TilWeb.ExportController do
   end
 
   def export_all(conn, _params) do
-    filename = PostExporter.compressed_posts_to_tar_from(conn.assigns.current_user)
+    case PostExporter.compressed_posts_to_tar_from(conn.assigns.current_user) do
+      {:ok, filename} ->
+        conn
+        |> put_resp_header("content-disposition", ~s(attachment; filename="#{filename}"))
+        |> send_file(200, filename)
 
-    conn
-    |> put_resp_header("content-disposition", ~s(attachment; filename="#{filename}"))
-    |> send_file(200, filename)
+      :error ->
+        conn
+        |> put_flash(:error, "Oops, something went wrong.")
+        |> redirect(to: Routes.post_path(conn, :index))
+    end
   end
 
   def export(conn, %{"id" => post_id}) do

@@ -21,7 +21,11 @@
         The exported files will be compressed into a tar archive.
         </p>
       </header>
-      <%= live_render(@conn, TilWeb.ExportAllLive, session: %{user_id: @current_user.id}) %>
+      <%= if @page.total_pages > 50 do %>
+        <%= live_render(@conn, TilWeb.ExportAllLive, session: %{user_id: @current_user.id}) %>
+      <% else %>
+        <%= link "Export all", to: Routes.export_path(@conn, :export_all), class: "btn btn-sm btn-white" %>
+      <% end %>
     </div>
   </div>
 </div>
