@@ -30,6 +30,8 @@ defmodule TilWeb.ExportControllerTest do
       conn = get(conn, Routes.export_path(conn, :download, filename))
 
       assert conn.state == :file
+
+      File.rm!(filename)
     end
 
     test "redirect with error message if user are not authorized", %{conn: conn, user: user} do
@@ -50,12 +52,15 @@ defmodule TilWeb.ExportControllerTest do
       assert html_response(conn, 200) =~ "Access denied"
     end
 
-    test "can get tar files when export all", %{conn: conn} do
+    test "can get tar files when export all", %{conn: conn, user: user} do
+      filename = "#{user.username}.tar.gz"
       conn = get(conn, Routes.export_path(conn, :export_all))
 
       assert conn.state == :file
       [content_disposition_value | _] = get_resp_header(conn, "content-disposition")
-      assert content_disposition_value =~ ".tar.gz"
+      assert content_disposition_value =~ filename
+
+      File.rm!(filename)
     end
 
     test "can get Markdown file if a specific post exist", %{conn: conn, user: user} do
