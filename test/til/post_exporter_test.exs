@@ -1,6 +1,5 @@
 defmodule Til.PostExporterTest do
-  use ExUnit.Case, async: true
-
+  use Til.DataCase
   alias Til.PostExporter
 
   describe "create_tar" do
@@ -25,16 +24,37 @@ defmodule Til.PostExporterTest do
 
   describe "convert_to_binary" do
     test "should convert post to expected format" do
-      post = %{title: "post", content: "hello TIL"}
+      post = insert(:post, title: "post")
 
-      result = PostExporter.convert_to_binary(post)
-      assert {'post.md', "hello TIL"} = result
+      {title, content} = PostExporter.convert_to_binary(post)
+      assert 'post.md' = title
+      assert content =~ post.content
     end
 
     test "should raise error if invalid input" do
       assert_raise RuntimeError, fn ->
         PostExporter.convert_to_binary(nil)
       end
+    end
+  end
+
+  describe "format_content" do
+    test "should include title, tags, date and content" do
+      user = insert(:user)
+
+      {:ok, post} =
+        Til.Posts.create_post(user, %{
+          "title" => "Post Title",
+          "content" => "Hello World",
+          "virtual_tags" => "test, tag"
+        })
+
+      result = PostExporter.format_content(post)
+
+      assert result =~ "title: #{post.title}"
+      assert result =~ "tags: test, tag"
+      assert result =~ "date: #{post.inserted_at}"
+      assert result =~ post.content
     end
   end
 

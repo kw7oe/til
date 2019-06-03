@@ -8,7 +8,7 @@ defmodule Til.PostExporter do
   """
   def export_to_markdown(post = %Posts.Post{}) do
     filename = get_filename(post.title, "md")
-    content = {:binary, post.content}
+    content = {:binary, format_content(post)}
 
     {filename, content}
   end
@@ -17,7 +17,7 @@ defmodule Til.PostExporter do
   Export all of the given user posts in to Markdown file and create
   a tar file.
 
-  Return file path of the tarfile.
+  Return {:ok, file path of the tarfile} on success, :error on failure.
   """
   def compressed_posts_to_tar_from(user = %Accounts.User{}) do
     filename = get_filename(user.username, "tar.gz")
@@ -34,6 +34,8 @@ defmodule Til.PostExporter do
 
   @doc """
   Create a tarfile.
+
+  Return :ok on success, :error on failure.
   """
   def create_tar(filename, posts) do
     try do
@@ -47,12 +49,32 @@ defmodule Til.PostExporter do
   @doc """
   Convert post into binary format expected from erl_tar, which is
   {'filename', binary}.
+
+  Raise RuntimeError if input is invalid.
   """
-  def convert_to_binary(%{title: title, content: content}) do
-    {to_charlist(get_filename(title, "md")), content}
+  def convert_to_binary(post = %Til.Posts.Post{}) do
+    {
+      to_charlist(get_filename(post.title, "md")),
+      format_content(post)
+    }
   end
 
   def convert_to_binary(_), do: raise("Invalid input; title and content key is expected")
+
+  @doc """
+  Format post into Markdown file content.
+  """
+  def format_content(post) do
+    """
+    ---
+    title: #{post.title}
+    tags: #{TilWeb.PostView.tag_list(post.tags)}
+    date: #{post.inserted_at}
+    ---
+
+    #{post.content}
+    """
+  end
 
   @doc """
   Sanitize and format filename given the title and extension
