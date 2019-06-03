@@ -1,6 +1,8 @@
 defmodule TilWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :til
 
+  socket "/live", Phoenix.LiveView.Socket
+
   socket "/socket", TilWeb.UserSocket,
     websocket: true,
     longpoll: false

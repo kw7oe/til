@@ -15,7 +15,10 @@ config :til, TilWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "aEr0QHunp0TboxnM1Iuk14J67l51PJGvchp7hUuXsnyu/aS0FII90LeFWqF0wYKS",
   render_errors: [view: TilWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Til.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Til.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [
+    signing_salt: "sLAWzAz7qDbmjBinjMcHr1TD621kn/TI"
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,

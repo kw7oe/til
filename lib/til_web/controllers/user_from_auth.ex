@@ -27,7 +27,7 @@ defmodule UserFromAuth do
 
   # GitHub
   defp avatar_from_auth(%{info: %{urls: %{avatar_url: image}}}), do: image
-  defp avatar_from_auth(auth), do: nil
+  defp avatar_from_auth(_auth), do: nil
 
   # GitHub
   defp handle_from_auth(%{info: %{nickname: handle}}), do: handle

@@ -5,6 +5,7 @@ defmodule TilWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
+    plug Phoenix.LiveView.Flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug Ueberauth
@@ -47,6 +48,10 @@ defmodule TilWeb.Router do
     resources "/tags", TagController, only: [:index, :show]
 
     resources "/posts", PostController
+
+    get "/posts/:id/export", ExportController, :export
+    get "/export_posts", ExportController, :export_all
+    get "/download/:tarfile", ExportController, :download
   end
 
   scope "/auth", TilWeb do

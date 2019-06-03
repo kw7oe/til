@@ -15,7 +15,7 @@
 
     <main role="main" class="mt-5">
       <%= render TilWeb.SharedView, "flash_message.html", assigns %>
-      <div class="row">
+      <div class="d-flex">
         <%= render TilWeb.SharedView, "side_menu.html", assigns %>
         <%= render @view_module, @view_template, assigns %>
       </div>

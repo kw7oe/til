@@ -1,10 +1,28 @@
 defmodule Til.PostsTest do
   use Til.DataCase
 
-  # alias Til.Posts
   # alias Til.Posts.Tag
-  #
+  alias Til.Posts
   alias Til.Posts.Post
+
+  describe "list_user_posts/1" do
+    setup do
+      user = insert(:confirmed_user)
+      _other_user_post = insert(:post, title: "Post")
+      _user_post1 = insert(:post, title: "Post 1", user: user)
+      _user_post2 = insert(:post, title: "Post 2", user: user)
+      {:ok, %{user: user}}
+    end
+
+    test "should return all user posts", %{user: user} do
+      result =
+        Posts.list_user_posts(user)
+        |> Enum.map(& &1.title)
+        |> Enum.sort()
+
+      assert result == ["Post 1", "Post 2"]
+    end
+  end
 
   describe "filter_by_tags" do
     setup do

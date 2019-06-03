@@ -13,12 +13,16 @@ import "phoenix_html"
 import "jquery"
 import "popper.js"
 import "bootstrap"
+import LiveSocket from "phoenix_live_view"
 
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
 import socket from "./socket"
 import Post from "./post"
+
+let liveSocket = new LiveSocket("/live")
+liveSocket.connect()
 
 Post.init(socket, document.getElementById("preview"))
 

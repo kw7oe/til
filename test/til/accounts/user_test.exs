@@ -19,7 +19,7 @@ defmodule Til.UserTest do
       changeset = User.changeset(%User{}, attrs)
 
       message = Regexp.http_message()
-      assert %{website: [message]} = errors_on(changeset)
+      assert %{website: [^message]} = errors_on(changeset)
     end
   end
 
