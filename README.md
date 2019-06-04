@@ -48,5 +48,23 @@ Currently, it is still in beta phase and hosted on Digital Ocean.
   - Able to upload images and attach to posts.
 - [ ] Allow user to customize exported file format and content.
 
+**Internal**
 
+- [ ] Refactor codebase.
+- [ ] Improve code coverage.
+
+## Contributing
+Everyone is welcome to contribute to the codebase. If you aren't interested in writing any code, these are the following ways you can contribute:
+
+- Start trying out the application
+- Provide constructive feedbacks
+- Submit feature requests
+- Submit bug reports or issues
+
+For those who are interested to contribute to the codebase, here are some of the ways:
+- Improve the UI and UX of the application
+- Refactoring
+- Add documentations 
+- Write tests to improve code coverage
+- Code Review
 
