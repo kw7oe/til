@@ -40,9 +40,9 @@
 
       <div class="col-md-6 mt-4 mt-sm-0">
         <label class="font-weight-bold">Preview</label>
-        <div id="preview">
+        <article id="preview">
           <p id="empty"><em>No preview yet</em></p>
-        </div>
+        </article>
       </div>
     </div>
   </div>
