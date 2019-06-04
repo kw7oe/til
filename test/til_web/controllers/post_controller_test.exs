@@ -61,6 +61,20 @@ defmodule TilWeb.PostControllerTest do
       assert html_response(conn, 200) =~ "some title"
     end
 
+    test "can create post and share to twitter", %{conn: conn} do
+      params = Map.merge(@create_attrs, %{"share_to_twitter" => "true"})
+      conn = post(conn, Routes.post_path(conn, :create), post: params)
+
+      assert %{id: id} = redirected_params(conn)
+
+      post_url = Routes.post_url(conn, :show, id)
+      twitter_url = Til.TwitterIntent.url(@create_attrs.title, post_url)
+      assert redirected_to(conn) == Routes.post_path(conn, :show, id, twitter_url: twitter_url)
+
+      conn = get(conn, post_url)
+      assert html_response(conn, 200) =~ "some title"
+    end
+
     test "cannot create posts with invalid attributes", %{conn: conn} do
       conn = post(conn, Routes.post_path(conn, :create), post: @invalid_attrs)
       assert html_response(conn, 200) =~ "Submit"
