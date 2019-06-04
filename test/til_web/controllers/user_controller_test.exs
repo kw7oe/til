@@ -15,6 +15,25 @@ defmodule TilWeb.UserControllerTest do
     )
   end
 
+  describe "guest" do
+    setup %{conn: conn} do
+      user = insert(:user)
+      post = insert(:post, user: user)
+      {:ok, conn: conn, user: user, post: post}
+    end
+
+    test "visit specific user profile", %{conn: conn, user: user, post: post} do
+      conn = get(conn, Routes.user_path(conn, :show, user.id))
+
+      assert html_response(conn, 200) =~ user.username
+      assert html_response(conn, 200) =~ user.bio
+      assert html_response(conn, 200) =~ user.website
+
+      assert html_response(conn, 200) =~ post.title
+      assert html_response(conn, 200) =~ post.content
+    end
+  end
+
   describe "login" do
     setup %{conn: conn} do
       user = insert(:user)

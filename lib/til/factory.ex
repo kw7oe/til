@@ -5,7 +5,9 @@ defmodule Til.Factory do
     %Til.Accounts.User{
       username: sequence(:username, &"user-#{&1}"),
       email: sequence(:email, &"user-#{&1}@email.com"),
-      password: "password"
+      password: "password",
+      bio: "I am a fake account",
+      website: "www.fake-user.com"
     }
   end
 
