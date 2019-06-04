@@ -14,11 +14,16 @@ defmodule Til.PostExporterTest do
 
       assert :ok = result
       assert File.exists?(filename)
+
+      File.rm!(filename)
     end
 
     test "should raise error if creation failed" do
       result = PostExporter.create_tar("test.tar.gz", nil)
       assert :error = result
+
+      # create_tar still create a tar file even there is error
+      File.rm!("test.tar.gz")
     end
   end
 
