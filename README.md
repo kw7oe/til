@@ -1,14 +1,15 @@
 # TIL
 
-TIL is a simple "Today I Learned" web application written Elixir. User
-write things they have learned in Markdown format and share to the others.
+TIL is a simple "Today I Learned" web application written Elixir. 
+
+User write things they have learned in Markdown format and share to the others.
 All the posts wrote can be exported easily to Markdown file.
 
 Currently, it is still in beta phase and hosted on Digital Ocean.
 
 ## Application Goal
 
-- To create a community.
+- To create a community who are curious to learn and share their knowledge.
 - To encourage knowledge sharing.
 - To encourage learning through writing.
 
@@ -40,8 +41,12 @@ Currently, it is still in beta phase and hosted on Digital Ocean.
 ## Roadmap 2.0.0
 
 **External**
-- [ ] Automatically upload posts to users personal website sources.
-  - Aim to support Jekyll, Hugo and Gatsby.js
-  - The reasoning behind is that, user can own their posts.
+- [ ] Automatically upload post to users' personal website sources.
+  - Support Jekyll, Hugo and Gatsby.js
 - [ ] Improve UI and UX for writing posts.
+  - Medium or Dropbox Paper like UX experience.
+  - Able to upload images and attach to posts.
+- [ ] Allow user to customize exported file format and content.
+
+
 
