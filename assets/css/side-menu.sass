@@ -1,3 +1,7 @@
+$light-gray: #f6f8fa
+$very-light-gray: #e9ecef
+$github-orange: #e36209
+
 .side-menu
   position: relative
 
@@ -29,16 +33,36 @@
 .side-nav-item
   list-style: none
 
-  & + &
-    border-top: 1px solid #e9ecef
+  &:not(.side-nav-title) + &
+    border-top: 1px solid $very-light-gray
 
 .side-nav-link
-  color: #6c757d
+  color: $blue
   display: block
-  padding: 15px 30px
+  padding: 10px 20px
   position: relative
   transition: all .4s
 
   &.active
-    color: #007bff
+    cursor: default
+    font-weight: bold
+    color: $dark
 
+    &:before
+      content: ""
+      position: absolute
+      background-color: $github-orange
+      width: 2px
+      bottom: 0
+      left: 0
+      top: 0
+
+    &:hover
+      color: $dark
+      background-color: transparent
+
+
+  &:hover
+    background-color: $light-gray
+    text-decoration: none
+    color: $blue
