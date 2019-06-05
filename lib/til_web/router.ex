@@ -1,5 +1,6 @@
 defmodule TilWeb.Router do
   use TilWeb, :router
+  use Honeybadger.Plug
 
   pipeline :browser do
     plug :accepts, ["html"]

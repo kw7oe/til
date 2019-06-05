@@ -85,7 +85,8 @@ defmodule Til.MixProject do
       {:hound, "~> 1.1", only: :test},
 
       # Deployment
-      {:distillery, "~> 2.0"}
+      {:distillery, "~> 2.0"},
+      {:honeybadger, "~> 0.7"}
     ]
   end
 
