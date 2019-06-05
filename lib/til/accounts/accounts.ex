@@ -219,10 +219,16 @@ defmodule Til.Accounts do
   end
 
   @doc """
+  Returns an `%Ecto.Changeset()` for change password only
+  """
+  def change_password(%User{} = user) do
+    User.password_changeset(user, %{})
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset()` for reset password only
   """
-
-  def change_password(%User{} = user) do
+  def change_reset_password(%User{} = user) do
     User.reset_password_changeset(user, %{})
   end
 end

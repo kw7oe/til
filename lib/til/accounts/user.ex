@@ -44,12 +44,12 @@ defmodule Til.Accounts.User do
     |> validate_format(:website, Regexp.http(), message: Regexp.http_message())
     |> unique_constraint(:email)
     |> unique_constraint(:username)
+    |> put_pass_hash()
   end
 
   def new_changeset(user, attrs) do
     user
     |> changeset(attrs)
-    |> put_pass_hash()
     |> put_confirmation_token()
   end
 
@@ -60,6 +60,49 @@ defmodule Til.Accounts.User do
     |> validate_length(:password, min: 6)
     |> put_pass_hash()
     |> clear_reset_token()
+  end
+
+  def password_changeset(user, attrs) do
+    user
+    |> verify_password(attrs)
+    |> validate_password_match(attrs)
+    |> validate_password_length(attrs)
+    |> put_pass_hash()
+  end
+
+  defp validate_password_length(changeset, attrs) do
+    cond do
+      String.length(attrs.new_password) < 6 ->
+        changeset
+        |> add_error(:new_password, "should be at least 6 character(s)")
+
+      true ->
+        changeset
+    end
+  end
+
+  defp validate_password_match(changeset, attrs) do
+    cond do
+      attrs.new_password != attrs.new_password_confirmation ->
+        changeset
+        |> add_error(:new_password_confirmation, "does not match new password")
+
+      true ->
+        changeset
+    end
+  end
+
+  defp verify_password(user, attrs) do
+    cond do
+      Comeonin.Pbkdf2.checkpw(attrs.old_password, user.password_hash) ->
+        user
+        |> cast(%{password: attrs.new_password}, [:password])
+
+      true ->
+        user
+        |> change()
+        |> add_error(:old_password, "must be correct")
+    end
   end
 
   def clear_reset_token(changeset) do

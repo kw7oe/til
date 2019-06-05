@@ -38,7 +38,7 @@ defmodule TilWeb.ResetPasswordController do
         |> redirect(to: Routes.page_path(conn, :index))
 
       {:ok, user} ->
-        changeset = Accounts.change_password(user)
+        changeset = Accounts.change_reset_password(user)
 
         conn
         |> render("edit.html", user: user, changeset: changeset, token: token)

@@ -45,6 +45,9 @@ defmodule TilWeb.Router do
     get "/profile/edit", UserController, :edit
     put "/profile/edit", UserController, :update
 
+    get "/password/edit", PasswordController, :edit
+    put "/password/edit", PasswordController, :update
+
     resources "/users", UserController, only: [:show]
     resources "/tags", TagController, only: [:index, :show]
 
