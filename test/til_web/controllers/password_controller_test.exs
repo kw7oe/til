@@ -17,13 +17,13 @@ defmodule TilWeb.PasswordControllerTest do
 
   describe "login" do
     setup %{conn: conn} do
-      user = insert(:user)
+      user = build(:user) |> set_password("password") |> insert
       conn = assign(conn, :current_user, user)
 
       {:ok, conn: conn, user: user}
     end
 
-    test "edit", %{conn: conn, user: user} do
+    test "edit", %{conn: conn} do
       conn = get(conn, Routes.password_path(conn, :edit))
 
       assert html_response(conn, 200) =~ "Change password"
@@ -31,9 +31,9 @@ defmodule TilWeb.PasswordControllerTest do
 
     test "update", %{conn: conn} do
       changes = %{
-        old_password: "password",
-        new_password: "newpassword",
-        new_password_confirmation: "newpassword"
+        "old_password" => "password",
+        "new_password" => "newpassword",
+        "new_password_confirmation" => "newpassword"
       }
 
       update_conn = put(conn, Routes.password_path(conn, :update), user: changes)

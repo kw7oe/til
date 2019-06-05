@@ -58,9 +58,9 @@ defmodule Til.UserTest do
       user = %User{} |> User.changeset(@valid_attrs) |> apply_changes()
 
       changes = %{
-        old_password: "password",
-        new_password: "newpassword",
-        new_password_confirmation: "newpassword"
+        "old_password" => "password",
+        "new_password" => "newpassword",
+        "new_password_confirmation" => "newpassword"
       }
 
       {:ok, user: user, changes: changes}
@@ -80,7 +80,7 @@ defmodule Til.UserTest do
       user: user,
       changes: changes
     } do
-      invalid_changes = Map.put(changes, :new_password, "newpasswordnotmatch")
+      invalid_changes = Map.put(changes, "new_password", "newpasswordnotmatch")
       changeset = user |> User.password_changeset(invalid_changes)
 
       refute changeset.valid?
@@ -90,7 +90,7 @@ defmodule Til.UserTest do
 
     test "return error message if new password is too short", %{user: user, changes: changes} do
       invalid_changes =
-        Map.merge(changes, %{new_password: "short", new_password_confirmation: "short"})
+        Map.merge(changes, %{"new_password" => "short", "new_password_confirmation" => "short"})
 
       changeset = user |> User.password_changeset(invalid_changes)
 
@@ -100,7 +100,7 @@ defmodule Til.UserTest do
     end
 
     test "return error message if old password is incorrect", %{user: user, changes: changes} do
-      invalid_changes = Map.put(changes, :old_password, "wrong password")
+      invalid_changes = Map.put(changes, "old_password", "wrong password")
       changeset = user |> User.password_changeset(invalid_changes)
 
       refute changeset.valid?

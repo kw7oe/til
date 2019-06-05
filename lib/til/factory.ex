@@ -5,7 +5,6 @@ defmodule Til.Factory do
     %Til.Accounts.User{
       username: sequence(:username, &"user-#{&1}"),
       email: sequence(:email, &"user-#{&1}@email.com"),
-      password: "password",
       bio: "I am a fake account",
       website: "www.fake-user.com"
     }
@@ -29,5 +28,11 @@ defmodule Til.Factory do
     %Til.Posts.Tag{
       name: sequence(:name, &"tag-#{&1}")
     }
+  end
+
+  def set_password(user, password) do
+    user
+    |> Til.Accounts.User.changeset(%{password: password})
+    |> Ecto.Changeset.apply_changes()
   end
 end

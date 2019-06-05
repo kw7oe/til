@@ -73,7 +73,17 @@ defmodule Til.Accounts do
   end
 
   @doc """
-  Update password for user
+  Update password for user. Require old password to be correct and
+  new password to match confirmation.
+  """
+  def update_password(%User{} = user, :change, attrs) do
+    user
+    |> User.password_changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Update password for user. Action from reset password.
   """
   def update_password(%User{} = user, attrs) do
     user
