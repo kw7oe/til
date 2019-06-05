@@ -29,7 +29,7 @@ defmodule TilWeb.PasswordControllerTest do
       assert html_response(conn, 200) =~ "Change password"
     end
 
-    test "update", %{conn: conn} do
+    test "can update password with valid input", %{conn: conn} do
       changes = %{
         "old_password" => "password",
         "new_password" => "newpassword",
@@ -37,11 +37,16 @@ defmodule TilWeb.PasswordControllerTest do
       }
 
       update_conn = put(conn, Routes.password_path(conn, :update), user: changes)
-
       assert redirected_to(update_conn) == Routes.password_path(update_conn, :edit)
 
       conn = get(conn, Routes.password_path(conn, :edit))
-      assert html_response(conn, 200)
+      assert html_response(conn, 200) =~ "Change password"
+    end
+
+    test "render errors when input is invalid", %{conn: conn} do
+      conn = put(conn, Routes.password_path(conn, :update), user: %{})
+      assert html_response(conn, 200) =~ "Change password"
+      assert html_response(conn, 200) =~ "wrong"
     end
   end
 end

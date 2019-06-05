@@ -21,8 +21,6 @@ defmodule TilWeb.PasswordController do
         )
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset)
-
         render(conn, "edit.html",
           changeset: changeset,
           layout: {TilWeb.LayoutView, "dashboard.html"}

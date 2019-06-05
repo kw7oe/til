@@ -72,7 +72,7 @@ defmodule Til.Accounts.User do
 
   defp validate_password_length(changeset, attrs) do
     cond do
-      String.length(attrs["new_password"]) < 6 ->
+      attrs["new_password"] && String.length(attrs["new_password"]) < 6 ->
         changeset
         |> add_error(:new_password, "should be at least 6 character(s)")
 
@@ -94,9 +94,14 @@ defmodule Til.Accounts.User do
 
   defp verify_password(user, attrs) do
     cond do
-      Comeonin.Pbkdf2.checkpw(attrs["old_password"], user.password_hash) ->
+      attrs["old_password"] && Comeonin.Pbkdf2.checkpw(attrs["old_password"], user.password_hash) ->
         user
         |> cast(%{password: attrs["new_password"]}, [:password])
+
+      attrs["old_password"] == nil ->
+        user
+        |> change()
+        |> add_error(:old_password, "cannot be blank")
 
       true ->
         user

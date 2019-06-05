@@ -76,6 +76,13 @@ defmodule Til.UserTest do
       assert old_password_hash != updated_user.password_hash
     end
 
+    test "return error message if old password is blank", %{user: user} do
+      changeset = user |> User.password_changeset(%{})
+      refute changeset.valid?
+
+      assert %{old_password: ["cannot be blank"]} = errors_on(changeset)
+    end
+
     test "return error message if new password doesn't match confirmation", %{
       user: user,
       changes: changes
