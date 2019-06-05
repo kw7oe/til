@@ -38,17 +38,22 @@ defmodule Til.PostsTest do
     end
 
     test "should return all posts if tags is empty" do
-      result = Post.filter_by_tags([]) |> Repo.all() |> Enum.map(& &1.title)
-      assert result == ["Post no tag", "Post", "Post 2", "Post 3", "Post 4"]
+      result = Post.filter_by_tags([]) |> Repo.all() |> Enum.map(& &1.title) |> Enum.sort()
+      assert result == ["Post", "Post 2", "Post 3", "Post 4", "Post no tag"]
     end
 
     test "should return a list of posts associated with the tags" do
-      result = Post.filter_by_tags(["ruby"]) |> Repo.all() |> Enum.map(& &1.title)
+      result = Post.filter_by_tags(["ruby"]) |> Repo.all() |> Enum.map(& &1.title) |> Enum.sort()
       assert result == ["Post 2", "Post 3", "Post 4"]
     end
 
     test "should return a list of posts that only containes tag1 or tag2 without duplicate" do
-      result = Post.filter_by_tags(["ruby", "elixir"]) |> Repo.all() |> Enum.map(& &1.title)
+      result =
+        Post.filter_by_tags(["ruby", "elixir"])
+        |> Repo.all()
+        |> Enum.map(& &1.title)
+        |> Enum.sort()
+
       assert result == ["Post", "Post 2", "Post 3", "Post 4"]
     end
 
