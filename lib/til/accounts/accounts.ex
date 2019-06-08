@@ -85,7 +85,7 @@ defmodule Til.Accounts do
   @doc """
   Update password for user. Action from reset password.
   """
-  def update_password(%User{} = user, attrs) do
+  def update_password(%User{} = user, :reset, attrs) do
     user
     |> User.reset_password_changeset(attrs)
     |> Repo.update()

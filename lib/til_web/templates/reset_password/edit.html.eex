@@ -11,12 +11,20 @@
           </div>
         <% end %>
 
-        <%= label f, :password %>
-        <%= password_input f, :password %>
-        <%= error_tag f, :password %>
+        <div class="form-group">
+          <%= label f, :password %>
+          <%= password_input f, :password, class: "form-control" %>
+          <%= error_tag f, :password %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :password_confirmation %>
+          <%= password_input f, :password_confirmation, class: "form-control" %>
+          <%= error_tag f, :password_confirmation %>
+        </div>
 
         <div>
-          <%= submit "Save" %>
+          <%= submit "Save", class: "btn btn-primary" %>
         </div>
 
       <% end %>

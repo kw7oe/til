@@ -57,6 +57,7 @@ defmodule Til.Accounts.User do
     user
     |> cast(attrs, [:password])
     |> validate_required([:password])
+    |> validate_confirmation(:password)
     |> validate_length(:password, min: 6)
     |> put_pass_hash()
     |> clear_reset_token()

@@ -35,7 +35,7 @@ defmodule TilWeb.ResetPasswordController do
       {:error, _} ->
         conn
         |> put_flash(:error, "Expired/Invalid Token")
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.reset_password_path(conn, :new))
 
       {:ok, user} ->
         changeset = Accounts.change_reset_password(user)
@@ -48,13 +48,18 @@ defmodule TilWeb.ResetPasswordController do
   # Update user password
   def update(conn, %{"token" => token, "user" => user_params}) do
     with {:ok, user} <- Accounts.check_reset_password_token(token),
-         {:ok, _user} <- Accounts.update_password(user, user_params) do
+         {:ok, _user} <- Accounts.update_password(user, :reset, user_params) do
       conn
       |> put_flash(:info, "Password updated successfully.")
       |> redirect(to: Routes.page_path(conn, :index))
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", changeset: changeset, token: token)
+
+      {:error, _} ->
+        conn
+        |> put_flash(:info, "Expired/Invalid Token")
+        |> redirect(to: Routes.reset_password_path(conn, :new))
     end
   end
 end

@@ -22,7 +22,7 @@ config :til, Til.Repo,
 config :pbkdf2_elixir, :rounds, 1
 
 # Mailer
-config :til, Til.Mailer, adapter: Bamboo.LocalAdapter
+config :til, Til.Mailer, adapter: Bamboo.TestAdapter
 
 # Hound
 config :hound, driver: "chrome_driver", browser: "chrome"
