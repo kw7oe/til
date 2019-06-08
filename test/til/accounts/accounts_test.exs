@@ -5,10 +5,6 @@ defmodule Til.AccountsTest do
   @valid_attrs %{email: "test@example.com", username: "test", password: "password"}
   @invalid_attrs %{email: "test@example.com", username: "123", password: "123"}
 
-  test "create_user/1 with invalid return error changeset" do
-    assert {:error, %Ecto.Changeset{}} = Accounts.create_user(@invalid_attrs)
-  end
-
   describe "authenticate_by_email_and_pass/2" do
     setup do
       {:ok, user} = Accounts.create_user(@valid_attrs)
@@ -77,6 +73,10 @@ defmodule Til.AccountsTest do
       assert user.confirmation_token != nil
     end
 
+    test "create_user/1 with invalid return error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_user(@invalid_attrs)
+    end
+
     test "confirm_user/1 return result.confirmed as true", context do
       user = context[:user]
       {:ok, result} = Accounts.confirm_user(user)
@@ -88,7 +88,7 @@ defmodule Til.AccountsTest do
       {:ok, user} = Accounts.reset_password(user)
 
       token = user.reset_password_token
-      {:ok, %Accounts.User{}} = Accounts.check_reset_password_token(token)
+      assert {:ok, %Accounts.User{}} = Accounts.check_reset_password_token(token)
     end
 
     test "check_reset_password_token/1 with invalid token return error", context do
@@ -96,7 +96,7 @@ defmodule Til.AccountsTest do
       {:ok, _user} = Accounts.reset_password(user)
 
       token = "invalid token"
-      {:error, :invalid} = Accounts.check_reset_password_token(token)
+      assert {:error, :invalid} = Accounts.check_reset_password_token(token)
     end
   end
 end

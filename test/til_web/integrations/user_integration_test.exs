@@ -49,7 +49,9 @@ defmodule Til.UserIntegrationTest do
     click_more()
     find_element(:link_text, "Account") |> click()
     find_element(:id, "user_username") |> fill_field("new_name")
-    find_element(:id, "user_submit") |> click()
+    find_element(:id, "user_website") |> fill_field("https://www.kaiwern.com")
+    find_element(:id, "user_bio") |> fill_field("Hi this is a test.")
+    find_element(:id, "profile_submit") |> click()
     assert visible_page_text() =~ "successfully"
   end
 end

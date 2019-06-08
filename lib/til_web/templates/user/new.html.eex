@@ -2,7 +2,7 @@
   <div class="col-md-6 card">
     <div class="card-body">
       <h2 class="text-center">Register</h2>
-      <%= render "form.html", Map.merge(assigns, %{action: Routes.user_path(@conn, :create), button_title: "Register", show_password: true}) %>
+      <%= render "sign_up_form.html", Map.merge(assigns, %{action: Routes.user_path(@conn, :create), button_title: "Register", show_password: true}) %>
     </div>
   </div>
 </div>

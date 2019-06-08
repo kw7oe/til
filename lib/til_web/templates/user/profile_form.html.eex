@@ -1,6 +1,12 @@
 <%= form_for @changeset, @action, fn f -> %>
 
   <div class="form-group">
+    <%= label f, :username %>
+    <%= text_input f, :username, required: true, class: "form-control" %>
+    <%= error_tag f, :username %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :website %>
     <%= text_input f, :website, required: true, class: "form-control" %>
     <small class="form-text text-muted">Your website url should start with http(s)://</small>
