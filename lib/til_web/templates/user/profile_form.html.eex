@@ -1,6 +1,12 @@
 <%= form_for @changeset, @action, fn f -> %>
 
   <div class="form-group">
+    <%= label f, :email %>
+    <%= text_input f, :email, disabled: true, class: "form-control" %>
+    <small class="form-text text-muted">Currently, changeing email is not supported yet.</small>
+  </div>
+
+  <div class="form-group">
     <%= label f, :username %>
     <%= text_input f, :username, required: true, class: "form-control" %>
     <%= error_tag f, :username %>
