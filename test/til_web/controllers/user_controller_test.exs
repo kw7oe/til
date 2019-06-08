@@ -46,8 +46,7 @@ defmodule TilWeb.UserControllerTest do
       conn = get(conn, Routes.user_path(conn, :edit))
 
       assert html_response(conn, 200) =~ "Profile"
-      assert String.contains?(conn.resp_body, user.username)
-      assert String.contains?(conn.resp_body, user.email)
+      assert html_response(conn, 200) =~ user.username
     end
 
     test "update", %{conn: conn} do
