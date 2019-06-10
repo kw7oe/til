@@ -9,6 +9,11 @@ defmodule Til.Posts do
   alias Til.Accounts
   alias Til.Posts.{Post, Tag}
 
+  def count_for(user_id) do
+    Post.submitted_by(user_id)
+    |> Repo.aggregate(:count, :id)
+  end
+
   def list_user_posts(user_id) when is_integer(user_id) do
     Post.submitted_by(user_id)
     |> preload(:tags)

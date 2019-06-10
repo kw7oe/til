@@ -5,6 +5,18 @@ defmodule Til.PostsTest do
   alias Til.Posts
   alias Til.Posts.Post
 
+  describe "count_for/1" do
+    test "return the right count" do
+      user = insert(:user)
+      _post = insert(:post, user: user)
+      _post = insert(:post, user: user)
+      _post = insert(:post)
+
+      result = Posts.count_for(user.id)
+      assert 2 = result
+    end
+  end
+
   describe "list_user_posts/1" do
     setup do
       user = insert(:confirmed_user)

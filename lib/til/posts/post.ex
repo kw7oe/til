@@ -19,6 +19,12 @@ defmodule Til.Posts.Post do
     from(q in query, where: q.user_id == ^user_id)
   end
 
+  def filter_by_date(query \\ __MODULE__, start_date, end_date) do
+    from q in query,
+      where: q.start_date >= ^start_date,
+      where: q.start_date <= ^end_date
+  end
+
   # Method header
   def filter_by_tags(query \\ __MODULE__, tags)
   def filter_by_tags(query, []), do: query
