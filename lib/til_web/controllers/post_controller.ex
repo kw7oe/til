@@ -13,10 +13,14 @@ defmodule TilWeb.PostController do
 
   def index(conn, params, current_user) do
     page = Posts.list_user_posts_with_paginate(current_user, params)
+    total_post_count = Posts.count_for(current_user.id)
 
     render(conn, "index.html",
       page: Map.delete(page, :entries),
       posts: page.entries,
+      total_post_count: total_post_count,
+      writing_streaks: 14,
+      total_post_view: 4141,
       layout: {TilWeb.LayoutView, "dashboard.html"}
     )
   end

@@ -1,5 +1,7 @@
 <div class="d-flex flex-column">
-  <div class="card">
+  <%= render "statistic.html", assigns %>
+
+  <div class="card my-4">
     <div class="card-header bg-white">
       <h4>My Posts</h4>
     </div>
