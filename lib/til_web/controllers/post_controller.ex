@@ -3,6 +3,7 @@ defmodule TilWeb.PostController do
 
   alias Til.Posts
   alias Til.Posts.Post
+  alias Til.Statistic
 
   plug :authenticate_user when action in [:index, :new, :create, :edit, :update, :delete]
 
@@ -14,12 +15,13 @@ defmodule TilWeb.PostController do
   def index(conn, params, current_user) do
     page = Posts.list_user_posts_with_paginate(current_user, params)
     total_post_count = Posts.count_for(current_user.id)
+    writing_streaks = Statistic.writing_streaks(current_user)
 
     render(conn, "index.html",
       page: Map.delete(page, :entries),
       posts: page.entries,
       total_post_count: total_post_count,
-      writing_streaks: 14,
+      writing_streaks: writing_streaks,
       total_post_view: 4141,
       layout: {TilWeb.LayoutView, "dashboard.html"}
     )

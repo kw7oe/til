@@ -19,6 +19,13 @@ defmodule Til.Posts.Post do
     from(q in query, where: q.user_id == ^user_id)
   end
 
+  def group_by_date(query \\ __MODULE__) do
+    from(q in query,
+      select: [fragment("date_trunc('day', ?) as date", q.inserted_at)],
+      group_by: fragment("date")
+    )
+  end
+
   def filter_by_date(query \\ __MODULE__, start_date, end_date) do
     from q in query,
       where: q.start_date >= ^start_date,
