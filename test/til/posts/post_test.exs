@@ -14,9 +14,10 @@ defmodule Til.PostTest do
         Post.group_by_date()
         |> Repo.all()
         |> List.flatten()
+        |> Enum.sort()
 
-      assert to_naive_datetime_and_truncate(today) == NaiveDateTime.truncate(date1, :second)
-      assert to_naive_datetime_and_truncate(yesterday) == NaiveDateTime.truncate(date2, :second)
+      assert to_naive_datetime_and_truncate(yesterday) == NaiveDateTime.truncate(date1, :second)
+      assert to_naive_datetime_and_truncate(today) == NaiveDateTime.truncate(date2, :second)
     end
   end
 
