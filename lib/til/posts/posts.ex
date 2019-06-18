@@ -7,7 +7,12 @@ defmodule Til.Posts do
 
   alias Til.Repo
   alias Til.Accounts
-  alias Til.Posts.{Post, Tag}
+  alias Til.Posts.{Post, Tag, PostTag}
+
+  def tag_count_for(user_id) do
+    PostTag.involved_by(user_id)
+    |> Repo.aggregate(:count, :tag_id)
+  end
 
   def count_for(user_id) do
     Post.submitted_by(user_id)

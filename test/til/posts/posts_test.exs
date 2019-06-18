@@ -5,6 +5,27 @@ defmodule Til.PostsTest do
   alias Til.Posts
   alias Til.Posts.Post
 
+  @params %{"title" => "Post", "content" => "Hello", "virtual_tags" => "tag1, tag2"}
+
+  describe "tag_count_for/1" do
+    test "with tags" do
+      user = insert(:user)
+      Posts.create_post(user, @params)
+
+      result = Posts.tag_count_for(user.id)
+      assert 2 = result
+    end
+
+    test "with repeated tags" do
+      user = insert(:user)
+      Posts.create_post(user, @params)
+      Posts.create_post(user, Map.merge(@params, %{"virtual_tags" => "tag1, tag3"}))
+
+      result = Posts.tag_count_for(user.id)
+      assert 3 = result
+    end
+  end
+
   describe "count_for/1" do
     test "return the right count" do
       user = insert(:user)

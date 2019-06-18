@@ -24,9 +24,9 @@
   <div class="col-4">
     <div class="card">
       <div class="card-body">
-        Total Post View
+        Total Tag Count
         <h5 class="card-title">
-          <%= @total_post_view %>
+          <%= @total_tag_count %>
         </h5>
       </div>
     </div>
