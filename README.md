@@ -1,6 +1,6 @@
 # TIL
 
-TIL is a simple "Today I Learned" web application written Elixir. 
+TIL is a simple "Today I Learned" web application written Elixir.
 
 User write things they have learned in Markdown format and share to the others.
 All the posts wrote can be exported easily to Markdown file.
@@ -24,7 +24,7 @@ Currently, it is still in beta phase and hosted on Digital Ocean.
 - [x] User Profile
 - [x] Export Post to File
 - [x] Export all posts
-- [ ] Post Statistics
+- [x] Post Statistics
 - [ ] Filter posts by tags
 - [ ] Search posts by title
 - [ ] Search posts by content
@@ -64,7 +64,7 @@ Everyone is welcome to contribute to the codebase. If you aren't interested in w
 For those who are interested to contribute to the codebase, here are some of the ways:
 - Improve the UI and UX of the application
 - Refactoring
-- Add documentations 
+- Add documentations
 - Write tests to improve code coverage
 - Code Review
 
