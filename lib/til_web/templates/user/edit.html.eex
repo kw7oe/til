@@ -1,5 +1,5 @@
 <div class="col mb-5">
-  <h4 class="my-4">Profile</h4>
+  <h4 class="mb-4">Profile</h4>
   <div class="card">
     <div class="card-body">
       <%= render "profile_form.html", Map.merge(assigns, %{action: Routes.user_path(@conn, :update), button_title: "Save"}) %>

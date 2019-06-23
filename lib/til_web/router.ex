@@ -53,6 +53,7 @@ defmodule TilWeb.Router do
 
     resources "/posts", PostController
 
+    get "/statistic", StatisticController, :show
     get "/posts/:id/export", ExportController, :export
     get "/export_posts", ExportController, :export_all
     get "/download/:tarfile", ExportController, :download

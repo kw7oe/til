@@ -1,0 +1,38 @@
+<div class="d-flex flex-column w-100">
+  <h4 class="mb-4">Statistic</h4>
+  <div class="stats-group text-center">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          Writing Streaks
+          <h5 class="card-title">
+            <%= @writing_streaks %> day(s)
+          </h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          Total Post Count
+          <h5 class="card-title">
+            <%= @total_post_count %>
+          </h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          Total Tag Count
+          <h5 class="card-title">
+            <%= @total_tag_count %>
+          </h5>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,10 +1,6 @@
 <div class="d-flex flex-column">
-  <%= render "statistic.html", assigns %>
-
-  <div class="card my-4">
-    <div class="card-header bg-white">
-      <h4>My Posts</h4>
-    </div>
+  <h4 class="mb-4">Posts</h4>
+  <div class="card">
     <div class="card-table">
       <%= render "posts_table.html", Map.merge(assigns, %{posts: @posts, page: @page}) %>
     </div>
@@ -13,16 +9,13 @@
     </div>
   </div>
 
-
-  <div class="card my-4">
+  <h4 class="my-4">Download your TIL posts</h4>
+  <div class="card mb-4">
     <div class="card-body">
-      <header>
-        <h4>Download your TIL posts</h4>
-        <p>
+      <p>
         You can export all of your TIL posts in Markdown format.
         The exported files will be compressed into a tar archive.
-        </p>
-      </header>
+      </p>
       <%= if @page.total_pages > 50 do %>
         <%= live_render(@conn, TilWeb.ExportAllLive, session: %{user_id: @current_user.id}) %>
       <% else %>

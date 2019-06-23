@@ -41,7 +41,7 @@ defmodule TilWeb.PostControllerTest do
       other_post = insert(:post)
       conn = get(conn, Routes.post_path(conn, :index))
 
-      assert html_response(conn, 200) =~ "My Posts"
+      assert html_response(conn, 200) =~ "Posts"
       assert html_response(conn, 200) =~ user_post.title
       refute html_response(conn, 200) =~ other_post.title
     end

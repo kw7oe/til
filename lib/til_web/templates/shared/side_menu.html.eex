@@ -8,6 +8,9 @@
       <%= active_link_to @conn, "Security", to: Routes.password_path(@conn, :edit), class: "side-nav-link", active_class: "active" %>
     </li>
     <li class="side-nav-item">
+      <%= active_link_to @conn, "Statistic", to: Routes.statistic_path(@conn, :show), class: "side-nav-link", active_class: "active" %>
+    </li>
+    <li class="side-nav-item">
       <%= active_link_to @conn, "Posts", to: Routes.post_path(@conn, :index), class: "side-nav-link", active_class: "active" %>
     </li>
   </ul>
