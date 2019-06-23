@@ -48,5 +48,6 @@ npm-debug.log
 
 # Ignore deployment folder
 /deployment
+/new_deployment
 
 
