@@ -2,10 +2,36 @@
   <div class="row">
     <%= label f, :filter_by_tag, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-8">
-      <%= select f, :tags, @tags, class: "form-control" %>
+      <div id="tags-container" class: "form-control">
+        <input id="tagsinput" type="text" list="tags">
+      </div>
+      <datalist id="tags">
+        <%= for tag <- @tags do %>
+          <option><%= tag %></option>
+        <% end %>
+      </datalist>
     </div>
     <div class="col-sm-2">
       <%= submit "Submit", class: "btn btn-outline-primary" %>
     </div>
   </div>
 <% end %>
+
+<script>
+  function renderTags(tag) {
+    return "<span class='badge badge-primary mr-1'>" + tag + "</span>"
+  }
+
+  var tags = []
+  var tagsInput = document.getElementById("tagsinput")
+  var tagsContainer = document.getElementById("tags-container")
+
+  tagsInput.addEventListener("keyup", function(event) {
+    if (event.key === ",") {
+      var tag = event.target.value.split(",")[0]
+      tags.push(tag)
+      event.target.value = ""
+      tagsContainer.insertAdjacentHTML("beforebegin", renderTags(tag))
+    }
+  })
+</script>
