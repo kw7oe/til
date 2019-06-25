@@ -2,7 +2,7 @@
   <div class="row">
     <%= label f, :filter_by_tag, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-8">
-      <div id="tags-container" class: "form-control">
+      <div id="tags-container" class="form-control">
         <input id="tagsinput" type="text" list="tags">
       </div>
       <datalist id="tags">
@@ -18,20 +18,34 @@
 <% end %>
 
 <script>
-  function renderTags(tag) {
-    return "<span class='badge badge-primary mr-1'>" + tag + "</span>"
-  }
-
   var tags = []
   var tagsInput = document.getElementById("tagsinput")
   var tagsContainer = document.getElementById("tags-container")
 
+  function renderTag(tag, index) {
+    return "<span class='badge badge-primary mr-1' id='tag-" + index + "'>" + tag + "</span>"
+  }
+
+  function addTag(tag, event) {
+    tags.push(tag)
+    event.target.value = ""
+    tagsInput.insertAdjacentHTML("beforebegin", renderTag(tag, tags.length))
+  }
+
   tagsInput.addEventListener("keyup", function(event) {
-    if (event.key === ",") {
-      var tag = event.target.value.split(",")[0]
-      tags.push(tag)
-      event.target.value = ""
-      tagsContainer.insertAdjacentHTML("beforebegin", renderTags(tag))
+    var tag
+    switch (event.key) {
+      case ",":
+        tag = event.target.value.split(",")[0]
+        addTag(tag, event)
+        break
+      case "Enter":
+        tag = event.target.value
+        addTag(tag, event)
+        console.log(tag)
+        break
+      default:
+        break
     }
   })
 </script>
