@@ -23,13 +23,26 @@
   var tagsContainer = document.getElementById("tags-container")
 
   function renderTag(tag, index) {
-    return "<span class='badge badge-primary mr-1' id='tag-" + index + "'>" + tag + "</span>"
+    return "<span class='badge badge-primary mr-1'>" + tag
+      + "<button type='button' class='close tagclose'>&times;</button>"
+      + "</span>"
+  }
+
+  function removeTag(event) {
+    var parent = event.target.parentElement
+    parent.remove()
+    console.log(tags)
   }
 
   function addTag(tag, event) {
-    tags.push(tag)
     event.target.value = ""
     tagsInput.insertAdjacentHTML("beforebegin", renderTag(tag, tags.length))
+    tags.push(tag)
+
+    var tagClose = document.getElementsByClassName("tagclose")
+    for (var i = 0; i < tagClose.length; i++) {
+     tagClose[i].addEventListener("click", removeTag)
+    }
   }
 
   tagsInput.addEventListener("keyup", function(event) {
