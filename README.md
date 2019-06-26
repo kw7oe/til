@@ -25,7 +25,7 @@ Currently, it is still in beta phase and hosted on Digital Ocean.
 - [x] Export Post to File
 - [x] Export all posts
 - [x] Post Statistics
-- [ ] Filter posts by tags
+- [x] Filter posts by tags
 - [ ] Search posts by title
 - [ ] Search posts by content
 - [ ] Subscribe interested tags
