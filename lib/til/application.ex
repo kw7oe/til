@@ -6,6 +6,22 @@ defmodule Til.Application do
   use Application
 
   def start(_type, _args) do
+    Til.PhoenixInstrumenter.setup()
+    Til.PipelineInstrumenter.setup()
+    Til.RepoInstrumenter.setup()
+    Prometheus.Registry.register_collector(:prometheus_process_collector)
+    Til.MetricsExporter.setup()
+
+    # Prometheus Ecto
+    :ok =
+      Telemetry.attach(
+        "prometheus-ecto",
+        [:til, :repo, :query],
+        Til.RepoInstrumenter,
+        :handle_event,
+        %{}
+      )
+
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
