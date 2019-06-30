@@ -55,6 +55,8 @@ config :scrivener_html,
 # Prometheus
 config :prometheus, Til.PhoenixInstrumenter,
   controller_call_labels: [:controller, :action],
+  channel_join_labels: [:channel, :topic, :transport],
+  channel_receive_labels: [:channel, :topic, :transport],
   duration_buckets: [
     10,
     25,
