@@ -1,8 +1,28 @@
-<h1>Search Result</h1>
+<h2 class="mb-5">Search Result</h2>
 
 <%= if Enum.empty?(@posts) do %>
   <p>No results available.</p>
 <% else %>
-  <%= render TilWeb.PostView, "posts.html", Map.merge(assigns, %{posts: @posts, page: false}) %>
+  <div class="row">
+    <%= for post <- @posts do %>
+      <div class="col-12 mb-4">
+        <%= link to: Routes.post_path(@conn, :show, post.id), class: "link-blank" do %>
+        <div class="card card-hovarable">
+          <div class="card-body">
+            <h4 class="mb-0"><%= post.title %></h4>
+            <small class="mb-3 d-inline-block">
+              by
+            </small>
+            <%= link post.user.username, to: Routes.user_path(@conn, :show, post.user.id), class: "small" %>
+
+            <%= link to: Routes.post_path(@conn, :show, post.id), class: "link-blank" do %>
+              <p class="mb-0"><%= post_excerpt(post.content) %></p>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 

@@ -18,10 +18,7 @@ defmodule Til.Posts.PostSearch do
         on: p.id == pd.post_id,
         order_by: [desc: pd.rank]
 
-    post_query
-    |> Repo.all()
-    |> Repo.preload(:user)
-    |> Repo.preload(:tags)
+    Repo.all(post_query)
   end
 
   def post_documents_by(search_string) do
