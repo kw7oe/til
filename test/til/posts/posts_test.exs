@@ -49,7 +49,8 @@ defmodule Til.PostsTest do
 
     test "should return all user posts", %{user: user} do
       result =
-        Posts.list_user_posts(user)
+        user
+        |> Posts.list_user_posts()
         |> Enum.map(& &1.title)
         |> Enum.sort()
 
@@ -76,13 +77,16 @@ defmodule Til.PostsTest do
     end
 
     test "should return a list of posts associated with the tags" do
-      result = Post.filter_by_tags(["ruby"]) |> Repo.all() |> Enum.map(& &1.title) |> Enum.sort()
+      result =
+        ["ruby"] |> Post.filter_by_tags() |> Repo.all() |> Enum.map(& &1.title) |> Enum.sort()
+
       assert result == ["Post 2", "Post 3", "Post 4"]
     end
 
     test "should return a list of posts that only containes tag1 or tag2 without duplicate" do
       result =
-        Post.filter_by_tags(["ruby", "elixir"])
+        ["ruby", "elixir"]
+        |> Post.filter_by_tags()
         |> Repo.all()
         |> Enum.map(& &1.title)
         |> Enum.sort()
@@ -91,7 +95,7 @@ defmodule Til.PostsTest do
     end
 
     test "should return empty records if no posts found" do
-      result = Post.filter_by_tags(["apple"]) |> Repo.all() |> Enum.map(& &1.title)
+      result = ["apple"] |> Post.filter_by_tags() |> Repo.all() |> Enum.map(& &1.title)
       assert result == []
     end
   end

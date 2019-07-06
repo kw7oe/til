@@ -19,7 +19,7 @@ defmodule TilWeb.ResendConfirmationController do
           Accounts.add_confirmation_token(user)
         end
 
-        Email.welcome_email(user) |> Mailer.deliver_later()
+        user |> Email.welcome_email() |> Mailer.deliver_later()
     end
 
     conn

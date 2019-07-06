@@ -28,7 +28,7 @@ defmodule TilWeb.UserController do
   def create(conn, %{"user" => user_params}) do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
-        Email.welcome_email(user) |> Mailer.deliver_later()
+        user |> Email.welcome_email() |> Mailer.deliver_later()
 
         conn
         |> put_flash(:info, "Only one step left! Check your inbox for a confirmation email.")

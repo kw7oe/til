@@ -10,29 +10,34 @@ defmodule Til.Posts do
   alias Til.Posts.{Post, Tag, PostTag}
 
   def tag_count_for(user_id) do
-    PostTag.involved_by(user_id)
+    user_id
+    |> PostTag.involved_by()
     |> Repo.aggregate(:count, :tag_id)
   end
 
   def count_for(user_id) do
-    Post.submitted_by(user_id)
+    user_id
+    |> Post.submitted_by()
     |> Repo.aggregate(:count, :id)
   end
 
   def list_user_posts(user_id) when is_integer(user_id) do
-    Post.submitted_by(user_id)
+    user_id
+    |> Post.submitted_by()
     |> preload(:tags)
     |> Repo.all()
   end
 
   def list_user_posts(%Accounts.User{} = user) do
-    Post.submitted_by(user.id)
+    user.id
+    |> Post.submitted_by()
     |> preload(:tags)
     |> Repo.all()
   end
 
   def list_user_posts_with_paginate(%Accounts.User{} = user, params) do
-    Post.submitted_by(user.id)
+    user.id
+    |> Post.submitted_by()
     |> Post.ordered()
     |> preload(:user)
     |> preload(:tags)
@@ -48,6 +53,7 @@ defmodule Til.Posts do
   end
 
   def get_user_post!(%Accounts.User{} = user, id) do
+    # TODO: Move to post instead
     from(p in Post, where: p.id == ^id)
     |> Post.submitted_by(user.id)
     |> Repo.one!()
@@ -56,7 +62,8 @@ defmodule Til.Posts do
   end
 
   def get_post!(id) do
-    Repo.get!(Post, id)
+    Post
+    |> Repo.get!(id)
     |> preload_user()
     |> preload_tags()
   end
@@ -107,7 +114,8 @@ defmodule Til.Posts do
   Returns a list of posts containing the tag.
   """
   def list_posts_by_tag(tag_id) do
-    Tag.with_posts(tag_id)
+    tag_id
+    |> Tag.with_posts()
     |> Repo.one()
   end
 end

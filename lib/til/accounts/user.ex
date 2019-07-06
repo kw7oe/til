@@ -72,24 +72,18 @@ defmodule Til.Accounts.User do
   end
 
   defp validate_password_length(changeset, attrs) do
-    cond do
-      attrs["new_password"] && String.length(attrs["new_password"]) < 6 ->
-        changeset
-        |> add_error(:new_password, "should be at least 6 character(s)")
-
-      true ->
-        changeset
+    if attrs["new_password"] && String.length(attrs["new_password"]) < 6 do
+      add_error(changeset, :new_password, "should be at least 6 character(s)")
+    else
+      changeset
     end
   end
 
   defp validate_password_match(changeset, attrs) do
-    cond do
-      attrs["new_password"] != attrs["new_password_confirmation"] ->
-        changeset
-        |> add_error(:new_password_confirmation, "does not match new password")
-
-      true ->
-        changeset
+    if attrs["new_password"] != attrs["new_password_confirmation"] do
+      add_error(changeset, :new_password_confirmation, "does not match new password")
+    else
+      changeset
     end
   end
 

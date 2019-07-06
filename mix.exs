@@ -84,6 +84,9 @@ defmodule Til.MixProject do
       {:excoveralls, "~> 0.10", only: :test},
       {:hound, "~> 1.1", only: :test},
 
+      # Development
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
+
       # Deployment
       {:distillery, "~> 2.0"},
       {:honeybadger, "~> 0.7"},

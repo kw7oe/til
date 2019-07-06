@@ -9,9 +9,10 @@ defmodule TilWeb.SharedView do
 
   def active_link_to(conn, title, to: path, class: class, active_class: active_class) do
     class_name =
-      cond do
-        current_path?(conn, path) -> "#{class} #{active_class}"
-        true -> class
+      if current_path?(conn, path) do
+        "#{class} #{active_class}"
+      else
+        class
       end
 
     link(title, to: path, class: class_name)

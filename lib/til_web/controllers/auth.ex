@@ -6,7 +6,7 @@ defmodule TilWeb.Auth do
   alias TilWeb.Router.Helpers, as: Routes
 
   # In seconds, 15 days. One day has 86400 seconds.
-  @remember_token_age 86400 * 15
+  @remember_token_age 86_400 * 15
 
   def init(opts), do: opts
 

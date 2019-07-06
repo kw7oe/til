@@ -21,7 +21,7 @@ defmodule TilWeb.ResetPasswordController do
 
       user ->
         {:ok, user} = Accounts.reset_password(user)
-        Email.reset_password_email(user) |> Mailer.deliver_later()
+        user |> Email.reset_password_email() |> Mailer.deliver_later()
 
         conn
         |> put_flash(:info, "We have sent a reset password instructions to your email.")

@@ -39,7 +39,7 @@ defmodule TilWeb.AuthTest do
         build_conn()
         |> init_test_session(%{})
         |> fetch_session()
-        |> put_resp_cookie("remember_token", "lalala", max_age: 86400)
+        |> put_resp_cookie("remember_token", "lalala", max_age: 86_400)
         |> fetch_cookies()
         |> Auth.call(%{})
 

@@ -4,7 +4,8 @@ defmodule Til.Statistic do
 
   def writing_streaks(%User{} = user) do
     dates =
-      Post.submitted_by(user.id)
+      user.id
+      |> Post.submitted_by()
       |> Post.group_by_date()
       |> Til.Repo.all()
       |> List.flatten()

@@ -5,7 +5,8 @@ defmodule TilWeb.PageController do
 
   def index(conn, params) do
     tags =
-      Map.get(params, "tags", "")
+      params
+      |> Map.get("tags", "")
       |> String.split(",", trim: true)
 
     all_tags = Posts.list_tags() |> Enum.map(& &1.name)

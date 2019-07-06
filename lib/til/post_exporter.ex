@@ -6,7 +6,7 @@ defmodule Til.PostExporter do
 
   Return {filename, {:binary, content}}
   """
-  def export_to_markdown(post = %Posts.Post{}) do
+  def export_to_markdown(%Posts.Post{} = post) do
     filename = get_filename(post.title, "md")
     content = {:binary, format_content(post)}
 
@@ -19,11 +19,12 @@ defmodule Til.PostExporter do
 
   Return {:ok, file path of the tarfile} on success, :error on failure.
   """
-  def compressed_posts_to_tar_from(user = %Accounts.User{}) do
+  def compressed_posts_to_tar_from(%Accounts.User{} = user) do
     filename = get_filename(user.username, "tar.gz")
 
     posts =
-      Posts.list_user_posts(user)
+      user
+      |> Posts.list_user_posts()
       |> Enum.map(&convert_to_binary/1)
 
     case create_tar(filename, posts) do
@@ -52,7 +53,7 @@ defmodule Til.PostExporter do
 
   Raise RuntimeError if input is invalid.
   """
-  def convert_to_binary(post = %Til.Posts.Post{}) do
+  def convert_to_binary(%Til.Posts.Post{} = post) do
     {
       to_charlist(get_filename(post.title, "md")),
       format_content(post)
