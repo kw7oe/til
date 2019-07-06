@@ -50,13 +50,13 @@ defmodule TilWeb.Router do
 
     resources "/users", UserController, only: [:show]
     resources "/tags", TagController, only: [:index, :show]
-
     resources "/posts", PostController
 
     get "/statistic", StatisticController, :show
     get "/posts/:id/export", ExportController, :export
     get "/export_posts", ExportController, :export_all
     get "/download/:tarfile", ExportController, :download
+    post "/search", SearchController, :create
   end
 
   scope "/auth", TilWeb do

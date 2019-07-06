@@ -5,9 +5,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search here.." aria-label="Search">
-      </form>
+      <%= form_for @conn, Routes.search_path(@conn, :create), [class: "form-inline my-2 my-lg-0"], fn f -> %>
+        <%= text_input f, :query, placeholder: "Search here...", class: "form-control mr-sm-2" %>
+      <% end %>
 
       <%= if @current_user do %>
         <li class="nav-item dropdown">
