@@ -2,4 +2,6 @@
   <%= render TilWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
 <% end %>
 
+<%= if @page do %>
 <%= render TilWeb.SharedView, "pagination.html", page: @page %>
+<% end %>

@@ -1,8 +1,10 @@
 defmodule TilWeb.SearchController do
   use TilWeb, :controller
 
-  def create(conn, params) do
-    IO.inspect(params)
-    render(conn, "show.html")
+  alias Til.Posts.PostSearch
+
+  def create(conn, %{"query" => query}) do
+    posts = PostSearch.run(query)
+    render(conn, "show.html", posts: posts)
   end
 end

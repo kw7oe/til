@@ -1,1 +1,8 @@
 <h1>Search Result</h1>
+
+<%= if Enum.empty?(@posts) do %>
+  <p>No results available.</p>
+<% else %>
+  <%= render TilWeb.PostView, "posts.html", Map.merge(assigns, %{posts: @posts, page: false}) %>
+<% end %>
+
