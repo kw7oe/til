@@ -13,26 +13,35 @@
 alias Til.Accounts
 alias Til.Posts
 
-user_attrs = %{username: "test12314", email: "test12314@email.com", password: "password"}
+user_attrs = [
+  %{username: "test12314", email: "test12314@email.com", password: "password"},
+  %{username: "kw7oe", email: "choongkwern@hotmail.com", password: "password"}
+]
 
-user =
-  case Accounts.get_user_by_email(user_attrs.email) do
+create_user = fn attrs ->
+  case Accounts.get_user_by_email(attrs.email) do
     nil ->
-      {:ok, result} = Accounts.create_user(user_attrs)
+      {:ok, result} = Accounts.create_user(attrs)
       result
 
     user ->
       user
   end
+end
 
-content = String.duplicate("Hello ", 10000)
+user =
+  user_attrs
+  |> Enum.map(create_user)
+  |> List.first()
+
+# content = String.duplicate("Hello ", 10000)
 
 post_attrs = fn index ->
   datetime = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
 
   [
     title: "title-#{index}",
-    content: content,
+    content: "Hello World #{index}",
     user_id: user.id,
     inserted_at: datetime,
     updated_at: datetime
@@ -40,7 +49,7 @@ post_attrs = fn index ->
 end
 
 posts =
-  1..10000
+  1..10
   |> Enum.map(post_attrs)
 
 Til.Repo.insert_all(Posts.Post, posts)
