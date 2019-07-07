@@ -26,11 +26,11 @@ Currently, it is still in beta phase and hosted on Digital Ocean.
 - [x] Export all posts
 - [x] Post Statistics
 - [x] Filter posts by tags
-- [ ] Search posts by title
-- [ ] Search posts by content
-- [ ] Subscribe interested tags
+- [x] Search posts by title
+- [x] Search posts by content
 - [ ] Landing Page
 - [ ] Sign Up/Login with social accounts
+- [ ] Subscribe interested tags
 
 **Internal**
 - [ ] Admin Dashboard
