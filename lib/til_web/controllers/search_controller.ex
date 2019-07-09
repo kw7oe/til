@@ -6,7 +6,8 @@ defmodule TilWeb.SearchController do
 
   def create(conn, %{"query" => query}) do
     posts =
-      PostSearch.run(query)
+      query
+      |> PostSearch.run()
       |> Repo.preload(:user)
 
     render(conn, "show.html", posts: posts)

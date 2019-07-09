@@ -13,7 +13,13 @@ defmodule Til.Posts.Post do
     timestamps()
   end
 
-  def ordered(query \\ __MODULE__), do: from(q in query, order_by: [desc: :inserted_at])
+  def by_id(query \\ __MODULE__, id) do
+    from(q in query, where: q.id == ^id)
+  end
+
+  def ordered(query \\ __MODULE__) do
+    from(q in query, order_by: [desc: :inserted_at])
+  end
 
   def submitted_by(query \\ __MODULE__, user_id) do
     from(q in query, where: q.user_id == ^user_id)

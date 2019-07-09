@@ -21,7 +21,8 @@ defmodule Til.Tasks.UpdatePostDocumentsTask do
         select: [:id, :title, :content]
 
     data =
-      Repo.all(query)
+      query
+      |> Repo.all()
       |> Enum.map(fn post ->
         "(DEFAULT, to_tsvector('#{post.title}') || ' ' || to_tsvector('#{post.content}'), #{
           post.id

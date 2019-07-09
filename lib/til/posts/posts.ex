@@ -53,8 +53,8 @@ defmodule Til.Posts do
   end
 
   def get_user_post!(%Accounts.User{} = user, id) do
-    # TODO: Move to post instead
-    from(p in Post, where: p.id == ^id)
+    id
+    |> Post.by_id()
     |> Post.submitted_by(user.id)
     |> Repo.one!()
     |> preload_user()
