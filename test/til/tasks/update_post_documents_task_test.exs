@@ -10,7 +10,10 @@ defmodule Til.Tasks.UpdatePostDocumentsTaskTest do
     test "insert posts data into post documents" do
       insert(:post, title: "Post 1")
       insert(:post, title: "Post 2")
-      post3 = insert(:post, title: "Post 3")
+
+      post3 =
+        insert(:post, title: "Post 3", content: ~s(This is a string with "double" and 'single'))
+
       post4 = insert(:post, title: "Post 4")
       post5 = insert(:post, title: "Post 5")
       ids = [post3.id, post4.id, post5.id]
