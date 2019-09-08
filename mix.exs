@@ -77,7 +77,7 @@ defmodule Til.MixProject do
       {:zarex, "~> 1.0"},
 
       # Phoenix Live View
-      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
+      {:phoenix_live_view, "~> 0.1.0"},
 
       # Testing
       {:ex_machina, "~> 2.2"},
