@@ -16,8 +16,8 @@ defmodule Til.PostTest do
         |> List.flatten()
         |> Enum.sort()
 
-      assert to_naive_datetime_and_truncate(yesterday) == NaiveDateTime.truncate(date1, :second)
-      assert to_naive_datetime_and_truncate(today) == NaiveDateTime.truncate(date2, :second)
+      assert to_naive_datetime_and_truncate(yesterday) == date1
+      assert to_naive_datetime_and_truncate(today) == date2
     end
   end
 

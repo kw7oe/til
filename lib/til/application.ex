@@ -14,11 +14,10 @@ defmodule Til.Application do
 
     # Prometheus Ecto
     :ok =
-      Telemetry.attach(
+      :telemetry.attach(
         "prometheus-ecto",
         [:til, :repo, :query],
-        Til.RepoInstrumenter,
-        :handle_event,
+        &Til.RepoInstrumenter.handle_event/4,
         %{}
       )
 
