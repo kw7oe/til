@@ -1,12 +1,12 @@
 defmodule TilWeb.Router do
   use TilWeb, :router
+  import Phoenix.LiveDashboard.Router
   use Honeybadger.Plug
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
-    plug Phoenix.LiveView.Flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug Ueberauth
@@ -19,6 +19,13 @@ defmodule TilWeb.Router do
 
   if Mix.env() == :dev do
     forward "/sent_emails", Bamboo.SentEmailViewerPlug
+  end
+
+  if Mix.env() == :dev do
+    scope "/" do
+      pipe_through :browser
+      live_dashboard "/dashboard"
+    end
   end
 
   scope "/", TilWeb do

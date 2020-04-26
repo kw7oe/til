@@ -50,7 +50,7 @@ defmodule Til.MixProject do
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.13.2"},
+      {:phoenix_html, "~> 2.14.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
@@ -82,7 +82,7 @@ defmodule Til.MixProject do
       {:zarex, "~> 1.0"},
 
       # Phoenix Live View
-      {:phoenix_live_view, "~> 0.1.0"},
+      {:phoenix_live_view, "~> 0.12.0"},
 
       # Testing
       {:ex_machina, "~> 2.2"},
@@ -97,7 +97,7 @@ defmodule Til.MixProject do
       {:honeybadger, "~> 0.7"},
 
       # Metrics
-      # {:phoenix_live_dashboard, "~> 0.1"},
+      {:phoenix_live_dashboard, "~> 0.1"},
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.1"},
       {:prometheus_ecto, "~> 1.4.1"},
