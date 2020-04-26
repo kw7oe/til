@@ -49,12 +49,6 @@ end
 release :til do
   set version: current_version(:til)
 
-  set(
-    commands: [
-      migrate: "rel/commands/migrate.sh"
-    ]
-  )
-
   set applications: [
     :runtime_tools
   ]
