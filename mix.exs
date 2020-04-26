@@ -4,7 +4,7 @@ defmodule Til.MixProject do
   def project do
     [
       app: :til,
-      version: "0.4.2",
+      version: "0.4.3",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
