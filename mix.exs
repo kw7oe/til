@@ -17,6 +17,11 @@ defmodule Til.MixProject do
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
+      ],
+      releases: [
+        til: [
+          steps: [:assemble, :tar]
+        ]
       ]
     ]
   end
