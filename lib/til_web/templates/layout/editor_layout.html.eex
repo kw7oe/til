@@ -16,7 +16,7 @@
   <body>
     <main role="main" class="container-fluid p-0 h-100">
       <%= render TilWeb.SharedView, "flash_message.html", assigns %>
-      <%= render @view_module, @view_template, assigns %>
+      <%= @inner_content %>
     </main>
 
     <script>window.userId = "<%= assigns[:current_user].id %>";</script>

@@ -3,6 +3,6 @@
     <%# <link rel="stylesheet" href="<%= static_url(Myapp.Endpoint, "/css/email.css") %1>"> %>
   </head>
   <body>
-    <%= render @view_module, @view_template, assigns %>
+    <%= @inner_content %>
   </body>
 </html>

@@ -15,11 +15,10 @@ config :til, TilWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "aEr0QHunp0TboxnM1Iuk14J67l51PJGvchp7hUuXsnyu/aS0FII90LeFWqF0wYKS",
   render_errors: [view: TilWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Til.PubSub, adapter: Phoenix.PubSub.PG2],
+  pubsub_server: Til.PubSub,
   live_view: [
     signing_salt: "sLAWzAz7qDbmjBinjMcHr1TD621kn/TI"
-  ],
-  instrumenters: [Til.PhoenixInstrumenter]
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -51,54 +50,6 @@ config :scrivener_html,
   routes_helper: TilWeb.Router.Helpers,
   # If you use a single view style everywhere, you can configure it here. See View Styles below for more info.
   view_style: :bootstrap_v4
-
-# Prometheus
-config :prometheus, Til.PhoenixInstrumenter,
-  controller_call_labels: [:controller, :action],
-  channel_join_labels: [:channel, :topic, :transport],
-  channel_receive_labels: [:channel, :topic, :transport],
-  duration_buckets: [
-    10,
-    25,
-    50,
-    100,
-    250,
-    500,
-    1000,
-    2500,
-    5000,
-    10_000,
-    25_000,
-    50_000,
-    100_000,
-    250_000,
-    500_000,
-    1_000_000,
-    2_500_000,
-    5_000_000,
-    10_000_000
-  ],
-  registry: :default,
-  duration_unit: :microseconds
-
-config :prometheus, Til.PipelineInstrumenter,
-  labels: [:status_class, :method, :host, :scheme, :request_path],
-  duration_buckets: [
-    10,
-    100,
-    1_000,
-    10_000,
-    100_000,
-    300_000,
-    500_000,
-    750_000,
-    1_000_000,
-    1_500_000,
-    2_000_000,
-    3_000_000
-  ],
-  registry: :default,
-  duration_unit: :microseconds
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -13,7 +13,7 @@ defmodule TilWeb.AuthTest do
     test "assign user to current_user if user_id exist in session", %{user: user} do
       conn =
         build_conn()
-        |> init_test_session(%{user_id: user.id})
+        |> Phoenix.ConnTest.init_test_session(%{user_id: user.id})
         |> fetch_session()
         |> Auth.call(%{})
 
@@ -24,7 +24,7 @@ defmodule TilWeb.AuthTest do
     test "assign user to current_user if remember_token from cookies is valid", %{user: user} do
       conn =
         build_conn()
-        |> init_test_session(%{})
+        |> Phoenix.ConnTest.init_test_session(%{})
         |> fetch_session()
         |> Auth.remember_me(user.id)
         |> fetch_cookies()
@@ -37,7 +37,7 @@ defmodule TilWeb.AuthTest do
     test "assign nil to current_user if remember_token does not contain existing user id" do
       conn =
         build_conn()
-        |> init_test_session(%{})
+        |> Phoenix.ConnTest.init_test_session(%{})
         |> fetch_session()
         |> put_resp_cookie("remember_token", "lalala", max_age: 86_400)
         |> fetch_cookies()
@@ -48,7 +48,12 @@ defmodule TilWeb.AuthTest do
     end
 
     test "assign nil to current_user if user_id does not exist" do
-      conn = build_conn() |> init_test_session(%{}) |> fetch_session() |> Auth.call(%{})
+      conn =
+        build_conn()
+        |> Phoenix.ConnTest.init_test_session(%{})
+        |> fetch_session()
+        |> Auth.call(%{})
+
       assert Map.has_key?(conn.assigns, :current_user)
       assert conn.assigns[:current_user] == nil
     end

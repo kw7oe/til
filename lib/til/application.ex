@@ -6,25 +6,11 @@ defmodule Til.Application do
   use Application
 
   def start(_type, _args) do
-    Til.PhoenixInstrumenter.setup()
-    Til.PipelineInstrumenter.setup()
-    Til.RepoInstrumenter.setup()
-    Prometheus.Registry.register_collector(:prometheus_process_collector)
-    Til.MetricsExporter.setup()
-
-    # Prometheus Ecto
-    :ok =
-      :telemetry.attach(
-        "prometheus-ecto",
-        [:til, :repo, :query],
-        &Til.RepoInstrumenter.handle_event/4,
-        %{}
-      )
-
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
       Til.Repo,
+      {Phoenix.PubSub, name: Til.PubSub},
       # Start the endpoint when the application starts
       TilWeb.Endpoint
       # Starts a worker by calling: Til.Worker.start_link(arg)

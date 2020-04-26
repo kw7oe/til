@@ -44,7 +44,5 @@ defmodule TilWeb.Endpoint do
     key: "_til_key",
     signing_salt: "aQyi1P80"
 
-  plug Til.MetricsExporter
-  plug Til.PipelineInstrumenter
   plug TilWeb.Router
 end

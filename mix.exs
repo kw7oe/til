@@ -45,8 +45,8 @@ defmodule Til.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.6"},
-      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix, "~> 1.5.1", override: true},
+      {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
@@ -54,7 +54,7 @@ defmodule Til.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"},
+      {:plug_cowboy, "~> 2.1"},
 
       # Date/Time Library
       {:timex, "~> 3.1"},
@@ -97,6 +97,7 @@ defmodule Til.MixProject do
       {:honeybadger, "~> 0.7"},
 
       # Metrics
+      # {:phoenix_live_dashboard, "~> 0.1"},
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.1"},
       {:prometheus_ecto, "~> 1.4.1"},
