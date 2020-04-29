@@ -32,7 +32,7 @@ defmodule Til.MixProject do
   def application do
     [
       mod: {Til.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
