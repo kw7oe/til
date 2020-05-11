@@ -1,0 +1,9 @@
+#!/bin/bash
+
+APP_NAME="$(grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g')"
+APP_VSN="$(grep 'version:' mix.exs | cut -d '"' -f2)"
+ID=$(docker create ${APP_NAME}_server)
+
+docker cp $ID:/app/${APP_NAME}-${APP_VSN}.tar.gz ./deployment
+docker rm $ID
+

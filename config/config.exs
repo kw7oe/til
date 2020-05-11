@@ -34,16 +34,8 @@ config :ueberauth, Ueberauth,
     github: {Ueberauth.Strategy.Github, [default_scope: "user:email", allow_private_emails: true]}
   ]
 
-# Update provider configuration
-config :ueberauth, Ueberauth.Strategy.Github.OAuth,
-  client_id: System.get_env("GITHUB_CLIENT_ID"),
-  client_secret: System.get_env("GITHUB_CLIENT_SECRET")
-
 # Mailer
-config :til, Til.Mailer,
-  adapter: Bamboo.MailgunAdapter,
-  api_key: System.get_env("MAILGUN_API_KEY"),
-  domain: System.get_env("MAILGUN_DOMAIN")
+config :til, Til.Mailer, adapter: Bamboo.MailgunAdapter
 
 # Pagination
 config :scrivener_html,

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+APP_NAME="$(grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g')"
+APP_VSN="$(grep 'version:' mix.exs | cut -d '"' -f2)"
+
+docker-compose build
+
+./extract
+
+cd deployment && \
+  ansible-playbook -i playbooks/inventories/production playbooks/new_deploy.yml --extra-vars "app_name=${APP_NAME} app_ver=${APP_VSN}"
+
