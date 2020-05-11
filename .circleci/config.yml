@@ -25,4 +25,4 @@ jobs:
       - run: mix local.rebar --force
       - run: mix deps.get
       - run: mix ecto.create
-      - run: mix test
+      - run: mix test --exclude integration
