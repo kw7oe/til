@@ -7,4 +7,4 @@ steps:
   - label: ":package: Build Release"
     command: "./build"
     artifact_paths:
-      - "./deployment/*.tar.gz"
+      - "*.tar.gz"

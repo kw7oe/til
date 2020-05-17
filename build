@@ -10,6 +10,6 @@ docker build -t til_server .
 
 
 id=$(docker create ${APP_NAME}_server)
-docker cp $id:/app/${TAR_FILENAME} deployment/${TAR_FILENAME}
+docker cp $id:/app/${TAR_FILENAME} .
 docker rm $id
 
