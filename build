@@ -4,10 +4,12 @@ set -exu
 
 APP_NAME="$(grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g')"
 APP_VSN="$(grep 'version:' mix.exs | cut -d '"' -f2)"
+TAR_FILENAME=${APP_NAME}-${APP_VSN}.tar.gz
 
 docker build -t til_server .
 
+
 id=$(docker create ${APP_NAME}_server)
-docker cp $id:/app/${APP_NAME}-${APP_VSN}.tar.gz ./deployment
+docker cp $id:/app/${TAR_FILENAME} deployment/${TAR_FILENAME}
 docker rm $id
 
