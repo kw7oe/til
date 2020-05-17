@@ -1,0 +1,5 @@
+steps:
+  - label: "Get dependencies"
+    command: "mix deps.get"
+  - label: "Run tests"
+    command: "mix test --cover"
