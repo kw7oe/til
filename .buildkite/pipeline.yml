@@ -1,5 +1,3 @@
 steps:
-  - label: "Get dependencies"
-    command: "mix deps.get"
-  - label: "Run tests"
-    command: "mix test --cover"
+  - label: ":hammer: Tests"
+    command: "mix deps.get && mix test --cover"
