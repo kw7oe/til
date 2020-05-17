@@ -1,3 +1,10 @@
 steps:
   - label: ":hammer: Tests"
     command: "mix deps.get && mix test --exclude integration"
+
+  - wait
+
+  - label: ":package: Build Release"
+    command: "./build"
+    artifact_paths:
+      - "deployment/*.tar.gz"
