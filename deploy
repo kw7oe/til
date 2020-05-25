@@ -1,12 +1,34 @@
 #!/bin/bash
 
+set -e
+
 APP_NAME="$(grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g')"
 APP_VSN="$(grep 'version:' mix.exs | cut -d '"' -f2)"
+TAR_FILENAME=${APP_NAME}-${APP_VSN}.tar.gz
+HOST="do"
 
-docker build -t til_server .
+bold_echo() {
+  echo -e "\033[1m---> $1\033[0m"
+}
 
-./extract
+deploy_release() {
+  bold_echo "Creating directory if not exist..."
+  ssh $HOST mkdir -p $APP_NAME/$APP_VSN
 
-cd deployment && \
-  ansible-playbook -i playbooks/inventories/production playbooks/new_deploy.yml --extra-vars "app_name=${APP_NAME} app_ver=${APP_VSN}"
+  bold_echo "Copying environment variables..."
+  scp .env.production do:~/$APP_NAME/.env
+
+  bold_echo "Copying release to remote..."
+  scp $TAR_FILENAME do:~/$APP_NAME/$TAR_FILENAME
+  ssh $HOST tar -xzf $APP_NAME/$TAR_FILENAME -C $APP_NAME/$APP_VSN
+
+  bold_echo "Starting release as"
+  ssh $HOST "souce .env && ~/$APP_NAME/$APP_VSN/bin/$APP_NAME daemon"
+
+  bold_echo "Removing remote tar file..."
+  ssh $HOST rm "~/$APP_NAME/$TAR_FILENAME"
+}
+
+buildkite-agent artifact download $TAR_FILENAME .
+deploy_release
 

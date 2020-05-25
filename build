@@ -8,7 +8,6 @@ TAR_FILENAME=${APP_NAME}-${APP_VSN}.tar.gz
 
 docker build -t til_server .
 
-
 id=$(docker create ${APP_NAME}_server)
 docker cp $id:/app/${TAR_FILENAME} .
 docker rm $id

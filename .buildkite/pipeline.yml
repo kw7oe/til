@@ -8,3 +8,12 @@ steps:
     command: "./build"
     artifact_paths:
       - "*.tar.gz"
+
+  - block: "Deploy"
+    prompt: "Deploy to production?"
+
+  - label: "🚀"
+    command: "./deploy"
+    if: build.branch == 'master'
+    concurrency_group: "my-app-deploy"
+    concurrency: 1
