@@ -15,15 +15,12 @@ deploy_release() {
   bold_echo "Creating directory if not exist..."
   ssh $HOST mkdir -p $APP_NAME/$APP_VSN
 
-  bold_echo "Copying environment variables..."
-  scp .env.production do:~/$APP_NAME/.env
-
   bold_echo "Copying release to remote..."
   scp $TAR_FILENAME do:~/$APP_NAME/$TAR_FILENAME
   ssh $HOST tar -xzf $APP_NAME/$TAR_FILENAME -C $APP_NAME/$APP_VSN
 
   bold_echo "Starting release as"
-  ssh $HOST "souce .env && ~/$APP_NAME/$APP_VSN/bin/$APP_NAME daemon"
+  ssh $HOST "source ~/$APP_NAME/.env  && PORT=5001 ELIXIR_ERL_OPTIONS='-sname green_til' ~/$APP_NAME/$APP_VSN/bin/$APP_NAME daemon"
 
   bold_echo "Removing remote tar file..."
   ssh $HOST rm "~/$APP_NAME/$TAR_FILENAME"

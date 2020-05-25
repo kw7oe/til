@@ -1,8 +1,8 @@
 steps:
-  - label: ":hammer: Tests"
-    command: "mix deps.get && mix test --exclude integration"
+  # - label: ":hammer: Tests"
+  #   command: "mix deps.get && mix test --exclude integration"
 
-  - wait
+  # - wait
 
   - label: ":package: Build Release"
     command: "./build"
