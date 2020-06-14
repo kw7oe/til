@@ -13,19 +13,44 @@ bold_echo() {
 
 deploy_release() {
   bold_echo "Creating directory if not exist..."
-  ssh $HOST mkdir -p $APP_NAME/$APP_VSN
+  ssh $HOST mkdir -p $APP_NAME/releases/$APP_VSN
 
   bold_echo "Copying release to remote..."
-  scp $TAR_FILENAME do:~/$APP_NAME/$TAR_FILENAME
-  ssh $HOST tar -xzf $APP_NAME/$TAR_FILENAME -C $APP_NAME/$APP_VSN
+  scp $TAR_FILENAME do:~/$APP_NAME/releases/$TAR_FILENAME
+  ssh $HOST tar -xzf $APP_NAME/releases/$TAR_FILENAME -C $APP_NAME/
 
-  bold_echo "Starting release as"
-  ssh $HOST "source ~/$APP_NAME/.env  && PORT=5001 ELIXIR_ERL_OPTIONS='-sname green_til' ~/$APP_NAME/$APP_VSN/bin/$APP_NAME daemon"
+  bold_echo "Waiting for existing application to stop..."
+  # Stop existing application if any
+  ssh $HOST $APP_NAME/bin/$APP_NAME stop
+
+  set +e
+  # Waiting for application to stop
+  ssh $HOST $APP_NAME/bin/$APP_NAME pid
+  while [ $? -ne 1 ]
+  do
+    ssh $HOST $APP_NAME/bin/$APP_NAME pid
+  done
+
+  bold_echo "Starting application in daemon mode..."
+  ssh $HOST "source $APP_NAME/.env  && $APP_NAME/bin/$APP_NAME daemon"
+
+  bold_echo "Health checking application..."
+  # Waiting for application to start
+  ssh $HOST "$APP_NAME/bin/$APP_NAME rpc 'IO.puts(\"health-check\")'"
+  while [ $? -ne 0 ]
+  do
+    ssh $HOST "$APP_NAME/bin/$APP_NAME rpc 'IO.puts(\"health-check\")'"
+  done
+  set -e
+  bold_echo "Application started!"
 
   bold_echo "Removing remote tar file..."
-  ssh $HOST rm "~/$APP_NAME/$TAR_FILENAME"
+  ssh $HOST rm "~/$APP_NAME/releases/$TAR_FILENAME"
+
+  bold_echo "Removing local tar file..."
+  rm $TAR_FILENAME
 }
 
-buildkite-agent artifact download $TAR_FILENAME .
+# buildkite-agent artifact download $TAR_FILENAME .
 deploy_release
 

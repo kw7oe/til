@@ -98,11 +98,6 @@ defmodule Til.MixProject do
 
       # Metrics
       {:phoenix_live_dashboard, "~> 0.1"},
-      {:prometheus_ex, "~> 3.0"},
-      {:prometheus_plugs, "~> 1.1.1"},
-      {:prometheus_ecto, "~> 1.4.1"},
-      {:prometheus_phoenix, "~> 1.2.0"},
-      {:prometheus_process_collector, "~> 1.4.3"}
     ]
   end
 
